@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#f7f8fa" />
+<title>قرارداد همکاری | پازل فرشته × کدپکس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-base:#f7f8fa;--bg-soft:#fff;--bg-card:#fff;--bg-elevated:#fff;--bg-subtle:#f2f4f7;--bg-tint:#eef6f9;
+  --text-primary:#0e2a36;--text-secondary:#4a6270;--text-muted:#8298a3;--text-faint:#a8b8c0;
+  --accent:#0d4a5c;--accent-2:#1a7086;--accent-soft:#e6f2f6;--accent-ring:rgba(13,74,92,.18);
+  --gold:#c9962e;--gold-2:#e2b95a;--gold-soft:#fdf6e6;--gold-ring:rgba(201,150,46,.22);
+  --success:#1a9a6a;--success-soft:#e6f7f0;
+  --border:rgba(14,42,54,.08);--border-strong:rgba(14,42,54,.14);--border-soft:rgba(14,42,54,.05);
+  --shadow-xs:0 1px 2px rgba(14,42,54,.04);--shadow-sm:0 2px 8px rgba(14,42,54,.05);
+  --shadow-md:0 8px 28px rgba(14,42,54,.08);--shadow-lg:0 24px 60px rgba(14,42,54,.10);--shadow-xl:0 32px 80px rgba(14,42,54,.14);
+  --grad-hero:linear-gradient(135deg,#f0f9fc 0%,#e3f1f6 45%,#d5e9f0 100%);
+  --grad-accent:linear-gradient(135deg,#0d4a5c 0%,#1a7086 100%);
+  --grad-gold:linear-gradient(135deg,#c9962e 0%,#e2b95a 100%);
+  --grad-card:linear-gradient(180deg,#ffffff 0%,#fbfcfd 100%);
+  --header-bg:rgba(247,248,250,.72);--header-border:rgba(14,42,54,.06);
+  --radius-xs:10px;--radius-sm:14px;--radius-md:20px;--radius-lg:28px;--radius-xl:36px;
+  --ease:cubic-bezier(.22,1,.36,1);--ease-out:cubic-bezier(.16,1,.3,1);--header-h:76px;
+}
+[data-theme="dark"]{
+  --bg-base:#07161f;--bg-soft:#0b1f2b;--bg-card:#0e2532;--bg-elevated:#12303f;--bg-subtle:#0a1c26;--bg-tint:#0d2836;
+  --text-primary:#eaf2f6;--text-secondary:#a8c0cc;--text-muted:#7a97a6;--text-faint:#55707e;
+  --accent:#4db8d4;--accent-2:#6dcfe8;--accent-soft:rgba(77,184,212,.10);--accent-ring:rgba(77,184,212,.22);
+  --gold:#e8c76a;--gold-2:#f4d991;--gold-soft:rgba(232,199,106,.10);--gold-ring:rgba(232,199,106,.24);
+  --success:#4ddba0;--success-soft:rgba(77,219,160,.10);
+  --border:rgba(255,255,255,.07);--border-strong:rgba(255,255,255,.14);--border-soft:rgba(255,255,255,.04);
+  --shadow-xs:0 1px 2px rgba(0,0,0,.3);--shadow-sm:0 2px 8px rgba(0,0,0,.3);--shadow-md:0 8px 28px rgba(0,0,0,.35);
+  --shadow-lg:0 24px 60px rgba(0,0,0,.45);--shadow-xl:0 32px 80px rgba(0,0,0,.55);
+  --grad-hero:linear-gradient(135deg,#0a2532 0%,#0d3a4c 50%,#155a70 100%);
+  --grad-accent:linear-gradient(135deg,#0a2532 0%,#155a70 100%);
+  --grad-gold:linear-gradient(135deg,#e8c76a 0%,#f4d991 100%);
+  --grad-card:linear-gradient(180deg,#0e2532 0%,#0c2130 100%);
+  --header-bg:rgba(7,22,31,.72);--header-border:rgba(255,255,255,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:100px;-webkit-text-size-adjust:100%}
+body{font-family:'Vazirmatn',system-ui,-apple-system,sans-serif;background:var(--bg-base);color:var(--text-primary);line-height:1.9;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;transition:background-color .45s var(--ease),color .45s var(--ease);font-weight:400;min-height:100vh;position:relative}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 90% 5%,var(--accent-soft),transparent 40%),radial-gradient(circle at 5% 40%,var(--gold-soft),transparent 35%);pointer-events:none;z-index:0;opacity:.9;transition:opacity .45s var(--ease)}
+body.menu-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--accent);color:#fff}
+ul{list-style:none}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--bg-subtle)}
+::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:99px;border:3px solid var(--bg-subtle)}
+::-webkit-scrollbar-thumb:hover{background:var(--text-muted)}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+.scroll-progress{position:fixed;top:0;right:0;left:0;height:3px;background:transparent;z-index:2000;pointer-events:none}
+.scroll-progress__bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--accent-2),var(--gold));background-size:200% 100%;animation:shimmer 3s linear infinite;transition:width .1s linear;box-shadow:0 0 12px var(--gold-ring)}
+@keyframes shimmer{to{background-position:-200% 0}}
+
+.loader{position:fixed;inset:0;z-index:9999;background:var(--bg-base);display:grid;place-items:center;transition:opacity .7s var(--ease),visibility .7s}
+.loader.is-done{opacity:0;visibility:hidden;pointer-events:none}
+.loader__inner{text-align:center;width:min(340px,84vw)}
+.loader__mark{width:80px;height:80px;margin:0 auto 20px;border-radius:24px;background:var(--grad-accent);color:#fff;display:grid;place-items:center;font-size:2.1rem;font-weight:900;box-shadow:0 20px 50px var(--accent-ring),inset 0 1px 0 rgba(255,255,255,.18);animation:markPulse 2s var(--ease) infinite;position:relative}
+.loader__mark::after{content:'';position:absolute;inset:-8px;border-radius:32px;border:1px solid var(--accent-ring);animation:markRing 2s var(--ease) infinite}
+@keyframes markPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes markRing{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.5}}
+.loader__brand{font-size:1.7rem;font-weight:900;color:var(--text-primary);letter-spacing:-.5px}
+.loader__brand span{color:var(--accent-2)}
+.loader__sub{font-size:.72rem;letter-spacing:3px;color:var(--text-muted);text-transform:uppercase;margin-bottom:28px;font-weight:600}
+.loader__track{height:4px;background:var(--bg-subtle);border-radius:99px;overflow:hidden;margin-bottom:10px;border:1px solid var(--border-soft)}
+.loader__fill{height:100%;width:0;background:var(--grad-gold);border-radius:99px;transition:width .2s var(--ease);box-shadow:0 0 16px var(--gold-ring)}
+.loader__row{display:flex;justify-content:space-between;font-size:.72rem;color:var(--text-muted);font-weight:500}
+
+.header{position:sticky;top:0;z-index:1000;height:var(--header-h);display:flex;align-items:center;background:var(--header-bg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid transparent;transition:border-color .35s var(--ease),box-shadow .35s var(--ease),background .45s var(--ease)}
+.header.is-scrolled{border-color:var(--header-border);box-shadow:0 1px 24px rgba(14,42,54,.05)}
+.header__inner{max-width:1200px;width:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;color:var(--text-primary);transition:transform .3s var(--ease)}
+.brand:hover{transform:translateY(-1px)}
+.brand__mark{width:40px;height:40px;border-radius:13px;background:var(--grad-accent);color:#fff;display:grid;place-items:center;font-weight:900;font-size:1.05rem;box-shadow:0 8px 20px var(--accent-ring),inset 0 1px 0 rgba(255,255,255,.2);position:relative;overflow:hidden}
+.brand__mark::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.18) 50%,transparent 60%);transform:translateX(-100%);animation:shine 4s var(--ease) infinite}
+@keyframes shine{0%,70%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.brand__text{display:flex;flex-direction:column;line-height:1.15}
+.brand__name{font-size:1rem;font-weight:900;letter-spacing:-.3px}
+.brand__tag{font-size:.55rem;letter-spacing:1.6px;color:var(--text-muted);font-weight:600;text-transform:uppercase;margin-top:2px}
+.header__actions{display:flex;align-items:center;gap:10px}
+
+.icon-btn{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--bg-elevated);border:1px solid var(--border);color:var(--text-secondary);box-shadow:var(--shadow-xs);transition:.3s var(--ease);position:relative;overflow:hidden}
+.icon-btn:hover{color:var(--accent);border-color:var(--accent-ring);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.icon-btn svg{width:19px;height:19px;stroke-width:2}
+.icon-btn .icon-sun,.icon-btn .icon-moon{transition:.4s var(--ease);position:absolute}
+[data-theme="light"] .icon-btn .icon-moon{opacity:0;transform:rotate(-90deg) scale(.6)}
+[data-theme="light"] .icon-btn .icon-sun{opacity:1;transform:rotate(0) scale(1)}
+[data-theme="dark"] .icon-btn .icon-sun{opacity:0;transform:rotate(90deg) scale(.6)}
+[data-theme="dark"] .icon-btn .icon-moon{opacity:1;transform:rotate(0) scale(1)}
+
+.pill-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:13px;background:var(--bg-elevated);border:1px solid var(--border);color:var(--text-primary);font-size:.8rem;font-weight:700;box-shadow:var(--shadow-xs);transition:.3s var(--ease)}
+.pill-btn:hover{transform:translateY(-2px);border-color:var(--accent-ring);color:var(--accent);box-shadow:var(--shadow-sm)}
+.pill-btn svg{width:16px;height:16px}
+.pill-btn.primary{background:var(--grad-accent);color:#fff;border-color:transparent;box-shadow:0 10px 24px var(--accent-ring)}
+.pill-btn.primary:hover{color:#fff;transform:translateY(-2px)}
+
+.burger{display:none;width:44px;height:44px;border-radius:13px;background:var(--bg-elevated);border:1px solid var(--border);place-items:center;box-shadow:var(--shadow-xs);position:relative}
+.burger i,.burger i::before,.burger i::after{display:block;width:20px;height:2px;background:var(--text-primary);border-radius:99px;position:absolute;right:12px;transition:.3s var(--ease)}
+.burger i{top:21px}
+.burger i::before{content:'';top:-6px}
+.burger i::after{content:'';top:6px}
+.burger.is-active i{background:transparent}
+.burger.is-active i::before{top:0;transform:rotate(45deg)}
+.burger.is-active i::after{top:0;transform:rotate(-45deg)}
+
+.mnav{position:fixed;inset:0;z-index:999;background:rgba(7,22,31,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:.35s var(--ease)}
+.mnav.is-open{opacity:1;visibility:visible}
+.mnav__panel{position:absolute;top:0;right:0;bottom:0;width:min(380px,90vw);background:var(--bg-soft);border-left:1px solid var(--border);padding:96px 22px 32px;transform:translateX(100%);transition:transform .5s var(--ease);overflow-y:auto;box-shadow:-24px 0 60px rgba(14,42,54,.16)}
+.mnav.is-open .mnav__panel{transform:none}
+.mnav__title{font-size:.7rem;letter-spacing:2px;color:var(--text-muted);font-weight:800;text-transform:uppercase;margin-bottom:14px;padding-right:10px}
+.mnav__link{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:13px;color:var(--text-secondary);font-size:.83rem;font-weight:600;margin-bottom:3px;transition:.25s var(--ease)}
+.mnav__link:hover,.mnav__link.is-active{background:var(--accent-soft);color:var(--accent);transform:translateX(-3px)}
+.mnav__num{width:30px;height:30px;flex:0 0 30px;border-radius:9px;display:grid;place-items:center;background:var(--bg-subtle);border:1px solid var(--border);font-size:.7rem;font-weight:800;color:var(--text-secondary);transition:.25s var(--ease)}
+.mnav__link:hover .mnav__num,.mnav__link.is-active .mnav__num{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.hero{position:relative;padding:70px 0 90px;overflow:hidden;isolation:isolate}
+.hero__bg{position:absolute;inset:0;z-index:-1;background:var(--grad-hero);transition:background .5s var(--ease)}
+.hero__bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 15% 20%,var(--gold-soft),transparent 25%),radial-gradient(circle at 85% 30%,var(--accent-soft),transparent 30%);opacity:.7}
+.hero__grid{position:absolute;inset:0;z-index:-1;opacity:.5;background-image:linear-gradient(var(--border-soft) 1px,transparent 1px),linear-gradient(90deg,var(--border-soft) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 90% 60% at 50% 40%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 40%,#000 20%,transparent 75%)}
+.hero__orb{position:absolute;border-radius:50%;filter:blur(70px);z-index:-1;pointer-events:none}
+.hero__orb--1{width:340px;height:340px;background:var(--gold);opacity:.14;top:-100px;right:5%;animation:float 14s ease-in-out infinite alternate}
+.hero__orb--2{width:400px;height:400px;background:var(--accent-2);opacity:.13;bottom:-160px;left:0;animation:float 18s ease-in-out infinite alternate-reverse}
+@keyframes float{to{transform:translate(40px,30px) scale(1.1)}}
+.hero__inner{max-width:1000px;margin:0 auto;padding:0 24px;text-align:center;position:relative;z-index:2}
+.hero__kicker{display:inline-flex;align-items:center;gap:10px;padding:8px 18px 8px 14px;border-radius:999px;background:var(--bg-elevated);border:1px solid var(--border);color:var(--text-secondary);font-size:.72rem;font-weight:700;box-shadow:var(--shadow-sm);margin-bottom:26px}
+.hero__kicker-dot{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 0 4px var(--success-soft);animation:pulseDot 2s var(--ease) infinite}
+@keyframes pulseDot{0%,100%{box-shadow:0 0 0 4px var(--success-soft)}50%{box-shadow:0 0 0 8px transparent}}
+.hero__title{font-size:clamp(2.1rem,5.8vw,4.4rem);font-weight:900;line-height:1.18;letter-spacing:-.02em;color:var(--text-primary);margin-bottom:22px}
+.hero__title .grad{background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;position:relative}
+[data-theme="dark"] .hero__title .grad{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);-webkit-background-clip:text;background-clip:text}
+.hero__sub{font-size:clamp(.95rem,1.5vw,1.12rem);color:var(--text-secondary);max-width:720px;margin:0 auto;line-height:2;font-weight:400}
+.hero__sub strong{color:var(--text-primary);font-weight:800}
+.hero__meta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:34px}
+.hero__chip{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;background:var(--bg-elevated);border:1px solid var(--border);font-size:.73rem;font-weight:600;color:var(--text-secondary);box-shadow:var(--shadow-xs);transition:.3s var(--ease)}
+.hero__chip:hover{transform:translateY(-2px);border-color:var(--accent-ring);color:var(--accent);box-shadow:var(--shadow-sm)}
+.hero__chip svg{width:14px;height:14px;color:var(--gold)}
+.hero__scroll{display:inline-flex;flex-direction:column;align-items:center;gap:8px;margin-top:52px;color:var(--text-muted);font-size:.68rem;font-weight:600;letter-spacing:1px}
+.hero__scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--text-muted),transparent);position:relative;overflow:hidden}
+.hero__scroll-line::after{content:'';position:absolute;top:0;left:0;width:100%;height:12px;background:var(--gold);animation:scrollDot 2.2s var(--ease) infinite}
+@keyframes scrollDot{0%{transform:translateY(-12px);opacity:0}40%{opacity:1}100%{transform:translateY(36px);opacity:0}}
+
+/* META GRID */
+.meta-wrap{max-width:1200px;margin:-44px auto 44px;padding:0 24px;position:relative;z-index:5}
+.meta-grid{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-lg);padding:6px;box-shadow:var(--shadow-lg);backdrop-filter:blur(20px);display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;overflow:hidden}
+.meta-card{padding:20px 22px;border-left:1px solid var(--border);transition:.25s var(--ease);min-height:96px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.meta-card:first-child{border-left:none}
+.meta-card:hover{background:var(--bg-subtle)}
+.meta-card .label{font-size:.62rem;font-weight:800;color:var(--text-muted);letter-spacing:1.2px;margin-bottom:6px;text-transform:uppercase}
+.meta-card .value{font-weight:900;font-size:.95rem;color:var(--text-primary);line-height:1.45;letter-spacing:-.01em}
+.meta-card .value .em{color:var(--accent);font-weight:900}
+[data-theme="dark"] .meta-card .value .em{color:var(--gold-2)}
+.meta-card .value .sub{font-weight:500;color:var(--text-muted);font-size:.74rem;display:block;margin-top:3px}
+@media (max-width:900px){
+  .meta-card{border-left:none;border-top:1px solid var(--border)}
+  .meta-card:nth-child(-n+2){border-top:none}
+}
+@media (max-width:560px){
+  .meta-card{border-top:1px solid var(--border)!important}
+  .meta-card:first-child{border-top:none!important}
+}
+
+.toc{max-width:1200px;margin:0 auto 44px;padding:0 24px;position:relative;z-index:5}
+.toc__card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 26px;box-shadow:var(--shadow-md);backdrop-filter:blur(20px)}
+.toc__head{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;user-select:none}
+.toc__head-left{display:flex;align-items:center;gap:12px}
+.toc__icon{width:38px;height:38px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:1.05rem}
+.toc__title{font-size:1rem;font-weight:800;color:var(--text-primary)}
+.toc__count{font-size:.7rem;color:var(--text-muted);font-weight:600;margin-top:1px}
+.toc__chev{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--bg-subtle);color:var(--text-muted);transition:.35s var(--ease)}
+.toc.is-collapsed .toc__chev{transform:rotate(180deg)}
+.toc__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:8px;margin-top:20px;max-height:900px;overflow:hidden;transition:max-height .5s var(--ease),margin-top .4s var(--ease),opacity .35s var(--ease)}
+.toc.is-collapsed .toc__grid{max-height:0;margin-top:0;opacity:0}
+.toc__link{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:13px;color:var(--text-secondary);font-size:.79rem;font-weight:600;border:1px solid transparent;transition:.25s var(--ease)}
+.toc__link:hover{background:var(--bg-subtle);color:var(--text-primary);transform:translateY(-1px);border-color:var(--border)}
+.toc__link.is-active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-ring)}
+.toc__link b{width:26px;height:26px;flex:0 0 26px;border-radius:8px;display:grid;place-items:center;background:var(--bg-subtle);border:1px solid var(--border);font-size:.66rem;font-weight:800;transition:.25s var(--ease)}
+.toc__link:hover b,.toc__link.is-active b{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:26px;box-shadow:var(--shadow-sm);opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out),background-color .4s var(--ease),border-color .4s var(--ease);position:relative;overflow:hidden}
+.section::before{content:'';position:absolute;top:0;right:0;left:0;height:1px;background:linear-gradient(90deg,transparent,var(--border-strong),transparent);opacity:.6}
+.section.is-visible{opacity:1;transform:none}
+.section__head{display:flex;align-items:flex-start;gap:16px;padding-bottom:22px;margin-bottom:26px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.section__icon{width:52px;height:52px;flex:0 0 52px;border-radius:16px;background:var(--grad-accent);color:#fff;display:grid;place-items:center;font-size:1rem;font-weight:900;box-shadow:0 12px 28px var(--accent-ring),inset 0 1px 0 rgba(255,255,255,.18);position:relative;overflow:hidden}
+.section__icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.15) 50%,transparent 60%);transform:translateX(-100%)}
+.section.is-visible .section__icon::after{animation:shine 1.6s var(--ease) .3s}
+.section__title-wrap{flex:1;min-width:200px}
+.section__num{font-size:.66rem;letter-spacing:2.5px;font-weight:800;color:var(--gold);text-transform:uppercase;margin-bottom:4px}
+.section__title{font-size:clamp(1.25rem,2.4vw,1.75rem);font-weight:900;color:var(--text-primary);line-height:1.4;letter-spacing:-.01em;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:var(--gold-soft);border:1px solid var(--gold-ring);color:var(--gold);font-size:.65rem;font-weight:800;white-space:nowrap}
+.badge svg{width:12px;height:12px}
+.section__sub{font-size:.95rem;color:var(--text-secondary);line-height:2;margin-bottom:22px}
+.section h3{font-size:1.08rem;font-weight:800;color:var(--text-primary);margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+.section h3::before{content:'';width:4px;height:20px;border-radius:99px;background:var(--grad-gold)}
+.section p{margin-bottom:14px;color:var(--text-secondary);font-size:.9rem;line-height:2.05}
+.section p strong{color:var(--text-primary);font-weight:800}
+
+.callout{padding:20px 22px;border-radius:var(--radius-sm);background:var(--bg-subtle);border:1px solid var(--border);border-right:3px solid var(--accent);color:var(--text-secondary);font-size:.88rem;line-height:2;margin-bottom:18px}
+.callout strong{color:var(--text-primary);font-weight:800;display:block;margin-bottom:6px;font-size:.95rem}
+.callout p{margin:0}
+.highlight{padding:20px 22px;border-radius:var(--radius-sm);background:var(--gold-soft);border:1px solid var(--gold-ring);border-right:3px solid var(--gold);color:var(--text-secondary);font-size:.86rem;line-height:2;margin:18px 0}
+.highlight strong{color:var(--text-primary);font-weight:800}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}
+.stat{padding:22px 18px;border-radius:var(--radius-sm);background:var(--grad-card);border:1px solid var(--border);position:relative;overflow:hidden;transition:.35s var(--ease)}
+.stat:hover{transform:translateY(-4px);border-color:var(--accent-ring);box-shadow:var(--shadow-md)}
+.stat::before{content:'';position:absolute;top:0;right:0;width:60px;height:60px;background:radial-gradient(circle at top right,var(--accent-soft),transparent 70%);opacity:.9}
+.stat__icon{width:38px;height:38px;border-radius:11px;background:var(--bg-subtle);color:var(--accent);display:grid;place-items:center;margin-bottom:14px;border:1px solid var(--border);position:relative;z-index:1}
+.stat__icon svg{width:18px;height:18px}
+.stat__label{font-size:.68rem;color:var(--text-muted);font-weight:700;letter-spacing:.5px;margin-bottom:4px;position:relative;z-index:1}
+.stat__value{font-size:1.4rem;font-weight:900;color:var(--text-primary);line-height:1.2;position:relative;z-index:1;letter-spacing:-.02em}
+.stat__hint{font-size:.7rem;color:var(--text-muted);margin-top:6px;position:relative;z-index:1;line-height:1.6}
+
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:24px 0}
+.flow__item{padding:20px 14px;border-radius:var(--radius-sm);background:var(--grad-card);border:1px solid var(--border);text-align:center;position:relative;transition:.35s var(--ease);min-height:158px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.flow__item:hover{transform:translateY(-5px);border-color:var(--accent-ring);box-shadow:var(--shadow-md)}
+.flow__item:hover .flow__num{background:var(--accent);color:#fff;border-color:var(--accent);transform:scale(1.08)}
+.flow__num{width:34px;height:34px;border-radius:10px;background:var(--bg-subtle);border:1px solid var(--border);color:var(--text-secondary);display:grid;place-items:center;font-size:.78rem;font-weight:900;transition:.35s var(--ease)}
+.flow__title{font-size:.84rem;font-weight:800;color:var(--text-primary);line-height:1.5}
+.flow__desc{font-size:.7rem;color:var(--text-muted);line-height:1.75}
+
+.dark-box{background:var(--grad-accent);border-radius:var(--radius-md);padding:30px;color:#fff;margin:22px 0;position:relative;overflow:hidden;box-shadow:0 24px 60px var(--accent-ring)}
+.dark-box::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 65%);left:-100px;bottom:-140px}
+.dark-box::after{content:'✦';position:absolute;font-size:9rem;color:rgba(255,255,255,.04);left:20px;bottom:-50px;line-height:1}
+.dark-box h4{color:var(--gold-2);font-size:1.08rem;font-weight:800;margin-bottom:14px;position:relative;display:flex;align-items:center;gap:10px}
+.dark-box h4 svg{width:20px;height:20px}
+.dark-box ul{list-style:none;position:relative}
+.dark-box li{padding:9px 30px 9px 0;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.9);font-size:.86rem;line-height:1.9;position:relative}
+.dark-box li::before{content:'';position:absolute;right:4px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--gold-2)}
+.dark-box li:last-child{border-bottom:0}
+.dark-box li strong{color:var(--gold-2);font-weight:800}
+
+.phases{display:grid;gap:18px}
+.phase{background:var(--grad-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:26px;position:relative;overflow:hidden;transition:.35s var(--ease)}
+.phase::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--grad-gold);transition:.35s var(--ease)}
+.phase.is-core::before{background:var(--grad-accent)}
+.phase:hover{transform:translateY(-3px);border-color:var(--accent-ring);box-shadow:var(--shadow-lg)}
+.phase:hover::before{width:6px}
+.phase__head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+.phase__title-wrap{display:flex;gap:16px;align-items:flex-start;flex:1;min-width:240px}
+.phase__num{width:52px;height:52px;flex:0 0 52px;border-radius:16px;background:var(--grad-accent);color:#fff;display:grid;place-items:center;font-size:1.15rem;font-weight:900;box-shadow:0 12px 26px var(--accent-ring),inset 0 1px 0 rgba(255,255,255,.16);position:relative;overflow:hidden}
+.phase__num::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.18) 50%,transparent 60%);transform:translateX(-100%)}
+.phase:hover .phase__num::after{animation:shine 1.4s var(--ease)}
+.phase__title{font-size:1.1rem;font-weight:800;color:var(--text-primary);margin-bottom:4px;line-height:1.4}
+.phase__sub{font-size:.76rem;color:var(--text-muted);line-height:1.7;font-weight:500}
+.phase__meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;background:var(--bg-subtle);border:1px solid var(--border);color:var(--text-secondary);font-size:.7rem;font-weight:800;white-space:nowrap}
+.chip svg{width:13px;height:13px;color:var(--text-muted)}
+.chip--gold{background:var(--gold-soft);border-color:var(--gold-ring);color:var(--gold)}
+.chip--gold svg{color:var(--gold)}
+.chip--accent{background:var(--accent-soft);border-color:var(--accent-ring);color:var(--accent)}
+.chip--accent svg{color:var(--accent)}
+.phase__body{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;padding-top:4px}
+.phase__copy{font-size:.87rem;color:var(--text-secondary);line-height:2.1}
+.phase__copy b{color:var(--text-primary);font-weight:800}
+.deliver{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px}
+.deliver__title{display:flex;align-items:center;gap:9px;font-size:.86rem;font-weight:800;color:var(--text-primary);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.deliver__title svg{width:16px;height:16px;color:var(--gold)}
+.deliver ul{list-style:none}
+.deliver li{font-size:.78rem;color:var(--text-secondary);padding:7px 24px 7px 0;position:relative;line-height:1.85}
+.deliver li::before{content:'';position:absolute;right:0;top:13px;width:16px;height:16px;border-radius:50%;background:var(--accent-soft);border:1px solid var(--accent-ring)}
+.deliver li::after{content:'';position:absolute;right:5px;top:18px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.outcome{margin-top:16px;padding:14px 18px;border-radius:var(--radius-xs);background:var(--accent-soft);border-right:3px solid var(--accent);font-size:.8rem;color:var(--text-secondary);line-height:1.95}
+.outcome b{color:var(--accent);font-weight:800}
+
+.gift{background:var(--grad-accent);color:#fff;border-radius:var(--radius-lg);padding:36px;position:relative;overflow:hidden;box-shadow:0 32px 80px var(--accent-ring);margin:22px 0}
+.gift::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(232,199,106,.20),transparent 65%);left:-140px;top:-180px;pointer-events:none}
+.gift::after{content:'🎁';position:absolute;left:30px;bottom:-40px;font-size:11rem;opacity:.05;transform:rotate(-12deg);pointer-events:none;filter:grayscale(1) brightness(2)}
+.gift__head{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-start;position:relative;z-index:1}
+.gift__kicker{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);color:var(--gold-2);font-size:.7rem;font-weight:800;margin-bottom:14px}
+.gift__title{font-size:1.5rem;font-weight:900;margin-bottom:5px;letter-spacing:-.01em}
+.gift__subtitle{font-size:.74rem;color:rgba(255,255,255,.55);letter-spacing:1.5px;font-weight:500}
+.gift__value{text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-sm);padding:16px 24px;backdrop-filter:blur(10px);min-width:200px}
+.gift__value small{display:block;font-size:.66rem;color:rgba(255,255,255,.55);margin-bottom:6px}
+.gift__value strong{display:block;font-size:1.25rem;color:var(--gold-2);font-weight:900;line-height:1.2}
+.gift__value b{display:block;font-size:.74rem;color:#7de8b2;margin-top:6px;font-weight:800}
+.gift__intro{position:relative;z-index:1;margin:22px 0 24px;color:rgba(255,255,255,.85);font-size:.87rem;line-height:2.1;max-width:900px}
+.gift__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:1}
+.gift__item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:var(--radius-sm);padding:18px;transition:.3s var(--ease)}
+.gift__item:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.20);transform:translateY(-3px)}
+.gift__item b{display:flex;align-items:center;gap:8px;color:#fff;font-size:.82rem;font-weight:800;margin-bottom:6px}
+.gift__item p{color:rgba(255,255,255,.62);font-size:.74rem;line-height:1.85}
+.gift__goal{position:relative;z-index:1;margin-top:22px;padding:16px 20px;border-radius:var(--radius-xs);background:rgba(232,199,106,.10);border-right:3px solid var(--gold-2);color:rgba(255,255,255,.85);font-size:.8rem;line-height:2}
+.gift__goal b{color:var(--gold-2)}
+
+.ownership{background:linear-gradient(180deg,var(--gold-soft),var(--bg-card));border:1px solid var(--gold-ring);border-radius:var(--radius-md);padding:28px}
+.ownership__title{font-size:1.15rem;font-weight:900;color:var(--text-primary);margin-bottom:8px;line-height:1.5}
+.ownership__text{font-size:.87rem;color:var(--text-secondary);line-height:2.05;margin-bottom:20px}
+.ownership__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ownership__item{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-xs);padding:16px;font-size:.78rem;color:var(--text-secondary);line-height:1.85;transition:.3s var(--ease)}
+.ownership__item:hover{transform:translateY(-3px);border-color:var(--gold-ring);box-shadow:var(--shadow-sm)}
+.ownership__item b{display:flex;align-items:center;gap:8px;color:var(--text-primary);font-weight:800;margin-bottom:6px;font-size:.83rem}
+.ownership__item b svg{width:15px;height:15px;color:var(--gold)}
+
+.table-wrap{border-radius:var(--radius-sm);border:1px solid var(--border);overflow-x:auto;background:var(--bg-elevated);margin-bottom:18px}
+.table-wrap table{width:100%;border-collapse:collapse;min-width:700px;font-size:.82rem}
+.table-wrap thead{background:var(--bg-subtle)}
+.table-wrap th{text-align:right;padding:15px 18px;font-size:.72rem;font-weight:800;color:var(--text-secondary);letter-spacing:.5px;border-bottom:1px solid var(--border)}
+.table-wrap td{padding:15px 18px;border-bottom:1px solid var(--border);color:var(--text-secondary);font-weight:500;line-height:1.85;vertical-align:top}
+.table-wrap tr:last-child td{border-bottom:0}
+.table-wrap tbody tr{transition:background .25s var(--ease)}
+.table-wrap tbody tr:hover{background:var(--bg-subtle)}
+.table-wrap td strong{color:var(--text-primary);font-weight:900;font-size:.86rem}
+.table-wrap td small{color:var(--text-muted);font-size:.72rem;display:block;margin-top:2px;font-weight:500}
+.table-wrap td:first-child{font-weight:900;color:var(--accent)}
+.table-wrap .row-total td{background:var(--accent-soft)!important;color:var(--accent);font-weight:900;border-top:2px solid var(--accent-ring)}
+.table-wrap .row-final td{background:var(--gold-soft)!important;border-top:1px solid var(--gold-ring)}
+
+.pay-bar{display:flex;align-items:center;gap:10px;min-width:130px}
+.pay-bar__track{flex:1;height:5px;border-radius:3px;background:var(--bg-subtle);overflow:hidden;border:1px solid var(--border-soft)}
+.pay-bar__fill{height:100%;border-radius:3px;background:var(--grad-gold);transition:width 1s var(--ease-out)}
+.pay-bar__label{font-size:.76rem;font-weight:900;color:var(--text-primary);min-width:36px;text-align:left;direction:ltr}
+
+/* TIMELINE */
+.timeline{margin:24px 0;padding:32px 8px 20px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-md);overflow-x:auto;overflow-y:hidden;position:relative}
+.timeline__scroll{display:flex;min-width:900px;position:relative;padding:0 16px}
+.timeline__track{position:absolute;top:34px;right:60px;left:60px;height:2px;background:var(--accent-ring);z-index:0}
+.tl{flex:1;min-width:120px;position:relative;z-index:1;text-align:center}
+.tl__dot{width:46px;height:46px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:var(--bg-elevated);border:2px solid var(--accent-ring);color:var(--accent);font-size:.82rem;font-weight:900;transition:.3s var(--ease)}
+.tl:hover .tl__dot{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 8px 20px var(--accent-ring)}
+.tl.is-primary .tl__dot{background:var(--grad-accent);border-color:transparent;color:#fff}
+.tl.is-final .tl__dot{width:54px;height:54px;background:var(--grad-gold);border-color:transparent;color:#231a08;font-size:1.05rem}
+.tl__week{display:inline-block;font-size:.62rem;font-weight:800;color:var(--text-muted);background:var(--bg-elevated);padding:2px 10px;border-radius:999px;border:1px solid var(--border);margin-bottom:6px;letter-spacing:.5px}
+.tl.is-primary .tl__week{color:var(--accent);border-color:var(--accent-ring);background:var(--accent-soft)}
+.tl.is-final .tl__week{color:#231a08;background:var(--gold-2);border-color:transparent}
+.tl__label{font-size:.76rem;font-weight:800;color:var(--text-primary);line-height:1.5;margin-bottom:6px;min-height:34px}
+.tl__pay{display:inline-block;font-size:.68rem;font-weight:900;color:var(--accent);background:var(--accent-soft);padding:3px 12px;border-radius:999px;border:1px solid var(--accent-ring)}
+.tl.is-final .tl__pay{color:#231a08;background:var(--gold-2);border-color:transparent}
+.timeline__hint{font-size:.68rem;color:var(--text-muted);text-align:center;margin-top:6px;font-weight:600}
+
+.money{background:var(--grad-accent);color:#fff;border-radius:var(--radius-md);padding:32px;margin-top:20px;position:relative;overflow:hidden;box-shadow:0 24px 60px var(--accent-ring)}
+.money::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 20%,rgba(232,199,106,.20),transparent 45%);pointer-events:none}
+.money__label{font-size:.72rem;color:rgba(255,255,255,.65);letter-spacing:1.8px;font-weight:800;margin-bottom:12px;position:relative;text-transform:uppercase}
+.money__big{font-size:clamp(2rem,4.6vw,3.1rem);font-weight:900;color:var(--gold-2);line-height:1.1;position:relative;letter-spacing:-.02em}
+.money__big small{font-size:.4em;color:rgba(255,255,255,.7);font-weight:700;margin-right:8px}
+.money__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px;position:relative}
+.money__cell{padding:14px 16px;border-radius:var(--radius-xs);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);transition:.3s var(--ease)}
+.money__cell:hover{background:rgba(255,255,255,.11);transform:translateY(-2px)}
+.money__cell strong{display:block;font-size:.96rem;color:#fff;font-weight:900;margin-bottom:3px}
+.money__cell span{font-size:.7rem;color:rgba(255,255,255,.6);line-height:1.6}
+
+.checks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.check{background:var(--grad-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;position:relative;transition:.3s var(--ease)}
+.check:hover{transform:translateY(-3px);border-color:var(--accent-ring);box-shadow:var(--shadow-sm)}
+.check__num{width:32px;height:32px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:.75rem;font-weight:900;margin-bottom:12px}
+.check b{display:block;font-size:.82rem;color:var(--text-primary);font-weight:800;margin-bottom:6px}
+.check p{font-size:.74rem;color:var(--text-muted);line-height:1.85}
+
+.appendices{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:18px}
+.appendix{padding:18px 20px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:flex-start;gap:14px;transition:.25s var(--ease)}
+.appendix:hover{background:var(--bg-elevated);border-color:var(--accent-ring);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.appendix .badge-num{flex:0 0 34px;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--grad-accent);color:#fff;font-size:.72rem;font-weight:900;direction:ltr;box-shadow:0 6px 14px var(--accent-ring)}
+.appendix .txt{flex:1;min-width:0}
+.appendix .txt strong{display:block;font-size:.86rem;font-weight:800;color:var(--text-primary);margin-bottom:3px}
+.appendix .txt span{font-size:.75rem;color:var(--text-muted);line-height:1.65}
+
+/* SIGNATURES */
+.signatures{margin-top:32px;padding-top:32px;border-top:1px solid var(--border)}
+.sig-head{text-align:center;margin-bottom:28px}
+.sig-head .title{font-size:.7rem;font-weight:800;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.sig-head .desc{font-size:.85rem;color:var(--text-secondary);max-width:560px;margin:0 auto;line-height:1.9}
+.sig-card{padding:26px 24px 24px;border-radius:var(--radius-md);background:var(--grad-card);border:1px solid var(--border);min-height:180px;display:flex;flex-direction:column;justify-content:space-between;transition:.3s var(--ease)}
+.sig-card:hover{border-color:var(--accent-ring);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.sig-party{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.sig-avatar{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:var(--grad-accent);color:#fff;font-size:.85rem;font-weight:900;flex-shrink:0;letter-spacing:.02em;box-shadow:0 8px 18px var(--accent-ring)}
+.sig-info{min-width:0}
+.sig-info .name{font-size:.96rem;font-weight:900;color:var(--text-primary);letter-spacing:-.01em;margin-bottom:3px;line-height:1.4}
+.sig-info .role{font-size:.74rem;color:var(--text-muted);font-weight:600;line-height:1.6}
+.sig-blank{margin-top:auto;padding-top:16px;border-top:1px solid var(--border)}
+.sig-blank .line{font-size:.62rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;font-weight:800;margin-bottom:10px}
+.sig-blank .dotted{height:38px;border-bottom:1px solid var(--border-strong);margin-bottom:8px}
+.sig-blank .date{font-size:.7rem;color:var(--text-muted);font-weight:500}
+.sig-primary{margin-bottom:16px}
+.sig-team-label{font-size:.68rem;font-weight:800;color:var(--text-muted);letter-spacing:2.5px;text-transform:uppercase;margin:24px 0 12px;padding-right:4px}
+.sig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+.final{background:var(--grad-accent);color:#fff;border-radius:var(--radius-xl);padding:56px 32px;text-align:center;margin:36px 0 22px;position:relative;overflow:hidden;box-shadow:0 32px 90px var(--accent-ring)}
+.final::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,rgba(232,199,106,.16),transparent 35%),radial-gradient(circle at 80% 85%,rgba(255,255,255,.08),transparent 35%);pointer-events:none}
+.final__icon{width:76px;height:76px;margin:0 auto 22px;border-radius:24px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;font-size:2.2rem;position:relative;backdrop-filter:blur(10px)}
+.final h2{font-size:clamp(1.5rem,3.2vw,2.4rem);font-weight:900;line-height:1.35;margin-bottom:14px;position:relative;letter-spacing:-.01em}
+.final h2 span{background:linear-gradient(135deg,var(--gold-2),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.final p{max-width:620px;margin:0 auto 30px;color:rgba(255,255,255,.78);font-size:.9rem;line-height:2;position:relative}
+.final__btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative}
+.cta{display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:14px;font-size:.86rem;font-weight:800;transition:.3s var(--ease);position:relative;overflow:hidden;white-space:nowrap;cursor:pointer}
+.cta svg{width:17px;height:17px}
+.cta--gold{background:var(--grad-gold);color:#231a08;box-shadow:0 12px 30px rgba(232,199,106,.35)}
+.cta--gold:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(232,199,106,.45)}
+.cta--ghost{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(10px)}
+.cta--ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,.16)}
+
+.footer{text-align:center;padding:34px 24px 44px;color:var(--text-muted);font-size:.76rem;line-height:2}
+.footer strong{color:var(--text-secondary);font-weight:800}
+.footer__divider{width:52px;height:3px;border-radius:99px;background:var(--grad-gold);margin:0 auto 20px}
+.footer__meta{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;font-size:.7rem}
+.footer__meta span{padding:5px 12px;border-radius:999px;background:var(--bg-elevated);border:1px solid var(--border);color:var(--text-muted)}
+
+.back{position:fixed;left:22px;bottom:22px;z-index:900;width:48px;height:48px;border-radius:14px;background:var(--accent);color:#fff;display:grid;place-items:center;box-shadow:0 14px 34px var(--accent-ring);opacity:0;pointer-events:none;transform:translateY(16px) scale(.9);transition:.35s var(--ease)}
+.back.is-visible{opacity:1;pointer-events:auto;transform:none}
+.back:hover{transform:translateY(-3px);background:var(--accent-2)}
+.back svg{width:20px;height:20px}
+
+@media (max-width:1024px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:repeat(2,1fr)}
+  .checks{grid-template-columns:repeat(2,1fr)}
+  .gift__grid{grid-template-columns:repeat(2,1fr)}
+  .ownership__grid{grid-template-columns:repeat(2,1fr)}
+  .phase__body{grid-template-columns:1fr;gap:18px}
+  .money__grid{grid-template-columns:repeat(2,1fr)}
+  .sig-grid{grid-template-columns:1fr 1fr;gap:14px}
+}
+@media (max-width:820px){
+  :root{--header-h:68px}
+  .header__inner{padding:0 18px}
+  .pill-btn .label-hide{display:none}
+  .burger{display:grid}
+  .brand__tag{display:none}
+  .container{padding:0 18px}
+  .hero{padding:52px 0 76px}
+  .hero__inner{padding:0 18px}
+  .meta-wrap{padding:0 18px;margin:-38px auto 34px}
+  .toc{padding:0 18px;margin:0 auto 34px}
+  .toc__card{padding:20px}
+  .toc__grid{grid-template-columns:repeat(2,1fr)}
+  .section{padding:30px 24px;border-radius:22px}
+  .section__head{padding-bottom:18px;margin-bottom:22px}
+  .section__icon{width:46px;height:46px;flex-basis:46px;font-size:.95rem}
+  .phase{padding:22px 20px}
+  .gift{padding:28px 22px;border-radius:22px}
+  .gift::after{font-size:8rem}
+  .gift__value{width:100%;text-align:right;min-width:0}
+  .ownership{padding:22px}
+  .money{padding:24px 22px}
+  .final{padding:48px 22px;border-radius:26px}
+  .dark-box{padding:24px 22px}
+}
+@media (max-width:560px){
+  .hero__title{letter-spacing:-.01em}
+  .hero__meta{gap:8px}
+  .hero__chip{font-size:.68rem;padding:7px 12px}
+  .stats{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .checks{grid-template-columns:1fr}
+  .gift__grid{grid-template-columns:1fr}
+  .ownership__grid{grid-template-columns:1fr}
+  .money__grid{grid-template-columns:1fr}
+  .toc__grid{grid-template-columns:1fr}
+  .section{padding:24px 18px;border-radius:18px}
+  .section__title{font-size:1.12rem}
+  .section__icon{width:42px;height:42px;flex-basis:42px;font-size:.9rem}
+  .phase{padding:20px 16px;border-radius:18px}
+  .phase__num{width:44px;height:44px;flex-basis:44px;font-size:1rem}
+  .phase__title-wrap{gap:12px;min-width:0}
+  .phase__title{font-size:1rem}
+  .phase__meta{width:100%}
+  .phase__meta .chip{flex:1;justify-content:center}
+  .final{padding:40px 18px}
+  .final__btns{flex-direction:column;align-items:stretch}
+  .cta{justify-content:center;width:100%}
+  .back{left:14px;bottom:14px;width:44px;height:44px}
+  .table-wrap th,.table-wrap td{padding:12px 12px;font-size:.76rem}
+  .table-wrap table{min-width:620px}
+  .sig-grid{grid-template-columns:1fr;gap:12px}
+  .timeline__scroll{min-width:900px}
+  .meta-grid{grid-template-columns:1fr}
+  .meta-card{border-left:none;border-top:1px solid var(--border)}
+  .meta-card:first-child{border-top:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media print{
+  @page{size:A4;margin:14mm}
+  .loader,.header,.mnav,.back,.toc,.final__btns,.scroll-progress,.hero__scroll{display:none!important}
+  body{background:#fff!important;color:#000!important;font-size:10pt}
+  body::before{display:none}
+  .container{max-width:none;padding:0}
+  .hero{background:#fff!important;padding:12px 0 18px!important;border-bottom:1px solid #ddd}
+  .hero__title,.hero__sub{color:#000!important}
+  .hero__title{font-size:18pt!important}
+  .hero__kicker{font-size:8pt!important}
+  .meta-wrap{margin:0 0 14px!important;padding:0}
+  .meta-grid{border:1px solid #ddd!important;box-shadow:none!important;padding:0}
+  .meta-card{padding:8px 12px!important;min-height:auto!important;border-color:#ddd!important}
+  .meta-card .label{font-size:6.5pt!important;margin-bottom:2px!important}
+  .meta-card .value{font-size:9pt!important}
+  .section{opacity:1!important;transform:none!important;box-shadow:none!important;border:1px solid #ddd!important;break-inside:avoid;page-break-inside:avoid;padding:14px 18px!important;margin-bottom:10px!important;border-radius:6px!important}
+  .section__icon{width:30px!important;height:30px!important;flex-basis:30px!important;font-size:9pt!important;box-shadow:none!important}
+  .section__title{font-size:12pt!important}
+  .section__num{font-size:7pt!important}
+  .section p,.deliver li{font-size:9pt!important}
+  .phase{break-inside:avoid;padding:12px 14px!important}
+  .money,.dark-box,.final,.gift{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none!important;break-inside:avoid}
+  .table-wrap{break-inside:avoid;page-break-inside:avoid;border:1px solid #ddd!important}
+  .table-wrap table{font-size:7.5pt!important;min-width:0!important}
+  .table-wrap th{padding:6px 8px!important;font-size:7pt!important;background:#eef6f9!important;color:#0d4a5c!important}
+  .table-wrap td{padding:6px 8px!important;font-size:7.5pt!important}
+  .timeline{padding:10px 6px!important;background:#f5f5f5!important;break-inside:avoid}
+  .timeline__scroll{min-width:0!important;flex-wrap:wrap!important;padding:0!important}
+  .timeline__track{display:none!important}
+  .tl{flex:0 0 20%!important;min-width:0!important;margin-bottom:8px!important}
+  .tl__dot{width:26px!important;height:26px!important;font-size:7pt!important;margin-bottom:5px!important}
+  .tl__label{font-size:7pt!important;min-height:auto!important}
+  .sig-grid{grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
+  .sig-card{padding:12px!important;border:1px solid #ddd!important;background:#fafafa!important;min-height:100px!important;break-inside:avoid}
+  .sig-avatar{width:28px!important;height:28px!important;font-size:7pt!important;box-shadow:none!important}
+  .sig-info .name{font-size:8.5pt!important}
+  .sig-info .role{font-size:6.5pt!important}
+  .sig-blank .dotted{height:20px!important}
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress"><div class="scroll-progress__bar" id="scrollBar"></div></div>
+
+<div class="loader" id="loader">
+  <div class="loader__inner">
+    <div class="loader__mark">ک</div>
+    <div class="loader__brand">کد<span>پکس</span></div>
+    <div class="loader__sub">Code Packs</div>
+    <div class="loader__track"><div class="loader__fill" id="loaderFill"></div></div>
+    <div class="loader__row"><span>در حال آماده‌سازی قرارداد</span><span id="loaderPct">۰٪</span></div>
+  </div>
+</div>
+
+<header class="header" id="header">
+  <div class="header__inner">
+    <a href="#" class="brand">
+      <span class="brand__mark">ک</span>
+      <span class="brand__text">
+        <span class="brand__name">کدپکس</span>
+        <span class="brand__tag">Intelligent Business Systems</span>
+      </span>
+    </a>
+    <div class="header__actions">
+      <button class="pill-btn" id="tocBtn" aria-label="فهرست قرارداد">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        <span class="label-hide">فهرست</span>
+      </button>
+      <button class="pill-btn primary" id="printBtn" aria-label="دریافت PDF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+        <span class="label-hide">دریافت PDF</span>
+      </button>
+      <button class="icon-btn" id="themeToggle" aria-label="تغییر پوسته">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+      <button class="burger" id="burger" aria-label="منو"><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav class="mnav__panel" id="mnavPanel">
+    <div class="mnav__title">فهرست مواد قرارداد</div>
+    <a class="mnav__link" href="#c1"><span class="mnav__num">۰۱</span>طرفین قرارداد</a>
+    <a class="mnav__link" href="#c2"><span class="mnav__num">۰۲</span>موضوع و اهداف همکاری</a>
+    <a class="mnav__link" href="#c3"><span class="mnav__num">۰۳</span>معماری راهکار</a>
+    <a class="mnav__link" href="#c4"><span class="mnav__num">۰۴</span>تعهدات پیمانکار</a>
+    <a class="mnav__link" href="#c5"><span class="mnav__num">۰۵</span>تعهدات کارفرما</a>
+    <a class="mnav__link" href="#c6"><span class="mnav__num">۰۶</span>فازبندی و زمان‌بندی</a>
+    <a class="mnav__link" href="#c7"><span class="mnav__num">۰۷</span>شرح فاز ۱ تا ۳</a>
+    <a class="mnav__link" href="#c8"><span class="mnav__num">۰۸</span>هدیه همکاری</a>
+    <a class="mnav__link" href="#c9"><span class="mnav__num">۰۹</span>فازهای رشد ۴ و ۵</a>
+    <a class="mnav__link" href="#c10"><span class="mnav__num">۱۰</span>مالکیت محصول</a>
+    <a class="mnav__link" href="#c11"><span class="mnav__num">۱۱</span>تعهدات مالی</a>
+    <a class="mnav__link" href="#c12"><span class="mnav__num">۱۲</span>پشتیبانی و تحویل</a>
+    <a class="mnav__link" href="#c13"><span class="mnav__num">۱۳</span>محرمانگی</a>
+    <a class="mnav__link" href="#c14"><span class="mnav__num">۱۴</span>شرایط عمومی</a>
+    <a class="mnav__link" href="#appendices"><span class="mnav__num">پ</span>پیوست‌ها</a>
+    <a class="mnav__link" href="#signatures"><span class="mnav__num">✎</span>امضاها</a>
+  </nav>
+</div>
+
+<main class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__grid"></div>
+    <div class="hero__orb hero__orb--1"></div>
+    <div class="hero__orb hero__orb--2"></div>
+    <div class="hero__inner">
+      <div class="hero__kicker">
+        <span class="hero__kicker-dot"></span>
+        قرارداد همکاری رسمی — نسخه نهایی
+      </div>
+      <h1 class="hero__title">
+        قرارداد همکاری<br>
+        <span class="grad">اکوسیستم دیجیتال پازل فرشته</span>
+      </h1>
+      <p class="hero__sub">
+        این قرارداد فیمابین <strong>گروه مشاوره املاک پازل فرشته</strong> (به نمایندگی جناب مهندس سالمی) و <strong>شرکت Code Packs</strong> در خصوص طراحی، توسعه، استقرار و پشتیبانی اکوسیستم دیجیتال یکپارچه، مطابق شرایط مندرج در این سند و پیوست‌های آن منعقد می‌گردد.
+      </p>
+      <div class="hero__meta">
+        <span class="hero__chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          کارفرما: پازل فرشته
+        </span>
+        <span class="hero__chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          مدت اجرا: ۵ فاز
+        </span>
+        <span class="hero__chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.66 0 3.22.45 4.56 1.24"/></svg>
+          مالکیت کامل محصول
+        </span>
+        <span class="hero__chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          معماری توسعه‌پذیر API-First
+        </span>
+      </div>
+      <div class="hero__scroll">
+        <span>اسکرول کنید</span>
+        <span class="hero__scroll-line"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- META GRID -->
+  <div class="meta-wrap">
+    <div class="meta-grid">
+      <div class="meta-card">
+        <div class="label">تاریخ انعقاد</div>
+        <div class="value">[تاریخ شمسی]<span class="sub">([تاریخ میلادی])</span></div>
+      </div>
+      <div class="meta-card">
+        <div class="label">کارفرما</div>
+        <div class="value">پازل فرشته<span class="sub">جناب مهندس سالمی — مدیرعامل</span></div>
+      </div>
+      <div class="meta-card">
+        <div class="label">پیمانکار</div>
+        <div class="value">Code Packs</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">مدت اجرای فاز ۱ تا ۳</div>
+        <div class="value">۱۸۵ روز<span class="sub">(اجرای متوالی سه فاز نخست)</span></div>
+      </div>
+      <div class="meta-card">
+        <div class="label">سرمایه‌گذاری فاز ۱ تا ۳</div>
+        <div class="value"><span class="em">۵۶۰,۰۰۰,۰۰۰</span> تومان</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">هدیه همکاری</div>
+        <div class="value"><span class="em">۶۰ میلیون</span><span class="sub">بات اختصاصی بله — رایگان</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <section class="toc" id="toc">
+    <div class="toc__card">
+      <div class="toc__head" id="tocHead">
+        <div class="toc__head-left">
+          <div class="toc__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          </div>
+          <div>
+            <div class="toc__title">فهرست مواد قرارداد</div>
+            <div class="toc__count">۱۴ ماده اصلی + پیوست‌ها + امضاها</div>
+          </div>
+        </div>
+        <div class="toc__chev">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="toc__grid">
+        <a class="toc__link" href="#c1"><b>۰۱</b>طرفین قرارداد</a>
+        <a class="toc__link" href="#c2"><b>۰۲</b>موضوع و اهداف همکاری</a>
+        <a class="toc__link" href="#c3"><b>۰۳</b>معماری راهکار</a>
+        <a class="toc__link" href="#c4"><b>۰۴</b>تعهدات پیمانکار</a>
+        <a class="toc__link" href="#c5"><b>۰۵</b>تعهدات کارفرما</a>
+        <a class="toc__link" href="#c6"><b>۰۶</b>فازبندی و زمان‌بندی</a>
+        <a class="toc__link" href="#c7"><b>۰۷</b>شرح فاز ۱ تا ۳</a>
+        <a class="toc__link" href="#c8"><b>۰۸</b>هدیه همکاری</a>
+        <a class="toc__link" href="#c9"><b>۰۹</b>فازهای رشد ۴ و ۵</a>
+        <a class="toc__link" href="#c10"><b>۱۰</b>مالکیت محصول</a>
+        <a class="toc__link" href="#c11"><b>۱۱</b>تعهدات مالی</a>
+        <a class="toc__link" href="#c12"><b>۱۲</b>پشتیبانی و تحویل</a>
+        <a class="toc__link" href="#c13"><b>۱۳</b>محرمانگی</a>
+        <a class="toc__link" href="#c14"><b>۱۴</b>شرایط عمومی</a>
+        <a class="toc__link" href="#appendices"><b>پ</b>پیوست‌ها</a>
+        <a class="toc__link" href="#signatures"><b>✎</b>امضاها</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- C1: طرفین -->
+  <section class="section" id="c1">
+    <div class="section__head">
+      <div class="section__icon">۰۱</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۱</div>
+        <h2 class="section__title">طرفین قرارداد</h2>
+      </div>
+    </div>
+
+    <h3>۱-۱. کارفرما (سفارش‌دهنده)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:170px;">عنوان</th><th>مقدار</th></tr></thead>
+        <tbody>
+          <tr><td>نام</td><td><strong>گروه مشاوره املاک پازل فرشته</strong></td></tr>
+          <tr><td>نماینده قانونی</td><td><strong>جناب مهندس سالمی</strong></td></tr>
+          <tr><td>سمت</td><td>مدیرعامل</td></tr>
+          <tr><td>نشانی</td><td>[نشانی کامل دفتر مرکزی پازل فرشته]</td></tr>
+          <tr><td>تلفن تماس</td><td>[شماره تماس رسمی]</td></tr>
+          <tr><td>پست الکترونیک</td><td>[ایمیل رسمی سازمانی]</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>۱-۲. پیمانکار (مجری پروژه)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:170px;">عنوان</th><th>مقدار</th></tr></thead>
+        <tbody>
+          <tr><td>نام</td><td><strong>شرکت Code Packs</strong></td></tr>
+          <tr><td>نمایندگان قانونی</td><td><strong>آقای امیرمحمد بهرامی و آقای مبین شیخی</strong></td></tr>
+          <tr><td>سمت‌ها</td><td>آقای امیرمحمد بهرامی — مدیرعامل (CTO) | آقای مبین شیخی — رئیس هیئت مدیره (CEO)</td></tr>
+          <tr><td>نشانی</td><td>البرز، کرج، مهرشهر، بلوار ارم، ساختمان خلیج فارس، طبقه دوم، واحد ۲۰۲</td></tr>
+          <tr><td>تلفن تماس</td><td>۰۹۰۰۹۹۹۹۲۳۷</td></tr>
+          <tr><td>پست الکترونیک</td><td>codepacksteam@gmail.com</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;">۱-۳. در سراسر این سند، دو طرف با عنوان‌های «کارفرما» و «پیمانکار» شناخته می‌شوند.</p>
+  </section>
+
+  <!-- C2: موضوع -->
+  <section class="section" id="c2">
+    <div class="section__head">
+      <div class="section__icon">۰۲</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۲</div>
+        <h2 class="section__title">موضوع و اهداف همکاری</h2>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>مسئله اصلی، «ساخت یک نرم‌افزار» یا «طراحی یک وب‌سایت» نیست.</strong>
+      <p>نیاز واقعی، ایجاد یک زیرساخت مالکیتی و یکپارچه است که ابتدا عملیات داخل سازمان را منظم و داده‌محور کند، سپس همین داده‌ها را به تجربه مشتری، بازاریابی، هوش مصنوعی و در نهایت کمپین‌های مقیاس‌پذیر متصل سازد.</p>
+    </div>
+
+    <p>پیمانکار متعهد می‌شود اکوسیستم دیجیتال یکپارچه گروه مشاوره املاک پازل فرشته را مطابق با پروپوزال ارائه‌شده و در قالب <strong>۵ فاز</strong> طراحی، توسعه و مستقر نماید.</p>
+
+    <h3>اهداف اصلی این همکاری</h3>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li><strong>هسته مرکزی هوشمند:</strong> مدیریت یکپارچه فایل‌ها، املاک، مشاوران، معاملات، کمیسیون‌ها، قراردادها و کانال‌های فروش.</li>
+      <li><strong>CRM یکپارچه:</strong> مدیریت چرخه حیات مشتریان، لیدها و فرآیند فروش، کاملاً متصل به سامانه مرکزی.</li>
+      <li><strong>مدیریت دفاتر و مشاوران:</strong> گردش فایل، معاملات، کمیسیون‌ها، پیگیری‌ها و مدیریت پورسانت هر مشاور.</li>
+      <li><strong>دو وب‌سایت اختصاصی (شرکتی و پلتفرم املاک):</strong> با طراحی کاملاً اختصاصی، سئوی پیشرفته و کنترل کامل از سامانه مرکزی.</li>
+      <li><strong>پنل اختصاصی مشاوران شهرستان:</strong> توانمندسازی مشاوران برای مدیریت مستقل فایل‌ها و مشتریان حوزه خود.</li>
+      <li><strong>دستیار هوشمند رایا:</strong> دستیاری که به‌صورت ۲۴ ساعته با کاربران گفتگو می‌کند، لیدها را ثبت کرده و به تیم فروش اطلاع می‌دهد.</li>
+      <li><strong>هسته هوش مصنوعی پیشرفته:</strong> تحلیل مکالمه، تشخیص نیت مشتری، پیشنهاد استراتژی مذاکره و مربی هوشمند مشاوران.</li>
+      <li><strong>موتور رشد دیجیتال:</strong> سئوی پیشرفته چندلایه، تولید محتوای هدفمند و کمپین‌های تبلیغاتی مقیاس‌پذیر.</li>
+    </ul>
+
+    <div class="highlight">
+      <strong>🎯 هدف کلان:</strong> تبدیل پازل فرشته به مجموعه‌ای داده‌محور که اطلاعات، پیگیری مشتری، وب‌سایت، هوش مصنوعی و بازاریابی آن در یک مسیر واحد کار کنند؛ نه مجموعه‌ای از ابزارهای جدا از هم.
+    </div>
+  </section>
+
+  <!-- C3: معماری -->
+  <section class="section" id="c3">
+    <div class="section__head">
+      <div class="section__icon">۰۳</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۳</div>
+        <h2 class="section__title">معماری پیشنهادی اکوسیستم</h2>
+      </div>
+    </div>
+
+    <p class="section__sub">هر فاز باید ارزش مستقل ایجاد کند، اما از نظر معماری برای فاز بعدی آماده باشد. به این ترتیب هزینه‌ای بابت دوباره‌کاری یا ساخت چند دیتابیس و ابزار موازی تحمیل نمی‌شود.</p>
+
+    <div class="flow">
+      <div class="flow__item">
+        <div class="flow__num">۱</div>
+        <div class="flow__title">هسته داخلی</div>
+        <div class="flow__desc">CRM، فایل، تقاضا، مشتری، فرآیند، گزارش و دیتابیس مرکزی</div>
+      </div>
+      <div class="flow__item">
+        <div class="flow__num">۲</div>
+        <div class="flow__title">لایه بیرونی</div>
+        <div class="flow__desc">وب‌سایت اختصاصی، نمایش فایل منتخب، لندینگ و لیدگیری</div>
+      </div>
+      <div class="flow__item">
+        <div class="flow__num">۳</div>
+        <div class="flow__title">لایه هوشمند</div>
+        <div class="flow__desc">چت هوشمند هر فایل، تحلیل ویس و مکالمه، پیشنهاد مذاکره و هسته AI</div>
+      </div>
+      <div class="flow__item">
+        <div class="flow__num">۴</div>
+        <div class="flow__title">ماشین محتوا</div>
+        <div class="flow__desc">تور ۳۶۰، محتوای سایت، اینستاگرام و ارتباط مستمر</div>
+      </div>
+      <div class="flow__item">
+        <div class="flow__num">۵</div>
+        <div class="flow__title">مقیاس تبلیغات</div>
+        <div class="flow__desc">کمپین‌های هدفمند و اندازه‌گیری دقیق نتیجه</div>
+      </div>
+    </div>
+
+    <div class="dark-box">
+      <h4>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        اصل طراحی: یک منبع داده، چند خروجی
+      </h4>
+      <ul>
+        <li>اطلاعات یک بار در سیستم داخلی ثبت می‌شود و در صورت تأیید، در سایت و ابزارهای بازاریابی استفاده می‌شود.</li>
+        <li>رفتار مشتری و نتایج پیگیری، به دیتابیس بازمی‌گردد و خوراک تحلیل و هوش مصنوعی می‌شود.</li>
+        <li>زیرساخت از ابتدا برای API، توسعه ماژول‌های جدید و اتصال سرویس‌های آینده طراحی می‌شود.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- C4: تعهدات پیمانکار -->
+  <section class="section" id="c4">
+    <div class="section__head">
+      <div class="section__icon">۰۴</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۴</div>
+        <h2 class="section__title">تعهدات پیمانکار</h2>
+      </div>
+    </div>
+
+    <p>پیمانکار متعهد به موارد زیر است:</p>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li>اجرای پروژه مطابق با فازبندی، زمان‌بندی و خروجی‌های مندرج در مواد ۶، ۷ و ۹ این قرارداد.</li>
+      <li>ارائه مستندات کامل فنی و کاربردی در پایان هر فاز، شامل گزارش پیشرفت، مستندات API، راهنمای کاربر و معماری سیستم.</li>
+      <li>برگزاری جلسات دوره‌ای (آنلاین یا حضوری) با نمایندگان کارفرما و اعمال بازخوردها در روند اجرا.</li>
+      <li>تضمین کیفیت کد و اجرای تست‌های واحد، یکپارچه، نفوذ و بار مطابق با استانداردهای صنعت نرم‌افزار.</li>
+      <li>تحویل سورس‌کد کامل، دسترسی Repository، مالکیت دیتابیس و تمام دسترسی‌های مدیریتی به کارفرما در پایان هر فاز.</li>
+      <li>رعایت کامل محرمانگی اطلاعات کارفرما مطابق با ماده ۱۳ این قرارداد.</li>
+      <li>استقرار سیستم در زیرساخت کارفرما و آموزش دپارتمان‌های مختلف پس از تحویل نهایی فاز ۳.</li>
+      <li>ارائه پشتیبانی رایگان مطابق با ماده ۱۲ این قرارداد پس از تحویل نهایی.</li>
+    </ul>
+  </section>
+
+  <!-- C5: تعهدات کارفرما -->
+  <section class="section" id="c5">
+    <div class="section__head">
+      <div class="section__icon">۰۵</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۵</div>
+        <h2 class="section__title">تعهدات کارفرما</h2>
+      </div>
+    </div>
+
+    <p>کارفرما متعهد به موارد زیر است:</p>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li>ارائه مستندات، داده‌های فروش، اطلاعات فایل‌ها و املاک، لیست مشتریان و هر داده موردنیاز، حداکثر تا ۷ روز کاری از تاریخ امضا قرارداد.</li>
+      <li>فراهم‌سازی دسترسی‌های لازم به محیط‌های سرویس‌دهنده (سرور، دیتابیس، سرویس‌های ابری، دامنه و سایر موارد مورد نیاز).</li>
+      <li>پرداخت تعهدات مالی خود مطابق با ماده ۱۱ به‌موقع.</li>
+      <li>همکاری در تست‌های پذیرش کاربری (UAT) و ارائه تأییدیه نهایی حداکثر تا ۵ روز کاری پس از اعلام آمادگی پیمانکار.</li>
+      <li>تأمین اطلاعات برندینگ (لوگو، رنگ‌های سازمانی، هویت برند) برای طراحی وب‌سایت‌ها و دستیار هوشمند.</li>
+      <li>معرفی نماینده فنی و نماینده کسب‌وکار به‌عنوان نقاط ارتباطی اصلی با پیمانکار.</li>
+      <li>تأمین هزینه‌های جاری پروژه (سرور، دامنه، APIهای ثالث و سرویس‌های ابری) مطابق ماده ۱۱-۴.</li>
+    </ul>
+  </section>
+
+  <!-- C6: فازبندی -->
+  <section class="section" id="c6">
+    <div class="section__head">
+      <div class="section__icon">۰۶</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۶</div>
+        <h2 class="section__title">فازبندی، زمان‌بندی و نقاط تحویل</h2>
+      </div>
+    </div>
+
+    <p>کل پروژه در <strong>۵ فاز</strong> اجرا می‌شود. فازهای ۱ تا ۳ (ساخت دارایی دیجیتال اصلی) در مجموع <strong>۱۸۵ روز</strong> زمان‌بندی شده‌اند. فازهای ۴ و ۵ به‌صورت دوره‌ای / ماهانه و پس از تثبیت دامنه خدمات، اجرا خواهند شد.</p>
+
+    <div class="timeline">
+      <div class="timeline__scroll">
+        <div class="timeline__track"></div>
+
+        <div class="tl is-primary">
+          <div class="tl__dot">۱</div>
+          <div class="tl__week">۷۵ روز</div>
+          <div class="tl__label">زیرساخت داخلی و نرم‌افزار جامع</div>
+          <div class="tl__pay">۲۵۰ م.ت</div>
+        </div>
+        <div class="tl">
+          <div class="tl__dot">۲</div>
+          <div class="tl__week">۶۰ روز</div>
+          <div class="tl__label">وب‌سایت اختصاصی و لایه مشتری</div>
+          <div class="tl__pay">۹۰ م.ت</div>
+        </div>
+        <div class="tl">
+          <div class="tl__dot">۳</div>
+          <div class="tl__week">۵۰ روز</div>
+          <div class="tl__label">هوش مصنوعی پیشرفته</div>
+          <div class="tl__pay">۲۲۰ م.ت</div>
+        </div>
+        <div class="tl">
+          <div class="tl__dot">۴</div>
+          <div class="tl__week">ماهانه</div>
+          <div class="tl__label">تولید محتوا و مارکتینگ دوره‌ای</div>
+          <div class="tl__pay">دوره‌ای</div>
+        </div>
+        <div class="tl is-final">
+          <div class="tl__dot">★</div>
+          <div class="tl__week">کمپینی</div>
+          <div class="tl__label">تبلیغات انبوه و کمپین‌ها</div>
+          <div class="tl__pay">دوره‌ای</div>
+        </div>
+      </div>
+      <div class="timeline__hint">برای دیدن همه فازها، جدول را به چپ و راست بکشید</div>
+    </div>
+
+    <h3>۶-۱. جدول تفصیلی فازبندی و سرمایه‌گذاری</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:70px;">فاز</th>
+            <th>عنوان</th>
+            <th style="width:130px;">زمان تقریبی</th>
+            <th style="width:180px;">هزینه</th>
+            <th style="width:120px;">نوع</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>۱</td>
+            <td><strong>زیرساخت داخلی و نرم‌افزار جامع</strong><br><small>پایه عملیاتی و دیتابیس مرکزی مجموعه</small></td>
+            <td>۷۵ روز</td>
+            <td><strong>۲۵۰ میلیون تومان</strong></td>
+            <td>یک‌باره</td>
+          </tr>
+          <tr>
+            <td>۲</td>
+            <td><strong>وب‌سایت اختصاصی و لایه مشتری</strong><br><small>کانال رسمی دریافت لید و تجربه دیجیتال مشتری</small></td>
+            <td>۶۰ روز</td>
+            <td><strong>۹۰ میلیون تومان</strong></td>
+            <td>یک‌باره</td>
+          </tr>
+          <tr>
+            <td>۳</td>
+            <td><strong>هوش مصنوعی پیشرفته</strong><br><small>دستیار هوشمند مشاور، تحلیل مکالمه و پیشنهاد مذاکره</small></td>
+            <td>۵۰ روز</td>
+            <td><strong>۲۲۰ میلیون تومان</strong></td>
+            <td>یک‌باره</td>
+          </tr>
+          <tr class="row-total">
+            <td colspan="2"><strong>جمع فازهای ۱ تا ۳ — توسعه دارایی دیجیتال اصلی</strong></td>
+            <td><strong>۱۸۵ روز</strong></td>
+            <td><strong>۵۶۰,۰۰۰,۰۰۰ تومان</strong></td>
+            <td>—</td>
+          </tr>
+          <tr class="row-final">
+            <td>🎁</td>
+            <td><strong>بات اختصاصی بله برای پازل فرشته</strong><br><small>هدیه ویژه شروع همکاری</small></td>
+            <td>همراه پروژه</td>
+            <td><strong>رایگان — ارزش تقریبی ۶۰ میلیون</strong></td>
+            <td>هدیه</td>
+          </tr>
+          <tr>
+            <td>۴</td>
+            <td><strong>تولید محتوا، تور ۳۶۰ و مارکتینگ دوره‌ای</strong></td>
+            <td>دوره‌ای / ماهانه</td>
+            <td>پس از تعیین حجم خدمات</td>
+            <td>تکرارشونده</td>
+          </tr>
+          <tr>
+            <td>۵</td>
+            <td><strong>کمپین‌های تبلیغاتی</strong></td>
+            <td>دوره‌ای</td>
+            <td>بر اساس بودجه و کانال کمپین</td>
+            <td>کمپینی</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight">
+      زمان‌ها تخمینی هستند و برنامه نهایی پس از تثبیت Scope هر فاز تنظیم می‌شود. در صورت امکان فنی، بخشی از آماده‌سازی فاز بعد می‌تواند با هماهنگی طرفین هم‌پوشانی داشته باشد.
+    </div>
+  </section>
+
+  <!-- C7: شرح فاز 1 تا 3 -->
+  <section class="section" id="c7">
+    <div class="section__head">
+      <div class="section__icon">۰۷</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۷</div>
+        <h2 class="section__title">شرح تفصیلی فازهای ۱ تا ۳ — ساخت دارایی دیجیتال اصلی</h2>
+      </div>
+    </div>
+
+    <div class="phases">
+
+      <!-- Phase 1 -->
+      <div class="phase is-core">
+        <div class="phase__head">
+          <div class="phase__title-wrap">
+            <div class="phase__num">۱</div>
+            <div>
+              <div class="phase__title">ساخت زیرساخت داخلی</div>
+              <div class="phase__sub">نرم‌افزار جامع مدیریت عملیات و داده‌های مجموعه</div>
+            </div>
+          </div>
+          <div class="phase__meta">
+            <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۷۵ روز</span>
+            <span class="chip chip--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>۲۵۰ میلیون تومان</span>
+          </div>
+        </div>
+        <div class="phase__body">
+          <div class="phase__copy">
+            در این مرحله <b>«مرکز فرمان»</b> مجموعه ساخته می‌شود؛ جایی که فایل‌ها، تقاضاها، مشتریان، درخواست‌ها، پیگیری‌ها و چرخه‌های کاری به‌جای پراکندگی در ابزارهای مختلف، در یک سامانه واحد ثبت و مدیریت شوند. هدف فقط دیجیتال کردن فرم‌ها نیست؛ هدف ایجاد دیتابیسی تمیز، قابل گزارش‌گیری و آماده برای مارکتینگ و هوش مصنوعی آینده است.
+          </div>
+          <div class="deliver">
+            <div class="deliver__title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              خروجی‌های کلیدی
+            </div>
+            <ul>
+              <li>ثبت و مدیریت فایل‌ها، تقاضاها و مشتریان</li>
+              <li>پیگیری درخواست‌ها، فعالیت‌ها و مراحل هر پرونده</li>
+              <li>گزارش‌گیری آماری، فرآیندی و مدیریتی</li>
+              <li>یادآوری‌ها و کنترل اقدام‌های بعدی</li>
+              <li>رنکینگ و تحلیل عملکرد / داده‌ها</li>
+              <li>باشگاه مشتریان و تاریخچه تعاملات</li>
+              <li>دیتابیس جامع برای مارکتینگ آینده</li>
+              <li>زیرساخت API برای سایت و سرویس‌های بعدی</li>
+              <li>سطوح دسترسی و تاریخچه تغییرات</li>
+            </ul>
+          </div>
+        </div>
+        <div class="outcome">
+          <b>نتیجه تجاری فاز:</b> کاهش وابستگی به حافظه افراد و فایل‌های پراکنده، امکان اندازه‌گیری فرآیندها و ایجاد دارایی داده‌ای قابل استفاده در تمام فازهای بعدی.
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase is-core">
+        <div class="phase__head">
+          <div class="phase__title-wrap">
+            <div class="phase__num">۲</div>
+            <div>
+              <div class="phase__title">طراحی و برنامه‌نویسی وب‌سایت اختصاصی</div>
+              <div class="phase__sub">ویترین بیرونی، ابزار معرفی فایل و زیرساخت لیدگیری</div>
+            </div>
+          </div>
+          <div class="phase__meta">
+            <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۶۰ روز</span>
+            <span class="chip chip--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>۹۰ میلیون تومان</span>
+          </div>
+        </div>
+        <div class="phase__body">
+          <div class="phase__copy">
+            وب‌سایت از صفر برنامه‌نویسی می‌شود و بر پایه سیستم آماده‌ای مانند وردپرس ساخته نخواهد شد. سایت به همان دیتابیس زیرساخت داخلی متصل است؛ بنابراین تیم مجموعه می‌تواند مشخص کند کدام فایل‌ها و اطلاعات برای نمایش عمومی منتشر شوند. این فاز هم‌زمان نقش <b>ویترین برند</b>، <b>کانال سئو</b>، <b>لندینگ تبلیغات</b> و مسیر دریافت و انتقال منظم لید را دارد.
+          </div>
+          <div class="deliver">
+            <div class="deliver__title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              خروجی‌های کلیدی
+            </div>
+            <ul>
+              <li>طراحی UI/UX اختصاصی و کاملاً واکنش‌گرا</li>
+              <li>Front-end و Back-end اختصاصی</li>
+              <li>اتصال کنترل‌شده به دیتابیس فاز اول</li>
+              <li>انتخاب فایل‌های قابل انتشار از داخل سیستم</li>
+              <li>صفحات حرفه‌ای معرفی فایل و پروژه</li>
+              <li>لندینگ‌پیج‌های اختصاصی کمپین‌ها</li>
+              <li>فرم‌ها و ابزارهای جذب لید متصل به CRM</li>
+              <li>زیرساخت فنی مناسب سئو و محتوا</li>
+              <li>اشتراک‌گذاری هر ملک با لینک اختصاصی</li>
+            </ul>
+          </div>
+        </div>
+        <div class="outcome">
+          <b>مزیت اقتصادی:</b> با توجه به توسعه صفر تا صد اختصاصی، مبلغ این فاز به‌صورت ویژه و اقتصادی برای همکاری بلندمدت پیشنهاد شده است.
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase is-core">
+        <div class="phase__head">
+          <div class="phase__title-wrap">
+            <div class="phase__num">۳</div>
+            <div>
+              <div class="phase__title">هسته هوش مصنوعی پیشرفته</div>
+              <div class="phase__sub">دستیار هوشمند هر مشاور — از تحلیل مکالمه تا پیشنهاد برنده مذاکره</div>
+            </div>
+          </div>
+          <div class="phase__meta">
+            <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۵۰ روز</span>
+            <span class="chip chip--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>۲۲۰ میلیون تومان</span>
+          </div>
+        </div>
+        <div class="phase__body">
+          <div class="phase__copy">
+            در این فاز، هوش مصنوعی از یک ابزار گزارش‌گیری صرف فراتر می‌رود و به <b>«همراه هوشمند»</b> هر مشاور تبدیل می‌شود. برای هر فایل، یک چت اختصاصی هوشمند در سیستم باز می‌شود که تمام پیام‌ها، ویس‌ها و مکالمات مشتری — از هر پیام‌رسانی که باشد — به آن متصل می‌شود؛ سیستم مکالمه را تحلیل می‌کند، نیت مشتری را می‌فهمد، نقاط تردید را شناسایی می‌کند و بهترین پاسخ یا مسیر پیشبرد مذاکره را به مشاور پیشنهاد می‌دهد.
+          </div>
+          <div class="deliver">
+            <div class="deliver__title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              قابلیت‌های کلیدی
+            </div>
+            <ul>
+              <li>چت هوشمند اختصاصی برای هر فایل و هر مشتری</li>
+              <li>دریافت و تحلیل خودکار ویس‌های دریافتی از پیام‌رسان‌ها (بله، واتساپ، اینستاگرام و…)</li>
+              <li>تبدیل گفتار به متن و استخراج نکات کلیدی مکالمه</li>
+              <li>پیشنهاد پاسخ مناسب و استراتژی گام بعدی مذاکره</li>
+              <li>شناسایی نیت، نیاز و نقاط تردید مشتری از دل مکالمه</li>
+              <li>امتیازدهی و اولویت‌بندی هوشمند لیدها و پرونده‌ها</li>
+              <li>خلاصه‌سازی خودکار مکالمات طولانی و تاریخچه پرونده</li>
+              <li>هشدار فرصت‌های ازدست‌رفته و پیگیری‌های فراموش‌شده</li>
+              <li>پیشنهاد قیمت و راهکار تطبیقی بر اساس داده‌های بازار و سابقه</li>
+              <li>دستیار مربی: ارائه بازخورد به مشاوران برای بهبود کیفیت مکالمه</li>
+              <li>تولید خودکار پیام پیگیری متناسب با لحن مشتری</li>
+              <li>تحلیل احساسات و روند رضایت مشتری در طول مذاکره</li>
+              <li>گزارش‌های مدیریتی و پیش‌بینی روند فروش</li>
+            </ul>
+          </div>
+        </div>
+        <div class="outcome">
+          <b>نتیجه تجاری فاز:</b> هر مشاور یک «هم‌تیم هوشمند» در اختیار دارد که هرگز خسته نمی‌شود، همه مکالمات را به خاطر می‌سپارد و در لحظه بهترین حرکت بعدی را پیشنهاد می‌دهد.
+        </div>
+        <div class="highlight">
+          <strong>📌 یک مثال واقعی:</strong> مشتری برای فایل X یک ویس می‌فرستد: «قیمت کمی بالاست، ولی منظره عالیه». سیستم ویس را به متن تبدیل می‌کند، نیت مشتری (احتمالاً چانه‌زنی) را تشخیص می‌دهد، سابقه مکالمات قبلی او را می‌خواند و به مشاور پیشنهاد می‌دهد: «گزینه B را با ۵٪ تخفیف مشروط به پرداخت نقدی معرفی کن و روی نقطه قوت منظره تأکید کن.» مشاور فقط تأیید می‌کند و پیام آماده ارسال است.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- C8: هدیه -->
+  <section class="section" id="c8">
+    <div class="section__head">
+      <div class="section__icon">🎁</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۸</div>
+        <h2 class="section__title">هدیه همکاری — بات اختصاصی بله <span class="badge">ارزش تقریبی ۶۰ میلیون تومان</span></h2>
+      </div>
+    </div>
+
+    <div class="gift">
+      <div class="gift__head">
+        <div>
+          <span class="gift__kicker">🎁 هدیه ویژه شروع همکاری</span>
+          <div class="gift__title">بات اختصاصی بله برای پازل فرشته</div>
+          <div class="gift__subtitle">Internal Notification, Lead & Team Interaction Bot</div>
+        </div>
+        <div class="gift__value">
+          <small>ارزش تقریبی طراحی و راه‌اندازی</small>
+          <strong>۶۰ میلیون تومان</strong>
+          <b>برای پازل فرشته: رایگان</b>
+        </div>
+      </div>
+      <p class="gift__intro">
+        به‌عنوان بخشی از همکاری، یک بات اختصاصی و شخصی‌سازی‌شده در پیام‌رسان بله برای پازل فرشته طراحی می‌کنیم که به سیستم داخلی، CRM، وب‌سایت و در مراحل بعد به هسته هوش مصنوعی متصل می‌شود. هدف این بات این است که اتفاقات مهم کسب‌وکار، لیدهای جدید و اقدامات ضروری بدون اتلاف زمان به فرد درست برسند و بخشی از تعاملات روزمره تیم نیز از طریق یک کانال داخلی سریع و قابل پیگیری انجام شود.
+      </p>
+      <div class="gift__grid">
+        <div class="gift__item"><b>🏠 اعلان فایل و تقاضای جدید</b><p>اطلاع‌رسانی فوری ثبت فایل، تقاضا یا مشتری جدید به افراد یا گروه‌های تعیین‌شده.</p></div>
+        <div class="gift__item"><b>🔔 اعلان فوری Lead</b><p>ارسال لیدهای ورودی سایت و لندینگ‌ها به تیم مربوطه همراه با اطلاعات تماس و منبع ورود.</p></div>
+        <div class="gift__item"><b>📞 درخواست تماس و پیگیری</b><p>اعلان درخواست تماس مشتری و یادآوری پیگیری‌های مهم بر اساس جریان CRM.</p></div>
+        <div class="gift__item"><b>🧠 خلاصه و تحلیل AI</b><p>در فاز هوش مصنوعی، ارسال خلاصه پرونده، نیاز مشتری و پیشنهاد اقدام بعدی برای مشاور یا مدیر.</p></div>
+        <div class="gift__item"><b>📊 گزارش‌های مدیریتی</b><p>ارسال خلاصه رویدادها، لیدها، پیگیری‌ها و گزارش‌های منتخب سیستم در بازه‌های تعریف‌شده.</p></div>
+        <div class="gift__item"><b>👥 ارجاع هوشمند به تیم</b><p>ارسال هر رویداد یا درخواست به کارشناس، مشاور یا مدیر مرتبط بر اساس قواعد کسب‌وکار.</p></div>
+        <div class="gift__item"><b>📣 اطلاع‌رسانی داخلی</b><p>ارسال اعلان‌های سیستمی، تغییر وضعیت پرونده‌ها و پیام‌های موردنیاز تیم از یک نقطه مرکزی.</p></div>
+        <div class="gift__item"><b>🔄 همگام‌سازی با CRM</b><p>امکان ثبت یا به‌روزرسانی بخشی از وضعیت‌ها و عملیات از طریق اتصال امن به نرم‌افزار داخلی.</p></div>
+        <div class="gift__item"><b>⚙️ توسعه‌پذیر برای آینده</b><p>ساختار بات به‌گونه‌ای طراحی می‌شود که در آینده قابلیت‌ها و فرمان‌های جدید به آن افزوده شود.</p></div>
+      </div>
+      <div class="gift__goal">
+        <b>🎯 هدف:</b> کوتاه کردن فاصله بین «ثبت یک اتفاق در سیستم» تا «اقدام انسان درست»؛ یعنی کاهش زمان پاسخ‌گویی به لید، جلوگیری از فراموش شدن پیگیری‌ها و ایجاد یک پل عملیاتی مستقیم میان CRM، وب‌سایت، هوش مصنوعی و تیم پازل فرشته. هزینه سرویس‌ها یا APIهای ثالث احتمالی، در صورت وجود، تابع تعرفه ارائه‌دهنده مربوطه خواهد بود.
+      </div>
+    </div>
+  </section>
+
+  <!-- C9: فازهای رشد -->
+  <section class="section" id="c9">
+    <div class="section__head">
+      <div class="section__icon">۰۹</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۹</div>
+        <h2 class="section__title">فازهای رشد — محتوا، تور ۳۶۰ و تبلیغات</h2>
+      </div>
+    </div>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="phase__head">
+          <div class="phase__title-wrap">
+            <div class="phase__num">۴</div>
+            <div>
+              <div class="phase__title">تولید محتوا و مارکتینگ دوره‌ای</div>
+              <div class="phase__sub">فعالیت مستمر بر بستر زیرساخت ساخته‌شده</div>
+            </div>
+          </div>
+          <div class="phase__meta">
+            <span class="chip">ماهانه / تکرارشونده</span>
+            <span class="chip">تعرفه پس از توافق حجم کار</span>
+          </div>
+        </div>
+        <div class="phase__body">
+          <div class="phase__copy">
+            <b>تور مجازی ۳۶۰ درجه:</b> با توجه به محدود بودن تعداد فایل‌ها و ارزش بالای املاک، تولید تور مجازی برای این مدل کسب‌وکار توجیه مناسبی دارد. پیشنهاد اجرایی این است که دوربین ۳۶۰ درجه توسط مجموعه تهیه شود و تصویربرداری پس از آموزش ساده توسط تیم خود مجموعه انجام شود؛ سپس تدوین، ساخت تور و انتشار توسط کدپکس انجام شود.
+          </div>
+          <div class="deliver">
+            <div class="deliver__title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              محورهای همکاری دوره‌ای
+            </div>
+            <ul>
+              <li>تدوین و ساخت تورهای مجازی ۳۶۰ درجه</li>
+              <li>المان‌های برند و نقاط تعاملی داخل تور</li>
+              <li>لینک امن برای بازدید غیرحضوری مشتریان خاص</li>
+              <li>نمایش تور در دفتر، سایت و کمپین‌ها</li>
+              <li>محتوای هدفمند و سئو محور سایت</li>
+              <li>فعالیت اینستاگرام بر اساس استراتژی مورد توافق</li>
+              <li>استفاده از داده CRM برای دقیق‌تر شدن پیام</li>
+            </ul>
+          </div>
+        </div>
+        <div class="outcome">
+          <b>مزیت متمایزکننده:</b> «بازدید حرفه‌ای بدون الزام حضور اولیه» می‌تواند بخشی از تجربه ویژه مشتریان لوکس پازل فرشته باشد.
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase__head">
+          <div class="phase__title-wrap">
+            <div class="phase__num">۵</div>
+            <div>
+              <div class="phase__title">تبلیغات انبوه و کمپین‌های پیشرفته</div>
+              <div class="phase__sub">مقیاس‌دادن به جذب مشتری بعد از آماده شدن مسیر تبدیل</div>
+            </div>
+          </div>
+          <div class="phase__meta">
+            <span class="chip">دوره‌ای / کمپینی</span>
+            <span class="chip">بودجه هر کمپین مستقل</span>
+          </div>
+        </div>
+        <div class="phase__body">
+          <div class="phase__copy">
+            در این فاز تبلیغات زمانی افزایش پیدا می‌کند که لندینگ، CRM، لیدگیری و گزارش‌گیری آماده باشند؛ بنابراین هر لید ورودی قابلیت ثبت، پیگیری و تحلیل خواهد داشت. تمرکز به‌جای «صرفاً خرید تبلیغ» روی طراحی کمپین، پیام، صفحه فرود و اندازه‌گیری نتیجه است.
+          </div>
+          <div class="deliver">
+            <div class="deliver__title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              نمونه کانال‌ها و اقدامات
+            </div>
+            <ul>
+              <li>جایگاه‌ها و بنرهای اختصاصی در پلتفرم‌های مرتبط</li>
+              <li>کمپین‌های شبکه‌های تبلیغاتی</li>
+              <li>لندینگ اختصاصی برای هر پیشنهاد یا پروژه</li>
+              <li>UTM و تفکیک منبع لید در سیستم</li>
+              <li>تحلیل کیفیت لید و بهینه‌سازی دوره‌ای</li>
+              <li>انتخاب بسترهای مؤثر متناسب با هدف هر کمپین</li>
+            </ul>
+          </div>
+        </div>
+        <div class="outcome">
+          <b>شفافیت مالی:</b> هزینه رسانه، سرویس تبلیغاتی و حق‌الزحمه اجرا بر اساس برنامه هر دوره جداگانه مشخص و تأیید می‌شود.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C10: مالکیت -->
+  <section class="section" id="c10">
+    <div class="section__head">
+      <div class="section__icon">۱۰</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۱۰</div>
+        <h2 class="section__title">مالکیت، سورس‌کد و استقلال کارفرما <span class="badge">اصل کلیدی</span></h2>
+      </div>
+    </div>
+
+    <div class="ownership">
+      <div class="ownership__title">محصول اجاره‌ای نیست؛ دارایی دیجیتال کارفرماست.</div>
+      <p class="ownership__text">
+        تمام محصولات نرم‌افزاری، سورس‌کدها، مستندات، طرح‌ها، الگوریتم‌ها، پرامپت‌های هوش مصنوعی، طراحی دستیار هوشمند، وب‌سایت‌ها، دیتابیس و هر دستاورد فکری حاصل از این قرارداد — که توسط پیمانکار ایجاد شده و هزینه آن توسط کارفرما پرداخت گردیده — <strong>به‌صورت کامل به کارفرما تعلق خواهد داشت</strong>.
+      </p>
+      <div class="ownership__grid">
+        <div class="ownership__item">
+          <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>سورس کامل</b>
+          سورس پروژه‌های توسعه‌یافته فازهای ۱، ۲ و هسته توسعه‌یافته فاز ۳ تحویل می‌شود.
+        </div>
+        <div class="ownership__item">
+          <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>مستندات فنی</b>
+          ساختار پروژه، راه‌اندازی و نکات ضروری توسعه تا سطح توافق‌شده مستندسازی می‌شود.
+        </div>
+        <div class="ownership__item">
+          <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>انحصار محصول</b>
+          محصول اختصاصی ساخته‌شده برای کارفرما به‌عنوان دارایی پروژه در اختیار وی خواهد بود.
+        </div>
+        <div class="ownership__item">
+          <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>بدون اجاره نرم‌افزار</b>
+          برای استفاده از نرم‌افزار اختصاصی، هزینه دوره‌ای تحت عنوان اجاره یا لایسنس کدپکس دریافت نمی‌شود.
+        </div>
+        <div class="ownership__item">
+          <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>امکان ادامه با تیم دیگر</b>
+          استاندارد توسعه و مستندسازی با هدف امکان ادامه پروژه توسط تیم فنی منتخب کارفرما خواهد بود.
+        </div>
+        <div class="ownership__item">
+          <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6"/></svg>سرویس‌های ثالث</b>
+          سرور، دامنه، پیامک، APIها و مدل‌های ثالث تابع هزینه و مجوز همان ارائه‌دهنده هستند.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C11: مالی -->
+  <section class="section" id="c11">
+    <div class="section__head">
+      <div class="section__icon">۱۱</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۱۱</div>
+        <h2 class="section__title">تعهدات مالی و نحوه پرداخت</h2>
+      </div>
+    </div>
+
+    <h3>۱۱-۱. مبلغ کل قرارداد برای فازهای ۱ تا ۳</h3>
+    <p>مبلغ کل قرارداد برای فازهای ۱ تا ۳ (ساخت دارایی دیجیتال اصلی) معادل <strong>۵۶۰,۰۰۰,۰۰۰ تومان</strong> (پانصد و شصت میلیون تومان) است. تفکیک ارزش خدمات به شرح زیر است:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:60px;">ردیف</th>
+            <th>خدمت</th>
+            <th style="width:130px;">زمان</th>
+            <th style="width:200px;">ارزش (تومان)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>۱</td>
+            <td>زیرساخت داخلی و نرم‌افزار جامع (فاز ۱)</td>
+            <td>۷۵ روز</td>
+            <td><strong>۲۵۰,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr>
+            <td>۲</td>
+            <td>وب‌سایت اختصاصی و لایه مشتری (فاز ۲)</td>
+            <td>۶۰ روز</td>
+            <td><strong>۹۰,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr>
+            <td>۳</td>
+            <td>هوش مصنوعی پیشرفته (فاز ۳)</td>
+            <td>۵۰ روز</td>
+            <td><strong>۲۲۰,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr class="row-total">
+            <td colspan="3"><strong>جمع کل</strong></td>
+            <td><strong>۵۶۰,۰۰۰,۰۰۰</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--text-muted);">
+      <strong>تبصره:</strong> بات اختصاصی بله (فاز هدیه) به ارزش تقریبی ۶۰,۰۰۰,۰۰۰ تومان، به‌صورت رایگان و بدون هزینه در این قرارداد گنجانده شده است. فازهای ۴ و ۵ (تولید محتوا و تبلیغات) بر اساس تعرفه دوره‌ای، پس از توافق حجم خدمات، در قالب توافق‌نامه مستقل محاسبه می‌شوند.
+    </p>
+
+    <h3>۱۱-۲. جدول پرداخت بر اساس نقاط تحویل</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:70px;">مرحله</th>
+            <th style="width:110px;">زمان</th>
+            <th>شرح تحویل</th>
+            <th style="width:180px;">درصد</th>
+            <th style="width:150px;">مبلغ (تومان)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-total">
+            <td>۱</td>
+            <td>روز ۰</td>
+            <td><strong>پیش‌پرداخت</strong><br><small>امضای قرارداد و شروع رسمی فاز ۱</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:100%;"></div></div>
+                <span class="pay-bar__label">۲۰٪</span>
+              </div>
+            </td>
+            <td><strong>۱۱۲,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr>
+            <td>۲</td>
+            <td>روز ۷۵</td>
+            <td><strong>تحویل فاز ۱ — زیرساخت داخلی</strong><br><small>نرم‌افزار جامع + دیتابیس مرکزی + API-First</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:100%;"></div></div>
+                <span class="pay-bar__label">۲۵٪</span>
+              </div>
+            </td>
+            <td><strong>۱۴۰,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr>
+            <td>۳</td>
+            <td>روز ۱۳۵</td>
+            <td><strong>تحویل فاز ۲ — وب‌سایت اختصاصی</strong><br><small>سایت اختصاصی + لندینگ + لیدگیری متصل به CRM</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:80%;"></div></div>
+                <span class="pay-bar__label">۲۰٪</span>
+              </div>
+            </td>
+            <td><strong>۱۱۲,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr>
+            <td>۴</td>
+            <td>روز ۱۸۵</td>
+            <td><strong>تحویل فاز ۳ — هسته هوش مصنوعی</strong><br><small>دستیار مشاور + تحلیل مکالمه + مربی هوشمند</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:100%;"></div></div>
+                <span class="pay-bar__label">۲۵٪</span>
+              </div>
+            </td>
+            <td><strong>۱۴۰,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr class="row-final">
+            <td>۵</td>
+            <td>پس از استقرار</td>
+            <td><strong>تحویل نهایی و تسویه</strong><br><small>پس از استقرار، آموزش و اعلام رضایت کامل کارفرما</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:40%;"></div></div>
+                <span class="pay-bar__label">۱۰٪</span>
+              </div>
+            </td>
+            <td><strong>۵۶,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr class="row-total">
+            <td colspan="3"><strong>جمع کل</strong></td>
+            <td><strong>۱۰۰٪</strong></td>
+            <td><strong>۵۶۰,۰۰۰,۰۰۰</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>شرط پرداخت نهایی</strong>
+      <p>پرداخت ۱۰٪ نهایی (معادل ۵۶,۰۰۰,۰۰۰ تومان) فقط و فقط پس از تحویل نهایی فاز ۳، استقرار موفق، آموزش کامل و اعلام رضایت کامل کارفرما انجام می‌شود. در صورت عدم رضایت، طرفین مطابق ماده ۱۴-۳ (روش رسمی تحویل و تأیید) نسبت به رفع نقص اقدام خواهند نمود.</p>
+    </div>
+
+    <h3>۱۱-۳. نحوه پرداخت</h3>
+    <p>کلیه مبالغ به تومان و از طریق واریز به حساب رسمی شرکت Code Packs (به نمایندگی آقای مبین شیخی) با شماره حساب <strong style="direction:ltr;display:inline-block;">IR500560611828005756984701</strong> انجام می‌شود. کارفرما موظف است فیش پرداخت را به پیمانکار ارائه دهد.</p>
+
+    <h3>۱۱-۴. هزینه‌های جاری (پس از تحویل — به عهده کارفرما)</h3>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li><strong>دامنه:</strong> ثبت و تمدید سالانه دامنه‌های پروژه (سایت شرکتی و پلتفرم املاک) — متغیر بر اساس انتخاب دامنه</li>
+      <li><strong>سرور:</strong> سرور اختصاصی متناسب با حجم پروژه</li>
+      <li><strong>APIهای شخص ثالث:</strong> سرویس‌های ابری، OpenAI و مدل‌های هوش مصنوعی</li>
+      <li><strong>سرویس‌های پیام‌رسان:</strong> هزینه‌های مرتبط با بات بله، واتساپ و سایر بسترها</li>
+    </ul>
+
+    <div class="money">
+      <div class="money__label">مبلغ کل قرارداد فازهای ۱ تا ۳ — توسعه دارایی دیجیتال اصلی</div>
+      <div class="money__big">۵۶۰ <small>میلیون تومان</small></div>
+      <div class="money__grid">
+        <div class="money__cell">
+          <strong>۱۸۵ روز</strong>
+          <span>جمع زمان تخمینی اجرای متوالی فاز ۱ تا ۳</span>
+        </div>
+        <div class="money__cell">
+          <strong>۳ محصول متصل</strong>
+          <span>نرم‌افزار + وب‌سایت + هسته AI</span>
+        </div>
+        <div class="money__cell">
+          <strong>+ هدیه ۶۰ میلیونی</strong>
+          <span>بات اختصاصی بله، بدون هزینه طراحی</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C12: پشتیبانی و تحویل -->
+  <section class="section" id="c12">
+    <div class="section__head">
+      <div class="section__icon">۱۲</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۱۲</div>
+        <h2 class="section__title">تحویل، آموزش، انتقال دانش و پشتیبانی</h2>
+      </div>
+    </div>
+
+    <h3>۱۲-۱. موارد تحویلی</h3>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li>سورس‌کد کامل پروژه (سامانه جامع، CRM، وب‌سایت‌ها، دستیار هوشمند)</li>
+      <li>دسترسی کامل به Repository</li>
+      <li>مالکیت کامل دیتابیس و داده‌ها</li>
+      <li>تمام دسترسی‌های مدیریتی مرتبط با پروژه</li>
+      <li>مستندات کامل مدیریت سیستم، کدها و فرآیندها</li>
+      <li>راهنمای کاربری برای دپارتمان‌های مختلف</li>
+    </ul>
+
+    <h3>۱۲-۲. برنامه استقرار و آموزش (پس از تحویل فاز ۳)</h3>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li>استقرار سیستم در زیرساخت کارفرما</li>
+      <li>آموزش دپارتمان‌های مختلف (فروش، مشاوران، مالی، پشتیبانی)</li>
+      <li>پشتیبانی کامل در راه‌اندازی اولیه</li>
+      <li>رفع اشکالات ناشی از استقرار</li>
+    </ul>
+
+    <h3>۱۲-۳. پشتیبانی رایگان</h3>
+    <p>پس از تحویل نهایی فاز ۳ و استقرار کامل سیستم، پیمانکار متعهد می‌شود <strong>۶ ماه پشتیبانی رایگان</strong> برای کارفرما ارائه دهد. این دوره شامل موارد زیر است:</p>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li><strong>امنیت:</strong> پایش مستمر امنیت، بروزرسانی گواهی‌های SSL، تشخیص و رفع آسیب‌پذیری‌ها.</li>
+      <li><strong>رفع باگ‌ها:</strong> شناسایی و رفع هرگونه خطا، باگ یا نقص فنی در سامانه، CRM، وب‌سایت‌ها و دستیار هوشمند.</li>
+      <li><strong>بروزرسانی‌های متداول:</strong> اعمال به‌روزرسانی‌های معمول سیستم، کتابخانه‌ها و فریم‌ورک‌ها.</li>
+      <li><strong>پشتیبانی کاربران:</strong> پاسخگویی به مشکلات و سوالات فنی کاربران نهایی و تیم کارفرما.</li>
+      <li><strong>مشاوره فنی:</strong> پاسخ به سوالات فنی تیم کارفرما.</li>
+      <li><strong>محتوای آموزشی:</strong> تهیه ویدیوهای آموزشی کوتاه و موشن‌گرافیک‌های آموزشی.</li>
+      <li><strong>سئو اولیه:</strong> انجام اقدامات اولیه سئو برای بهبود رتبه وب‌سایت‌ها.</li>
+    </ul>
+  </section>
+
+  <!-- C13: محرمانگی -->
+  <section class="section" id="c13">
+    <div class="section__head">
+      <div class="section__icon">۱۳</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۱۳</div>
+        <h2 class="section__title">محرمانگی</h2>
+      </div>
+    </div>
+
+    <p>هر یک از طرفین متعهد می‌شوند اطلاعات محرمانه طرف دیگر (شامل اطلاعات تجاری، فنی، مالی، داده‌های مشتریان، مستندات داخلی، رمزهای عبور، الگوریتم‌ها، پرامپت‌های اختصاصی، اطلاعات کاربران دستیار هوشمند و هر اطلاعاتی که به‌عنوان محرمانه معرفی شده باشد) را بدون رضایت کتبی طرف دیگر، در اختیار هیچ شخص حقیقی یا حقوقی قرار ندهند و صرفاً در راستای اجرای این قرارداد از آن استفاده نمایند.</p>
+
+    <p>این تعهد تا <strong>۵ سال</strong> پس از خاتمه قرارداد نیز معتبر خواهد بود. در صورت نقض این تعهد، طرف متخلف مسئول جبران کلیه خسارات وارده خواهد بود.</p>
+  </section>
+
+  <!-- C14: شرایط عمومی -->
+  <section class="section" id="c14">
+    <div class="section__head">
+      <div class="section__icon">۱۴</div>
+      <div class="section__title-wrap">
+        <div class="section__num">ماده ۱۴</div>
+        <h2 class="section__title">تضمین‌ها، چارچوب اجرا و شرایط عمومی</h2>
+      </div>
+    </div>
+
+    <h3>۱۴-۱. تضمین پیمانکار</h3>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li>تمامی خدمات مطابق با استانداردهای حرفه‌ای صنعت نرم‌افزار ارائه می‌شود.</li>
+      <li>محصول تحویلی عاری از هرگونه نقص عمده و باگ‌های بحرانی خواهد بود.</li>
+      <li>کلیه حقوق مربوط به استفاده از نرم‌افزارهای شخص ثالث دارای مجوز قانونی هستند.</li>
+    </ul>
+
+    <h3>۱۴-۲. تضمین کارفرما</h3>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li>کلیه اطلاعات و داده‌های ارائه‌شده به پیمانکار، صحیح، کامل و قانونی است.</li>
+      <li>دسترسی‌های لازم برای اجرای پروژه را به‌موقع فراهم می‌کند.</li>
+      <li>تعهدات مالی خود را به‌طور کامل و به‌موقع انجام می‌دهد.</li>
+    </ul>
+
+    <h3>۱۴-۳. روش رسمی تحویل و تأیید (Acceptance)</h3>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;">
+      <li>پیمانکار پس از اتمام هر فاز، مراتب آمادگی تحویل را به‌صورت کتبی (ایمیل رسمی) به کارفرما اعلام می‌کند.</li>
+      <li>کارفرما حداکثر تا <strong>۵ روز کاری</strong> پس از اعلام، تحویل را بررسی و نتیجه (تأیید یا اعلام نقص) را به‌صورت کتبی اعلام می‌کند.</li>
+      <li>در صورت عدم اعلام نظر در بازه مذکور، آن فاز به‌صورت <strong>خودکار تأیید شده</strong> تلقی می‌گردد.</li>
+      <li>در صورت اعلام نقص، پیمانکار حداکثر تا <strong>۱۰ روز کاری</strong> نسبت به رفع نقص اقدام می‌کند.</li>
+      <li><strong>پرداخت مرتبط با هر فاز، پس از تأیید کتبی کارفرما (یا تأیید خودکار) حداکثر تا ۷ روز کاری انجام می‌شود.</strong></li>
+    </ul>
+
+    <h3>۱۴-۴. چارچوب اجرایی — چهار نقطه کنترل هر فاز</h3>
+    <div class="checks">
+      <div class="check">
+        <div class="check__num">۱</div>
+        <b>تثبیت نیازمندی</b>
+        <p>جلسه شروع فاز، لیست ماژول‌ها، نقش‌ها، داده‌ها و اولویت‌ها.</p>
+      </div>
+      <div class="check">
+        <div class="check__num">۲</div>
+        <b>تأیید طراحی</b>
+        <p>تأیید معماری، تجربه کاربری و مسیرهای کلیدی پیش از توسعه کامل.</p>
+      </div>
+      <div class="check">
+        <div class="check__num">۳</div>
+        <b>تحویل آزمایشی</b>
+        <p>ارائه نسخه تست، دریافت بازخورد و اصلاح موارد منطبق با Scope.</p>
+      </div>
+      <div class="check">
+        <div class="check__num">۴</div>
+        <b>تحویل نهایی</b>
+        <p>استقرار، تحویل سورس و مستندات مربوط به همان فاز.</p>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>اصل همکاری:</strong> هر تصمیم فنی باید به یکی از سه خروجی منجر شود: کاهش اصطکاک داخلی، بهبود تجربه مشتری یا افزایش کیفیت تصمیم‌گیری و فروش.
+    </div>
+  </section>
+
+  <!-- APPENDICES -->
+  <section class="section" id="appendices">
+    <div class="section__head">
+      <div class="section__icon">پ</div>
+      <div class="section__title-wrap">
+        <div class="section__num">پیوست‌ها</div>
+        <h2 class="section__title">اسناد تکمیلی</h2>
+      </div>
+    </div>
+
+    <p>پیوست‌های زیر جزئی جدایی‌ناپذیر از این قرارداد محسوب می‌شوند و در زمان امضا به امضای طرفین می‌رسند:</p>
+
+    <div class="appendices">
+      <div class="appendix">
+        <span class="badge-num">A</span>
+        <div class="txt">
+          <strong>پروپوزال تفصیلی پازل فرشته</strong>
+          <span>پروپوزال کامل اکوسیستم دیجیتال — نسخه ۲</span>
+        </div>
+      </div>
+      <div class="appendix">
+        <span class="badge-num">B</span>
+        <div class="txt">
+          <strong>جدول فازبندی تفصیلی</strong>
+          <span>زمان‌بندی ۵ فاز به‌صورت گام‌به‌گام</span>
+        </div>
+      </div>
+      <div class="appendix">
+        <span class="badge-num">C</span>
+        <div class="txt">
+          <strong>مشخصات فنی و معماری</strong>
+          <span>سند فنی سامانه، CRM، وب‌سایت‌ها و هسته AI</span>
+        </div>
+      </div>
+      <div class="appendix">
+        <span class="badge-num">D</span>
+        <div class="txt">
+          <strong>لیست خدمات پشتیبانی</strong>
+          <span>فعالیت‌ها و نرخ‌های پشتیبانی پس از دوره رایگان</span>
+        </div>
+      </div>
+      <div class="appendix">
+        <span class="badge-num">E</span>
+        <div class="txt">
+          <strong>معیارهای پذیرش و تست</strong>
+          <span>سند UAT و معیارهای تست تحویل هر فاز</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURES -->
+  <section class="section" id="signatures">
+    <div class="section__head">
+      <div class="section__icon">✎</div>
+      <div class="section__title-wrap">
+        <div class="section__num">تعهد نهایی</div>
+        <h2 class="section__title">امضای طرفین</h2>
+      </div>
+    </div>
+
+    <div class="signatures">
+      <div class="sig-head">
+        <div class="title">امضای طرفین</div>
+        <p class="desc">این قرارداد در ۲ نسخه تنظیم و با امضای نمایندگان مجاز طرفین، لازم‌الاجرا می‌گردد.</p>
+      </div>
+
+      <div class="sig-primary">
+        <div class="sig-card">
+          <div class="sig-party">
+            <div class="sig-avatar">PF</div>
+            <div class="sig-info">
+              <div class="name">گروه مشاوره املاک پازل فرشته</div>
+              <div class="role">کارفرما — جناب مهندس سالمی / مدیرعامل</div>
+            </div>
+          </div>
+          <div class="sig-blank">
+            <div class="line">امضا و مهر</div>
+            <div class="dotted"></div>
+            <div class="date">تاریخ: [تاریخ شمسی] ([تاریخ میلادی])</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sig-team-label">تیم پیمانکار — Code Packs</div>
+
+      <div class="sig-grid">
+        <div class="sig-card">
+          <div class="sig-party">
+            <div class="sig-avatar">AB</div>
+            <div class="sig-info">
+              <div class="name">Code Packs</div>
+              <div class="role">امیرمحمد بهرامی / مدیرعامل (CTO)</div>
+            </div>
+          </div>
+          <div class="sig-blank">
+            <div class="line">امضا و مهر</div>
+            <div class="dotted"></div>
+            <div class="date">تاریخ: [تاریخ شمسی]</div>
+          </div>
+        </div>
+        <div class="sig-card">
+          <div class="sig-party">
+            <div class="sig-avatar">MS</div>
+            <div class="sig-info">
+              <div class="name">Code Packs</div>
+              <div class="role">مبین شیخی / رئیس هیئت مدیره (CEO)</div>
+            </div>
+          </div>
+          <div class="sig-blank">
+            <div class="line">امضا و مهر</div>
+            <div class="dotted"></div>
+            <div class="date">تاریخ: [تاریخ شمسی]</div>
+          </div>
+        </div>
+        <div class="sig-card">
+          <div class="sig-party">
+            <div class="sig-avatar">AR</div>
+            <div class="sig-info">
+              <div class="name">Code Packs</div>
+              <div class="role">امیر رکابدار / مدیر تحلیل فرآیند و استقرار پروژه</div>
+            </div>
+          </div>
+          <div class="sig-blank">
+            <div class="line">امضا و مهر</div>
+            <div class="dotted"></div>
+            <div class="date">تاریخ: [تاریخ شمسی]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="final__icon">🤝</div>
+    <h2>آماده‌ایم وارد <span>فاز اجرایی</span> شویم</h2>
+    <p>این قرارداد بر اساس پروپوزال نهایی اکوسیستم دیجیتال پازل فرشته تدوین شده و مبنای شروع رسمی پروژه قرار می‌گیرد.</p>
+    <div class="final__btns">
+      <a class="cta cta--gold" href="mailto:codepacksteam@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        ایمیل رسمی
+      </a>
+      <a class="cta cta--ghost" href="tel:+989196509802">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+        تماس مستقیم
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__divider"></div>
+    <div><strong>تیم کدپکس</strong> — طراحی و توسعه سیستم‌های هوشمند و زیرساخت‌های دیجیتال</div>
+    <div class="footer__meta">
+      <span>قرارداد CP-PUZZLE-001</span>
+      <span>[تاریخ شمسی]</span>
+      <span>از زیرساخت تا رشد؛ در یک معماری واحد</span>
+    </div>
+  </footer>
+
+</main>
+
+<button class="back" id="back" aria-label="بازگشت به بالا">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+
+  /* THEME */
+  const themeToggle = $('#themeToggle');
+  const root = document.documentElement;
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  const setTheme = (theme) => {
+    root.setAttribute('data-theme', theme);
+    try { localStorage.setItem('cp-theme', theme); } catch(e){}
+    if (metaTheme) metaTheme.setAttribute('content', theme === 'dark' ? '#07161f' : '#f7f8fa');
+  };
+  let saved = 'light';
+  try { saved = localStorage.getItem('cp-theme') || 'light'; } catch(e){}
+  setTheme(saved);
+  themeToggle?.addEventListener('click', () => {
+    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  /* LOADER */
+  const loader = $('#loader');
+  const loaderFill = $('#loaderFill');
+  const loaderPct = $('#loaderPct');
+  let p = 0;
+  const t = setInterval(() => {
+    p = Math.min(100, p + 4 + Math.random() * 8);
+    loaderFill.style.width = p + '%';
+    loaderPct.textContent = Math.round(p) + '٪';
+    if (p >= 100) {
+      clearInterval(t);
+      setTimeout(() => loader.classList.add('is-done'), 240);
+    }
+  }, 55);
+
+  /* HEADER + SCROLL */
+  const header = $('#header');
+  const back = $('#back');
+  const scrollBar = $('#scrollBar');
+
+  const onScroll = () => {
+    const y = window.scrollY;
+    header.classList.toggle('is-scrolled', y > 20);
+    back.classList.toggle('is-visible', y > 500);
+
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = h > 0 ? (y / h) * 100 : 0;
+    scrollBar.style.width = pct + '%';
+
+    let activeId = '';
+    $$('.section').forEach(s => {
+      const top = s.offsetTop;
+      if (y + 160 >= top && y + 160 < top + s.offsetHeight) activeId = s.id;
+    });
+    $$('.toc__link, .mnav__link').forEach(a => {
+      a.classList.toggle('is-active', a.getAttribute('href') === '#' + activeId);
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  back?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* PRINT */
+  $('#printBtn')?.addEventListener('click', () => window.print());
+
+  /* MOBILE NAV */
+  const burger = $('#burger');
+  const mnav = $('#mnav');
+  const mnavPanel = $('#mnavPanel');
+  const closeMenu = () => {
+    mnav.classList.remove('is-open');
+    burger.classList.remove('is-active');
+    document.body.classList.remove('menu-open');
+  };
+  burger?.addEventListener('click', () => {
+    mnav.classList.toggle('is-open');
+    burger.classList.toggle('is-active');
+    document.body.classList.toggle('menu-open');
+  });
+  mnav?.addEventListener('click', e => { if (e.target === mnav) closeMenu(); });
+  mnavPanel?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+  /* TOC */
+  const toc = $('#toc');
+  const tocHead = $('#tocHead');
+  const tocBtn = $('#tocBtn');
+  tocHead?.addEventListener('click', () => toc.classList.toggle('is-collapsed'));
+  tocBtn?.addEventListener('click', () => {
+    toc.classList.remove('is-collapsed');
+    toc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  /* REVEAL */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -50px' });
+  $$('.section').forEach(s => io.observe(s));
+
+  /* SMOOTH ANCHOR */
+  $$('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          const y = target.getBoundingClientRect().top + window.scrollY - 90;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  /* PAY BAR */
+  $$('.pay-bar__fill').forEach(f => {
+    const w = f.style.width;
+    f.style.width = '0%';
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setTimeout(() => { f.style.width = w; }, 150);
+          obs.unobserve(f);
+        }
+      });
+    }, { threshold: 0.4 });
+    obs.observe(f);
+  });
+})();
+</script>
+</body>
+</html>
