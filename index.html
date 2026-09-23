@@ -313,6 +313,7 @@ ul{list-style:none}
 .table-wrap td:first-child{font-weight:900;color:var(--accent)}
 .table-wrap .row-total td{background:var(--accent-soft)!important;color:var(--accent);font-weight:900;border-top:2px solid var(--accent-ring)}
 .table-wrap .row-final td{background:var(--gold-soft)!important;border-top:1px solid var(--gold-ring)}
+.table-wrap .row-deploy td{background:rgba(26,154,106,.08)!important;border-top:1px solid rgba(26,154,106,.25)}
 
 .pay-bar{display:flex;align-items:center;gap:10px;min-width:130px}
 .pay-bar__track{flex:1;height:5px;border-radius:3px;background:var(--bg-subtle);overflow:hidden;border:1px solid var(--border-soft)}
@@ -321,18 +322,21 @@ ul{list-style:none}
 
 /* TIMELINE */
 .timeline{margin:24px 0;padding:32px 8px 20px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-md);overflow-x:auto;overflow-y:hidden;position:relative}
-.timeline__scroll{display:flex;min-width:900px;position:relative;padding:0 16px}
+.timeline__scroll{display:flex;min-width:1000px;position:relative;padding:0 16px}
 .timeline__track{position:absolute;top:34px;right:60px;left:60px;height:2px;background:var(--accent-ring);z-index:0}
 .tl{flex:1;min-width:120px;position:relative;z-index:1;text-align:center}
 .tl__dot{width:46px;height:46px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:var(--bg-elevated);border:2px solid var(--accent-ring);color:var(--accent);font-size:.82rem;font-weight:900;transition:.3s var(--ease)}
 .tl:hover .tl__dot{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 8px 20px var(--accent-ring)}
 .tl.is-primary .tl__dot{background:var(--grad-accent);border-color:transparent;color:#fff}
+.tl.is-deploy .tl__dot{background:var(--success);border-color:transparent;color:#fff}
 .tl.is-final .tl__dot{width:54px;height:54px;background:var(--grad-gold);border-color:transparent;color:#231a08;font-size:1.05rem}
 .tl__week{display:inline-block;font-size:.62rem;font-weight:800;color:var(--text-muted);background:var(--bg-elevated);padding:2px 10px;border-radius:999px;border:1px solid var(--border);margin-bottom:6px;letter-spacing:.5px}
 .tl.is-primary .tl__week{color:var(--accent);border-color:var(--accent-ring);background:var(--accent-soft)}
+.tl.is-deploy .tl__week{color:var(--success);border-color:rgba(26,154,106,.25);background:var(--success-soft)}
 .tl.is-final .tl__week{color:#231a08;background:var(--gold-2);border-color:transparent}
 .tl__label{font-size:.76rem;font-weight:800;color:var(--text-primary);line-height:1.5;margin-bottom:6px;min-height:34px}
 .tl__pay{display:inline-block;font-size:.68rem;font-weight:900;color:var(--accent);background:var(--accent-soft);padding:3px 12px;border-radius:999px;border:1px solid var(--accent-ring)}
+.tl.is-deploy .tl__pay{color:var(--success);background:var(--success-soft);border-color:rgba(26,154,106,.25)}
 .tl.is-final .tl__pay{color:#231a08;background:var(--gold-2);border-color:transparent}
 .timeline__hint{font-size:.68rem;color:var(--text-muted);text-align:center;margin-top:6px;font-weight:600}
 
@@ -341,7 +345,7 @@ ul{list-style:none}
 .money__label{font-size:.72rem;color:rgba(255,255,255,.65);letter-spacing:1.8px;font-weight:800;margin-bottom:12px;position:relative;text-transform:uppercase}
 .money__big{font-size:clamp(2rem,4.6vw,3.1rem);font-weight:900;color:var(--gold-2);line-height:1.1;position:relative;letter-spacing:-.02em}
 .money__big small{font-size:.4em;color:rgba(255,255,255,.7);font-weight:700;margin-right:8px}
-.money__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px;position:relative}
+.money__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px;position:relative}
 .money__cell{padding:14px 16px;border-radius:var(--radius-xs);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);transition:.3s var(--ease)}
 .money__cell:hover{background:rgba(255,255,255,.11);transform:translateY(-2px)}
 .money__cell strong{display:block;font-size:.96rem;color:#fff;font-weight:900;margin-bottom:3px}
@@ -469,7 +473,7 @@ ul{list-style:none}
   .table-wrap th,.table-wrap td{padding:12px 12px;font-size:.76rem}
   .table-wrap table{min-width:620px}
   .sig-grid{grid-template-columns:1fr;gap:12px}
-  .timeline__scroll{min-width:900px}
+  .timeline__scroll{min-width:1000px}
   .meta-grid{grid-template-columns:1fr}
   .meta-card{border-left:none;border-top:1px solid var(--border)}
   .meta-card:first-child{border-top:none}
@@ -608,7 +612,7 @@ ul{list-style:none}
         </span>
         <span class="hero__chip">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          مدت اجرا: ۵ فاز
+          مدت اجرا: ۱۳۵ روز
         </span>
         <span class="hero__chip">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.66 0 3.22.45 4.56 1.24"/></svg>
@@ -616,7 +620,7 @@ ul{list-style:none}
         </span>
         <span class="hero__chip">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          معماری توسعه‌پذیر API-First
+          اجرای موازی + تحویل مرحله‌ای
         </span>
       </div>
       <div class="hero__scroll">
@@ -642,8 +646,8 @@ ul{list-style:none}
         <div class="value">Code Packs</div>
       </div>
       <div class="meta-card">
-        <div class="label">مدت اجرای فاز ۱ تا ۳</div>
-        <div class="value">۱۸۵ روز<span class="sub">(اجرای متوالی سه فاز نخست)</span></div>
+        <div class="label">مدت اجرای پروژه</div>
+        <div class="value">۱۳۵ روز<span class="sub">(اجرای موازی فازهای ۱ تا ۳ + استقرار)</span></div>
       </div>
       <div class="meta-card">
         <div class="label">سرمایه‌گذاری فاز ۱ تا ۳</div>
@@ -768,6 +772,11 @@ ul{list-style:none}
     <div class="highlight">
       <strong>🎯 هدف کلان:</strong> تبدیل پازل فرشته به مجموعه‌ای داده‌محور که اطلاعات، پیگیری مشتری، وب‌سایت، هوش مصنوعی و بازاریابی آن در یک مسیر واحد کار کنند؛ نه مجموعه‌ای از ابزارهای جدا از هم.
     </div>
+
+    <div class="callout">
+      <strong>رویکرد اجرایی این قرارداد: توسعه موازی و تحویل مرحله‌ای</strong>
+      <p>پروژه به‌صورت موازی پیش می‌رود؛ به این معنا که در هر بازه زمانی، بخشی از فازهای مختلف هم‌زمان در حال توسعه است. در هر نقطه پرداخت، بخشی از محصول به‌صورت قابل استفاده تحویل داده می‌شود تا کارفرما در تمام طول پروژه، پیشرفت واقعی و دارایی در حال شکل‌گیری را لمس کند.</p>
+    </div>
   </section>
 
   <!-- C3: معماری -->
@@ -836,13 +845,14 @@ ul{list-style:none}
     <p>پیمانکار متعهد به موارد زیر است:</p>
     <ul class="deliver" style="background:transparent;border:0;padding:0;">
       <li>اجرای پروژه مطابق با فازبندی، زمان‌بندی و خروجی‌های مندرج در مواد ۶، ۷ و ۹ این قرارداد.</li>
-      <li>ارائه مستندات کامل فنی و کاربردی در پایان هر فاز، شامل گزارش پیشرفت، مستندات API، راهنمای کاربر و معماری سیستم.</li>
+      <li>اجرای موازی فازها و تحویل مرحله‌ای بخش‌های قابل استفاده در هر نقطه پرداخت.</li>
+      <li>ارائه مستندات کامل فنی و کاربردی در پایان هر مرحله تحویل، شامل گزارش پیشرفت، مستندات API، راهنمای کاربر و معماری سیستم.</li>
       <li>برگزاری جلسات دوره‌ای (آنلاین یا حضوری) با نمایندگان کارفرما و اعمال بازخوردها در روند اجرا.</li>
       <li>تضمین کیفیت کد و اجرای تست‌های واحد، یکپارچه، نفوذ و بار مطابق با استانداردهای صنعت نرم‌افزار.</li>
-      <li>تحویل سورس‌کد کامل، دسترسی Repository، مالکیت دیتابیس و تمام دسترسی‌های مدیریتی به کارفرما در پایان هر فاز.</li>
+      <li>تحویل سورس‌کد کامل، دسترسی Repository، مالکیت دیتابیس و تمام دسترسی‌های مدیریتی به کارفرما در پایان هر مرحله.</li>
       <li>رعایت کامل محرمانگی اطلاعات کارفرما مطابق با ماده ۱۳ این قرارداد.</li>
-      <li>استقرار سیستم در زیرساخت کارفرما و آموزش دپارتمان‌های مختلف پس از تحویل نهایی فاز ۳.</li>
-      <li>ارائه پشتیبانی رایگان مطابق با ماده ۱۲ این قرارداد پس از تحویل نهایی.</li>
+      <li>استقرار سیستم در زیرساخت کارفرما، آموزش دپارتمان‌های مختلف و ارائه یک ماه پشتیبانی استقرار پس از تکمیل توسعه.</li>
+      <li>ارائه پشتیبانی رایگان ۶ ماهه مطابق با ماده ۱۲ این قرارداد پس از تحویل نهایی.</li>
     </ul>
   </section>
 
@@ -860,8 +870,8 @@ ul{list-style:none}
     <ul class="deliver" style="background:transparent;border:0;padding:0;">
       <li>ارائه مستندات، داده‌های فروش، اطلاعات فایل‌ها و املاک، لیست مشتریان و هر داده موردنیاز، حداکثر تا ۷ روز کاری از تاریخ امضا قرارداد.</li>
       <li>فراهم‌سازی دسترسی‌های لازم به محیط‌های سرویس‌دهنده (سرور، دیتابیس، سرویس‌های ابری، دامنه و سایر موارد مورد نیاز).</li>
-      <li>پرداخت تعهدات مالی خود مطابق با ماده ۱۱ به‌موقع.</li>
-      <li>همکاری در تست‌های پذیرش کاربری (UAT) و ارائه تأییدیه نهایی حداکثر تا ۵ روز کاری پس از اعلام آمادگی پیمانکار.</li>
+      <li>پرداخت تعهدات مالی خود مطابق با ماده ۱۱ به‌موقع و در نقاط تحویل مشخص‌شده.</li>
+      <li>همکاری در تست‌های پذیرش کاربری (UAT) و ارائه تأییدیه هر مرحله حداکثر تا ۵ روز کاری پس از اعلام آمادگی پیمانکار.</li>
       <li>تأمین اطلاعات برندینگ (لوگو، رنگ‌های سازمانی، هویت برند) برای طراحی وب‌سایت‌ها و دستیار هوشمند.</li>
       <li>معرفی نماینده فنی و نماینده کسب‌وکار به‌عنوان نقاط ارتباطی اصلی با پیمانکار.</li>
       <li>تأمین هزینه‌های جاری پروژه (سرور، دامنه، APIهای ثالث و سرویس‌های ابری) مطابق ماده ۱۱-۴.</li>
@@ -878,47 +888,122 @@ ul{list-style:none}
       </div>
     </div>
 
-    <p>کل پروژه در <strong>۵ فاز</strong> اجرا می‌شود. فازهای ۱ تا ۳ (ساخت دارایی دیجیتال اصلی) در مجموع <strong>۱۸۵ روز</strong> زمان‌بندی شده‌اند. فازهای ۴ و ۵ به‌صورت دوره‌ای / ماهانه و پس از تثبیت دامنه خدمات، اجرا خواهند شد.</p>
+    <p>کل پروژه در <strong>۵ فاز</strong> اجرا می‌شود. فازهای ۱ تا ۳ (ساخت دارایی دیجیتال اصلی) به‌صورت <strong>موازی و هم‌پوشان</strong> در مجموع <strong>۱۳۵ روز</strong> زمان‌بندی شده‌اند که شامل <strong>۱۰۵ روز توسعه موازی</strong> و <strong>۳۰ روز استقرار، آموزش و پشتیبانی استقرار</strong> است. فازهای ۴ و ۵ به‌صورت دوره‌ای / ماهانه و پس از تثبیت دامنه خدمات، اجرا خواهند شد.</p>
+
+    <div class="callout">
+      <strong>منطق اجرای موازی</strong>
+      <p>در این مدل، تیم‌های توسعه به‌صورت هم‌زمان روی بخش‌های مختلف کار می‌کنند. به‌جای آنکه فاز ۲ پس از اتمام کامل فاز ۱ شروع شود، طراحی و فرانت‌اند سایت از همان هفته‌های اول آغاز می‌شود و به دیتابیس در حال ساخت متصل می‌گردد. به همین شکل، هسته هوش مصنوعی از میانه پروژه وارد چرخه توسعه می‌شود. نتیجه: <strong>کاهش ۵۰ روزه زمان پروژه</strong> و تحویل بخش‌های قابل استفاده در هر مرحله.</p>
+    </div>
 
     <div class="timeline">
       <div class="timeline__scroll">
         <div class="timeline__track"></div>
 
         <div class="tl is-primary">
+          <div class="tl__dot">۰</div>
+          <div class="tl__week">روز ۰</div>
+          <div class="tl__label">امضا و پیش‌پرداخت</div>
+          <div class="tl__pay">۳۰٪</div>
+        </div>
+        <div class="tl">
           <div class="tl__dot">۱</div>
-          <div class="tl__week">۷۵ روز</div>
-          <div class="tl__label">زیرساخت داخلی و نرم‌افزار جامع</div>
-          <div class="tl__pay">۲۱۰ م.ت</div>
+          <div class="tl__week">روز ۲۵</div>
+          <div class="tl__label">ماژول اول هسته داخلی</div>
+          <div class="tl__pay">۱۰٪</div>
         </div>
         <div class="tl">
           <div class="tl__dot">۲</div>
-          <div class="tl__week">۶۰ روز</div>
-          <div class="tl__label">وب‌سایت اختصاصی و لایه مشتری</div>
-          <div class="tl__pay">۹۰ م.ت</div>
+          <div class="tl__week">روز ۵۰</div>
+          <div class="tl__label">هسته داخلی + آلفای سایت</div>
+          <div class="tl__pay">۱۰٪</div>
         </div>
         <div class="tl">
           <div class="tl__dot">۳</div>
-          <div class="tl__week">۵۰ روز</div>
-          <div class="tl__label">هوش مصنوعی پیشرفته</div>
-          <div class="tl__pay">۱۹۰ م.ت</div>
+          <div class="tl__week">روز ۷۵</div>
+          <div class="tl__label">وب‌سایت کامل + لیدگیری</div>
+          <div class="tl__pay">۱۰٪</div>
         </div>
         <div class="tl">
           <div class="tl__dot">۴</div>
-          <div class="tl__week">ماهانه</div>
-          <div class="tl__label">تولید محتوا و مارکتینگ دوره‌ای</div>
-          <div class="tl__pay">دوره‌ای</div>
+          <div class="tl__week">روز ۱۰۰</div>
+          <div class="tl__label">هسته هوش مصنوعی</div>
+          <div class="tl__pay">۱۵٪</div>
+        </div>
+        <div class="tl is-deploy">
+          <div class="tl__dot">۵</div>
+          <div class="tl__week">۱ ماه</div>
+          <div class="tl__label">استقرار، آموزش و پشتیبانی</div>
+          <div class="tl__pay">۱۰٪</div>
         </div>
         <div class="tl is-final">
           <div class="tl__dot">★</div>
-          <div class="tl__week">کمپینی</div>
-          <div class="tl__label">تبلیغات انبوه و کمپین‌ها</div>
-          <div class="tl__pay">دوره‌ای</div>
+          <div class="tl__week">روز ۱۳۵</div>
+          <div class="tl__label">تحویل نهایی و تسویه</div>
+          <div class="tl__pay">۱۵٪</div>
         </div>
       </div>
-      <div class="timeline__hint">برای دیدن همه فازها، جدول را به چپ و راست بکشید</div>
+      <div class="timeline__hint">برای دیدن همه مراحل، جدول را به چپ و راست بکشید</div>
     </div>
 
-    <h3>۶-۱. جمع‌بندی سرمایه‌گذاری و زمان‌بندی</h3>
+    <h3>۶-۱. جدول اجرای موازی و نقاط تحویل مرحله‌ای</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:110px;">بازه زمانی</th>
+            <th>فعالیت‌های موازی در این بازه</th>
+            <th style="width:220px;">نقطه تحویل (خروجی قابل استفاده)</th>
+            <th style="width:90px;">پرداخت</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-total">
+            <td>روز ۰</td>
+            <td>امضای قرارداد، تشکیل تیم، تثبیت نیازمندی‌ها، طراحی معماری کلان و راه‌اندازی محیط توسعه.</td>
+            <td><strong>شروع رسمی پروژه</strong><br><small>سند تثبیت Scope و معماری</small></td>
+            <td><strong>۳۰٪</strong></td>
+          </tr>
+          <tr>
+            <td>روز ۰ – ۲۵</td>
+            <td>توسعه ماژول فایل، املاک و مشتریان + CRM پایه &nbsp;|&nbsp; شروع موازی طراحی UI/UX وب‌سایت</td>
+            <td><strong>ماژول اول هسته داخلی</strong><br><small>ثبت فایل، مشتری و پیگیری — قابل استفاده واقعی</small></td>
+            <td><strong>۱۰٪</strong></td>
+          </tr>
+          <tr>
+            <td>روز ۲۵ – ۵۰</td>
+            <td>تکمیل هسته داخلی (گزارش، رنکینگ، دسترسی‌ها) &nbsp;|&nbsp; توسعه Front-end سایت بر بستر داده واقعی</td>
+            <td><strong>هسته داخلی کامل + نسخه آلفای وب‌سایت</strong><br><small>نرم‌افزار جامع فاز ۱ + پیش‌نمایش سایت</small></td>
+            <td><strong>۱۰٪</strong></td>
+          </tr>
+          <tr>
+            <td>روز ۵۰ – ۷۵</td>
+            <td>تکمیل وب‌سایت، لندینگ‌ها و اتصال لید به CRM &nbsp;|&nbsp; شروع موازی توسعه هسته هوش مصنوعی</td>
+            <td><strong>وب‌سایت اختصاصی کامل + لیدگیری متصل</strong><br><small>فاز ۲ تحویل + اولین نسخه چت هوشمند فایل</small></td>
+            <td><strong>۱۰٪</strong></td>
+          </tr>
+          <tr>
+            <td>روز ۷۵ – ۱۰۰</td>
+            <td>تکمیل هسته هوش مصنوعی: تحلیل مکالمه، پردازش ویس، پیشنهاد مذاکره، مربی هوشمند مشاوران</td>
+            <td><strong>هسته هوش مصنوعی کامل</strong><br><small>فاز ۳ تحویل + یکپارچگی سه محصول</small></td>
+            <td><strong>۱۵٪</strong></td>
+          </tr>
+          <tr class="row-deploy">
+            <td>روز ۱۰۰ – ۱۳۵</td>
+            <td>استقرار روی زیرساخت کارفرما &nbsp;|&nbsp; آموزش دپارتمان‌های فروش، مشاوران، مالی و پشتیبانی &nbsp;|&nbsp; پشتیبانی کامل ماه اول</td>
+            <td><strong>رضایت کامل کارفرما و تیم</strong><br><small>سیستم روی زیرساخت خود کارفرما، تیم آموزش‌دیده</small></td>
+            <td><strong>۱۰٪</strong></td>
+          </tr>
+          <tr class="row-final">
+            <td>پایان روز ۱۳۵</td>
+            <td>تحویل سورس‌کد کامل، مستندات، دسترسی‌های مدیریتی و تأییدیه کتبی نهایی</td>
+            <td><strong>تحویل نهایی و تسویه</strong><br><small>سند Acceptance و بستن پروژه</small></td>
+            <td><strong>۱۵٪</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>۶-۲. جدول تفصیلی فازبندی و سرمایه‌گذاری</h3>
     <div class="table-wrap">
       <table>
         <thead>
@@ -934,27 +1019,27 @@ ul{list-style:none}
           <tr>
             <td>۱</td>
             <td><strong>زیرساخت داخلی و نرم‌افزار جامع</strong><br><small>پایه عملیاتی و دیتابیس مرکزی مجموعه</small></td>
-            <td>۷۵ روز</td>
+            <td>۷۵ روز (موازی)</td>
             <td><strong>۲۱۰ میلیون تومان</strong></td>
             <td>یک‌باره</td>
           </tr>
           <tr>
             <td>۲</td>
             <td><strong>وب‌سایت برنامه‌نویسی‌شده اختصاصی</strong><br><small>کانال رسمی دریافت لید و تجربه دیجیتال مشتری</small></td>
-            <td>۶۰ روز</td>
+            <td>۶۰ روز (موازی)</td>
             <td><strong>۹۰ میلیون تومان</strong></td>
             <td>یک‌باره</td>
           </tr>
           <tr>
             <td>۳</td>
             <td><strong>هوش مصنوعی پیشرفته</strong><br><small>دستیار هوشمند مشاور، تحلیل مکالمه و پیشنهاد مذاکره</small></td>
-            <td>۵۰ روز</td>
+            <td>۵۰ روز (موازی)</td>
             <td><strong>۱۹۰ میلیون تومان</strong></td>
             <td>یک‌باره</td>
           </tr>
           <tr class="row-total">
-            <td colspan="2"><strong>جمع فازهای ۱ تا ۳ — توسعه دارایی دیجیتال اصلی</strong></td>
-            <td><strong>۱۸۵ روز</strong></td>
+            <td colspan="2"><strong>جمع فازهای ۱ تا ۳ — توسعه دارایی دیجیتال اصلی (اجرای موازی)</strong></td>
+            <td><strong>۱۳۵ روز</strong></td>
             <td><strong>۴۹۰,۰۰۰,۰۰۰ تومان</strong></td>
             <td>—</td>
           </tr>
@@ -984,7 +1069,7 @@ ul{list-style:none}
     </div>
 
     <div class="highlight">
-      زمان‌ها تخمینی هستند و برنامه نهایی پس از تثبیت Scope هر فاز تنظیم می‌شود. در صورت امکان فنی، بخشی از آماده‌سازی فاز بعد می‌تواند با هماهنگی طرفین هم‌پوشانی داشته باشد.
+      زمان‌ها تخمینی هستند و برنامه نهایی پس از تثبیت Scope هر فاز تنظیم می‌شود. اجرای موازی به‌گونه‌ای برنامه‌ریزی شده که هر مرحله پرداخت، با تحویل یک خروجی قابل استفاده و ملموس همراه باشد. در صورت امکان فنی و هماهنگی طرفین، هم‌پوشانی بیشتری بین فازها اعمال می‌شود.
     </div>
   </section>
 
@@ -996,6 +1081,11 @@ ul{list-style:none}
         <div class="section__num">ماده ۷</div>
         <h2 class="section__title">شرح تفصیلی فازهای ۱ تا ۳ — ساخت دارایی دیجیتال اصلی</h2>
       </div>
+    </div>
+
+    <div class="callout">
+      <strong>این سه فاز به‌صورت موازی اجرا می‌شوند و مرزهای زمانی آن‌ها هم‌پوشانی دارد.</strong>
+      <p>در هر بازه، بخشی از هر سه محصول در حال ساخت است و در نقاط مشخص‌شده، خروجی قابل استفاده تحویل داده می‌شود. جدول زمانی و نقاط تحویل در ماده ۶ و جدول پرداخت در ماده ۱۱ به‌تفصیل آمده است.</p>
     </div>
 
     <div class="phases">
@@ -1011,13 +1101,15 @@ ul{list-style:none}
             </div>
           </div>
           <div class="phase__meta">
-            <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۷۵ روز</span>
+            <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۷۵ روز (موازی)</span>
             <span class="chip chip--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>۲۱۰ میلیون تومان</span>
           </div>
         </div>
         <div class="phase__body">
           <div class="phase__copy">
             در این مرحله <b>«مرکز فرمان»</b> مجموعه ساخته می‌شود؛ جایی که فایل‌ها، تقاضاها، مشتریان، درخواست‌ها، پیگیری‌ها و چرخه‌های کاری به‌جای پراکندگی در ابزارهای مختلف، در یک سامانه واحد ثبت و مدیریت شوند. هدف فقط دیجیتال کردن فرم‌ها نیست؛ هدف ایجاد دیتابیسی تمیز، قابل گزارش‌گیری و آماده برای مارکتینگ و هوش مصنوعی آینده است.
+            <br><br>
+            <b>نقاط تحویل مرحله‌ای:</b> روز ۲۵ ماژول فایل/املاک/مشتری و CRM پایه تحویل می‌شود؛ روز ۵۰ هسته داخلی کامل شامل گزارش‌گیری، رنکینگ و سطوح دسترسی تحویل می‌گردد.
           </div>
           <div class="deliver">
             <div class="deliver__title">
@@ -1053,13 +1145,15 @@ ul{list-style:none}
             </div>
           </div>
           <div class="phase__meta">
-            <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۶۰ روز</span>
+            <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۶۰ روز (موازی)</span>
             <span class="chip chip--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>۹۰ میلیون تومان</span>
           </div>
         </div>
         <div class="phase__body">
           <div class="phase__copy">
             وب‌سایت از صفر برنامه‌نویسی می‌شود و بر پایه سیستم آماده‌ای مانند وردپرس ساخته نخواهد شد. سایت به همان دیتابیس زیرساخت داخلی متصل است؛ بنابراین تیم مجموعه می‌تواند مشخص کند کدام فایل‌ها و اطلاعات برای نمایش عمومی منتشر شوند. این فاز هم‌زمان نقش <b>ویترین برند</b>، <b>کانال سئو</b>، <b>لندینگ تبلیغات</b> و مسیر دریافت و انتقال منظم لید را دارد.
+            <br><br>
+            <b>نقاط تحویل مرحله‌ای:</b> روز ۵۰ نسخه آلفای سایت روی محیط تست تحویل می‌شود؛ روز ۷۵ وب‌سایت کامل به‌همراه لندینگ‌ها و فرم‌های متصل به CRM تحویل می‌گردد.
           </div>
           <div class="deliver">
             <div class="deliver__title">
@@ -1095,13 +1189,15 @@ ul{list-style:none}
             </div>
           </div>
           <div class="phase__meta">
-            <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۵۰ روز</span>
+            <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۵۰ روز (موازی)</span>
             <span class="chip chip--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>۱۹۰ میلیون تومان</span>
           </div>
         </div>
         <div class="phase__body">
           <div class="phase__copy">
             در این فاز، هوش مصنوعی از یک ابزار گزارش‌گیری صرف فراتر می‌رود و به <b>«همراه هوشمند»</b> هر مشاور تبدیل می‌شود. برای هر فایل، یک چت اختصاصی هوشمند در سیستم باز می‌شود که تمام پیام‌ها، ویس‌ها و مکالمات مشتری — از هر پیام‌رسانی که باشد — به آن متصل می‌شود؛ سیستم مکالمه را تحلیل می‌کند، نیت مشتری را می‌فهمد، نقاط تردید را شناسایی می‌کند و بهترین پاسخ یا مسیر پیشبرد مذاکره را به مشاور پیشنهاد می‌دهد.
+            <br><br>
+            <b>نقاط تحویل مرحله‌ای:</b> از روز ۷۵ اولین نسخه چت هوشمند فایل در دسترس قرار می‌گیرد؛ روز ۱۰۰ هسته کامل شامل تحلیل ویس، مربی هوشمند و گزارش‌های پیش‌بینی تحویل می‌شود.
           </div>
           <div class="deliver">
             <div class="deliver__title">
@@ -1340,19 +1436,19 @@ ul{list-style:none}
           <tr>
             <td>۱</td>
             <td>زیرساخت داخلی و نرم‌افزار جامع (فاز ۱)</td>
-            <td>۷۵ روز</td>
+            <td>۷۵ روز (موازی)</td>
             <td><strong>۲۱۰,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr>
             <td>۲</td>
             <td>وب‌سایت اختصاصی و لایه مشتری (فاز ۲)</td>
-            <td>۶۰ روز</td>
+            <td>۶۰ روز (موازی)</td>
             <td><strong>۹۰,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr>
             <td>۳</td>
             <td>هوش مصنوعی پیشرفته (فاز ۳)</td>
-            <td>۵۰ روز</td>
+            <td>۵۰ روز (موازی)</td>
             <td><strong>۱۹۰,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr class="row-total">
@@ -1367,15 +1463,20 @@ ul{list-style:none}
       <strong>تبصره:</strong> بات اختصاصی بله (فاز هدیه) به ارزش تقریبی ۶۰,۰۰۰,۰۰۰ تومان، به‌صورت رایگان و بدون هزینه در این قرارداد گنجانده شده است. فازهای ۴ و ۵ (تولید محتوا و تبلیغات) بر اساس تعرفه دوره‌ای، پس از توافق حجم خدمات، در قالب توافق‌نامه مستقل محاسبه می‌شوند.
     </p>
 
-    <h3>۱۱-۲. جدول پرداخت بر اساس نقاط تحویل</h3>
+    <h3>۱۱-۲. جدول پرداخت مرحله‌ای بر اساس نقاط تحویل</h3>
+    <div class="callout">
+      <strong>ساختار پرداخت: ۳۰٪ پیش‌پرداخت + ۴۵٪ در چهار مرحله تحویل + ۱۰٪ پس از استقرار و رضایت + ۱۵٪ تحویل نهایی</strong>
+      <p>هر پرداخت با یک خروجی قابل استفاده و ملموس گره خورده است. در هر مرحله، کارفرما بخشی از محصول را دریافت می‌کند و سپس پرداخت مربوطه انجام می‌شود.</p>
+    </div>
+
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
             <th style="width:70px;">مرحله</th>
             <th style="width:110px;">زمان</th>
-            <th>شرح تحویل</th>
-            <th style="width:180px;">درصد</th>
+            <th>شرح تحویل (خروجی ملموس)</th>
+            <th style="width:150px;">درصد</th>
             <th style="width:150px;">مبلغ (تومان)</th>
           </tr>
         </thead>
@@ -1383,62 +1484,86 @@ ul{list-style:none}
           <tr class="row-total">
             <td>۱</td>
             <td>روز ۰</td>
-            <td><strong>پیش‌پرداخت</strong><br><small>امضای قرارداد و شروع رسمی فاز ۱</small></td>
+            <td><strong>پیش‌پرداخت و شروع رسمی</strong><br><small>امضای قرارداد، تثبیت Scope، معماری کلان، تشکیل تیم</small></td>
             <td>
               <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:100%;"></div></div>
-                <span class="pay-bar__label">۲۰٪</span>
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:90%;"></div></div>
+                <span class="pay-bar__label">۳۰٪</span>
               </div>
             </td>
-            <td><strong>۹۸,۰۰۰,۰۰۰</strong></td>
+            <td><strong>۱۴۷,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr>
             <td>۲</td>
-            <td>روز ۷۵</td>
-            <td><strong>تحویل فاز ۱ — زیرساخت داخلی</strong><br><small>نرم‌افزار جامع + دیتابیس مرکزی + API-First</small></td>
+            <td>روز ۲۵</td>
+            <td><strong>تحویل ماژول اول هسته داخلی</strong><br><small>ثبت فایل، املاک، مشتریان و CRM پایه — قابل استفاده واقعی</small></td>
             <td>
               <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:100%;"></div></div>
-                <span class="pay-bar__label">۲۵٪</span>
-              </div>
-            </td>
-            <td><strong>۱۲۲,۵۰۰,۰۰۰</strong></td>
-          </tr>
-          <tr>
-            <td>۳</td>
-            <td>روز ۱۳۵</td>
-            <td><strong>تحویل فاز ۲ — وب‌سایت اختصاصی</strong><br><small>سایت اختصاصی + لندینگ + لیدگیری متصل به CRM</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:80%;"></div></div>
-                <span class="pay-bar__label">۲۰٪</span>
-              </div>
-            </td>
-            <td><strong>۹۸,۰۰۰,۰۰۰</strong></td>
-          </tr>
-          <tr>
-            <td>۴</td>
-            <td>روز ۱۸۵</td>
-            <td><strong>تحویل فاز ۳ — هسته هوش مصنوعی</strong><br><small>دستیار مشاور + تحلیل مکالمه + مربی هوشمند</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:100%;"></div></div>
-                <span class="pay-bar__label">۲۵٪</span>
-              </div>
-            </td>
-            <td><strong>۱۲۲,۵۰۰,۰۰۰</strong></td>
-          </tr>
-          <tr class="row-final">
-            <td>۵</td>
-            <td>پس از استقرار</td>
-            <td><strong>تحویل نهایی و تسویه</strong><br><small>پس از استقرار، آموزش و اعلام رضایت کامل کارفرما</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:40%;"></div></div>
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div>
                 <span class="pay-bar__label">۱۰٪</span>
               </div>
             </td>
             <td><strong>۴۹,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr>
+            <td>۳</td>
+            <td>روز ۵۰</td>
+            <td><strong>تحویل هسته داخلی کامل + نسخه آلفای وب‌سایت</strong><br><small>گزارش‌گیری، رنکینگ، دسترسی‌ها + پیش‌نمایش سایت روی داده واقعی</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div>
+                <span class="pay-bar__label">۱۰٪</span>
+              </div>
+            </td>
+            <td><strong>۴۹,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr>
+            <td>۴</td>
+            <td>روز ۷۵</td>
+            <td><strong>تحویل وب‌سایت کامل + لیدگیری متصل به CRM</strong><br><small>سایت اختصاصی، لندینگ‌ها و فرم‌های جذب لید</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div>
+                <span class="pay-bar__label">۱۰٪</span>
+              </div>
+            </td>
+            <td><strong>۴۹,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr>
+            <td>۵</td>
+            <td>روز ۱۰۰</td>
+            <td><strong>تحویل هسته هوش مصنوعی کامل</strong><br><small>دستیار مشاور، تحلیل مکالمه و ویس، مربی هوشمند — یکپارچگی سه محصول</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:45%;"></div></div>
+                <span class="pay-bar__label">۱۵٪</span>
+              </div>
+            </td>
+            <td><strong>۷۳,۵۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr class="row-deploy">
+            <td>۶</td>
+            <td>روز ۱۰۰ – ۱۳۵</td>
+            <td><strong>استقرار، آموزش و پشتیبانی یک ماهه</strong><br><small>استقرار روی زیرساخت کارفرما + آموزش تیم پازل فرشته + پشتیبانی ماه اول — پرداخت پس از رضایت کامل کارفرما و تیم</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div>
+                <span class="pay-bar__label">۱۰٪</span>
+              </div>
+            </td>
+            <td><strong>۴۹,۰۰۰,۰۰۰</strong></td>
+          </tr>
+          <tr class="row-final">
+            <td>۷</td>
+            <td>پایان روز ۱۳۵</td>
+            <td><strong>تحویل نهایی و تسویه</strong><br><small>سورس‌کد کامل، مستندات، دسترسی‌های مدیریتی و تأییدیه کتبی نهایی</small></td>
+            <td>
+              <div class="pay-bar">
+                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:45%;"></div></div>
+                <span class="pay-bar__label">۱۵٪</span>
+              </div>
+            </td>
+            <td><strong>۷۳,۵۰۰,۰۰۰</strong></td>
           </tr>
           <tr class="row-total">
             <td colspan="3"><strong>جمع کل</strong></td>
@@ -1450,8 +1575,13 @@ ul{list-style:none}
     </div>
 
     <div class="callout">
-      <strong>شرط پرداخت نهایی</strong>
-      <p>پرداخت ۱۰٪ نهایی (معادل ۴۹,۰۰۰,۰۰۰ تومان) فقط و فقط پس از تحویل نهایی فاز ۳، استقرار موفق، آموزش کامل و اعلام رضایت کامل کارفرما انجام می‌شود. در صورت عدم رضایت، طرفین مطابق ماده ۱۴-۳ (روش رسمی تحویل و تأیید) نسبت به رفع نقص اقدام خواهند نمود.</p>
+      <strong>شرط پرداخت مرحله ۶ (استقرار و آموزش)</strong>
+      <p>پرداخت ۱۰٪ مرحله ششم (معادل ۴۹,۰۰۰,۰۰۰ تومان) فقط پس از گذشت یک ماه از استقرار، انجام آموزش کامل تیم پازل فرشته و اعلام رضایت کامل کارفرما و تیم انجام می‌شود. در صورت اعلام نقص، پیمانکار مطابق ماده ۱۴-۳ نسبت به رفع آن اقدام می‌کند و پرداخت پس از تأیید مجدد انجام می‌گردد.</p>
+    </div>
+
+    <div class="callout">
+      <strong>شرط پرداخت مرحله ۷ (تحویل نهایی)</strong>
+      <p>پرداخت ۱۵٪ نهایی (معادل ۷۳,۵۰۰,۰۰۰ تومان) پس از تحویل کامل سورس‌کد، مستندات، دسترسی‌های مدیریتی و امضای صورت‌جلسه تحویل نهایی (Acceptance) انجام می‌شود.</p>
     </div>
 
     <h3>۱۱-۳. نحوه پرداخت</h3>
@@ -1470,8 +1600,12 @@ ul{list-style:none}
       <div class="money__big">۴۹۰ <small>میلیون تومان</small></div>
       <div class="money__grid">
         <div class="money__cell">
-          <strong>۱۸۵ روز</strong>
-          <span>جمع زمان تخمینی اجرای متوالی فاز ۱ تا ۳</span>
+          <strong>۱۳۵ روز</strong>
+          <span>توسعه موازی + استقرار و آموزش</span>
+        </div>
+        <div class="money__cell">
+          <strong>۷ پرداخت مرحله‌ای</strong>
+          <span>هر پرداخت با یک خروجی ملموس</span>
         </div>
         <div class="money__cell">
           <strong>۳ محصول متصل</strong>
@@ -1505,16 +1639,17 @@ ul{list-style:none}
       <li>راهنمای کاربری برای دپارتمان‌های مختلف</li>
     </ul>
 
-    <h3>۱۲-۲. برنامه استقرار و آموزش (پس از تحویل فاز ۳)</h3>
+    <h3>۱۲-۲. برنامه استقرار و آموزش (یک ماه — روز ۱۰۰ تا ۱۳۵)</h3>
     <ul class="deliver" style="background:transparent;border:0;padding:0;">
-      <li>استقرار سیستم در زیرساخت کارفرما</li>
+      <li>استقرار کامل سیستم روی زیرساخت کارفرما</li>
       <li>آموزش دپارتمان‌های مختلف (فروش، مشاوران، مالی، پشتیبانی)</li>
-      <li>پشتیبانی کامل در راه‌اندازی اولیه</li>
-      <li>رفع اشکالات ناشی از استقرار</li>
+      <li>پشتیبانی کامل در راه‌اندازی اولیه و رفع اشکالات استقرار</li>
+      <li>همراهی تیم پازل فرشته در اولین چرخه کاری واقعی روی سیستم</li>
+      <li>اعلام رضایت کتبی کارفرما به‌عنوان شرط پرداخت مرحله ششم</li>
     </ul>
 
     <h3>۱۲-۳. پشتیبانی رایگان</h3>
-    <p>پس از تحویل نهایی فاز ۳ و استقرار کامل سیستم، پیمانکار متعهد می‌شود <strong>۶ ماه پشتیبانی رایگان</strong> برای کارفرما ارائه دهد. این دوره شامل موارد زیر است:</p>
+    <p>پس از تحویل نهایی و استقرار کامل سیستم، پیمانکار متعهد می‌شود <strong>۶ ماه پشتیبانی رایگان</strong> برای کارفرما ارائه دهد. این دوره شامل موارد زیر است:</p>
     <ul class="deliver" style="background:transparent;border:0;padding:0;">
       <li><strong>امنیت:</strong> پایش مستمر امنیت، بروزرسانی گواهی‌های SSL، تشخیص و رفع آسیب‌پذیری‌ها.</li>
       <li><strong>رفع باگ‌ها:</strong> شناسایی و رفع هرگونه خطا، باگ یا نقص فنی در سامانه، CRM، وب‌سایت‌ها و دستیار هوشمند.</li>
@@ -1562,24 +1697,25 @@ ul{list-style:none}
     <ul class="deliver" style="background:transparent;border:0;padding:0;">
       <li>کلیه اطلاعات و داده‌های ارائه‌شده به پیمانکار، صحیح، کامل و قانونی است.</li>
       <li>دسترسی‌های لازم برای اجرای پروژه را به‌موقع فراهم می‌کند.</li>
-      <li>تعهدات مالی خود را به‌طور کامل و به‌موقع انجام می‌دهد.</li>
+      <li>تعهدات مالی خود را در نقاط تحویل مشخص‌شده، به‌طور کامل و به‌موقع انجام می‌دهد.</li>
     </ul>
 
     <h3>۱۴-۳. روش رسمی تحویل و تأیید (Acceptance)</h3>
     <ul class="deliver" style="background:transparent;border:0;padding:0;">
-      <li>پیمانکار پس از اتمام هر فاز، مراتب آمادگی تحویل را به‌صورت کتبی (ایمیل رسمی) به کارفرما اعلام می‌کند.</li>
+      <li>پیمانکار در هر نقطه تحویل (روزهای ۲۵، ۵۰، ۷۵، ۱۰۰ و پایان روز ۱۳۵)، مراتب آمادگی تحویل را به‌صورت کتبی (ایمیل رسمی) به کارفرما اعلام می‌کند.</li>
       <li>کارفرما حداکثر تا <strong>۵ روز کاری</strong> پس از اعلام، تحویل را بررسی و نتیجه (تأیید یا اعلام نقص) را به‌صورت کتبی اعلام می‌کند.</li>
-      <li>در صورت عدم اعلام نظر در بازه مذکور، آن فاز به‌صورت <strong>خودکار تأیید شده</strong> تلقی می‌گردد.</li>
+      <li>در صورت عدم اعلام نظر در بازه مذکور، آن مرحله به‌صورت <strong>خودکار تأیید شده</strong> تلقی می‌گردد.</li>
       <li>در صورت اعلام نقص، پیمانکار حداکثر تا <strong>۱۰ روز کاری</strong> نسبت به رفع نقص اقدام می‌کند.</li>
-      <li><strong>پرداخت مرتبط با هر فاز، پس از تأیید کتبی کارفرما (یا تأیید خودکار) حداکثر تا ۷ روز کاری انجام می‌شود.</strong></li>
+      <li><strong>پرداخت مرتبط با هر مرحله، پس از تأیید کتبی کارفرما (یا تأیید خودکار) حداکثر تا ۷ روز کاری انجام می‌شود.</strong></li>
+      <li>پرداخت مرحله استقرار و آموزش، مشروط به گذشت یک ماه از استقرار و اعلام رضایت کامل کارفرما و تیم است.</li>
     </ul>
 
-    <h3>۱۴-۴. چارچوب اجرایی — چهار نقطه کنترل هر فاز</h3>
+    <h3>۱۴-۴. چارچوب اجرایی — چهار نقطه کنترل هر مرحله</h3>
     <div class="checks">
       <div class="check">
         <div class="check__num">۱</div>
         <b>تثبیت نیازمندی</b>
-        <p>جلسه شروع فاز، لیست ماژول‌ها، نقش‌ها، داده‌ها و اولویت‌ها.</p>
+        <p>جلسه شروع، لیست ماژول‌ها، نقش‌ها، داده‌ها و اولویت‌ها.</p>
       </div>
       <div class="check">
         <div class="check__num">۲</div>
@@ -1593,8 +1729,8 @@ ul{list-style:none}
       </div>
       <div class="check">
         <div class="check__num">۴</div>
-        <b>تحویل نهایی</b>
-        <p>استقرار، تحویل سورس و مستندات مربوط به همان فاز.</p>
+        <b>تحویل نهایی هر مرحله</b>
+        <p>استقرار، تحویل سورس و مستندات مربوط به همان مرحله.</p>
       </div>
     </div>
 
@@ -1626,8 +1762,8 @@ ul{list-style:none}
       <div class="appendix">
         <span class="badge-num">B</span>
         <div class="txt">
-          <strong>جدول فازبندی تفصیلی</strong>
-          <span>زمان‌بندی ۵ فاز به‌صورت گام‌به‌گام</span>
+          <strong>جدول فازبندی و اجرای موازی</strong>
+          <span>زمان‌بندی ۱۳۵ روزه با نقاط تحویل مرحله‌ای</span>
         </div>
       </div>
       <div class="appendix">
@@ -1648,7 +1784,7 @@ ul{list-style:none}
         <span class="badge-num">E</span>
         <div class="txt">
           <strong>معیارهای پذیرش و تست</strong>
-          <span>سند UAT و معیارهای تست تحویل هر فاز</span>
+          <span>سند UAT و معیارهای تست هر نقطه تحویل</span>
         </div>
       </div>
     </div>
