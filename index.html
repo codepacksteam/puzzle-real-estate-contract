@@ -411,6 +411,11 @@ ul{list-style:none}
 .back:hover{transform:translateY(-3px);background:var(--accent-2)}
 .back svg{width:20px;height:20px}
 
+/* ============================================================
+   PRINT DOCUMENT — hidden on screen, beautifully typeset for PDF
+   ============================================================ */
+.print-doc{display:none}
+
 @media (max-width:1024px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .flow{grid-template-columns:repeat(2,1fr)}
@@ -481,44 +486,288 @@ ul{list-style:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
-@media print{
-  @page{size:A4;margin:14mm}
-  .loader,.header,.mnav,.back,.toc,.final__btns,.scroll-progress,.hero__scroll{display:none!important}
-  body{background:#fff!important;color:#000!important;font-size:10pt}
-  body::before{display:none}
-  .container{max-width:none;padding:0}
-  .hero{background:#fff!important;padding:12px 0 18px!important;border-bottom:1px solid #ddd}
-  .hero__title,.hero__sub{color:#000!important}
-  .hero__title{font-size:18pt!important}
-  .hero__kicker{font-size:8pt!important}
-  .meta-wrap{margin:0 0 14px!important;padding:0}
-  .meta-grid{border:1px solid #ddd!important;box-shadow:none!important;padding:0}
-  .meta-card{padding:8px 12px!important;min-height:auto!important;border-color:#ddd!important}
-  .meta-card .label{font-size:6.5pt!important;margin-bottom:2px!important}
-  .meta-card .value{font-size:9pt!important}
-  .section{opacity:1!important;transform:none!important;box-shadow:none!important;border:1px solid #ddd!important;break-inside:avoid;page-break-inside:avoid;padding:14px 18px!important;margin-bottom:10px!important;border-radius:6px!important}
-  .section__icon{width:30px!important;height:30px!important;flex-basis:30px!important;font-size:9pt!important;box-shadow:none!important}
-  .section__title{font-size:12pt!important}
-  .section__num{font-size:7pt!important}
-  .section p,.deliver li{font-size:9pt!important}
-  .phase{break-inside:avoid;padding:12px 14px!important}
-  .money,.dark-box,.final,.gift{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none!important;break-inside:avoid}
-  .table-wrap{break-inside:avoid;page-break-inside:avoid;border:1px solid #ddd!important}
-  .table-wrap table{font-size:7.5pt!important;min-width:0!important}
-  .table-wrap th{padding:6px 8px!important;font-size:7pt!important;background:#eef6f9!important;color:#0d4a5c!important}
-  .table-wrap td{padding:6px 8px!important;font-size:7.5pt!important}
-  .timeline{padding:10px 6px!important;background:#f5f5f5!important;break-inside:avoid}
-  .timeline__scroll{min-width:0!important;flex-wrap:wrap!important;padding:0!important}
-  .timeline__track{display:none!important}
-  .tl{flex:0 0 20%!important;min-width:0!important;margin-bottom:8px!important}
-  .tl__dot{width:26px!important;height:26px!important;font-size:7pt!important;margin-bottom:5px!important}
-  .tl__label{font-size:7pt!important;min-height:auto!important}
-  .sig-grid{grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
-  .sig-card{padding:12px!important;border:1px solid #ddd!important;background:#fafafa!important;min-height:100px!important;break-inside:avoid}
-  .sig-avatar{width:28px!important;height:28px!important;font-size:7pt!important;box-shadow:none!important}
-  .sig-info .name{font-size:8.5pt!important}
-  .sig-info .role{font-size:6.5pt!important}
-  .sig-blank .dotted{height:20px!important}
+
+/* ============ PRINT ============ */
+@media print {
+  @page {
+    size: A4;
+    margin: 13mm 13mm 14mm 13mm;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #16232b !important;
+    font-size: 9.5pt !important;
+    line-height: 1.7 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body::before { display: none !important; }
+
+  /* Hide every screen element */
+  .scroll-progress,
+  .loader,
+  .header,
+  .mnav,
+  .back,
+  .hero,
+  .meta-wrap,
+  .toc,
+  .final,
+  .footer { display: none !important; }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .container > .section { display: none !important; }
+
+  .print-doc {
+    display: block !important;
+    font-family: 'Vazirmatn', system-ui, sans-serif;
+    color: #16232b;
+    direction: rtl;
+    font-size: 9.5pt;
+    line-height: 1.7;
+  }
+
+  /* ---- HEADER ---- */
+  .pd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2.2pt solid #0d4a5c;
+    padding-bottom: 3.5mm;
+    margin-bottom: 5mm;
+  }
+  .pd-header__brand { display: flex; align-items: center; gap: 2.5mm; }
+  .pd-header__logo {
+    width: 11mm; height: 11mm;
+    background: #0d4a5c;
+    color: #fff;
+    border-radius: 2.2mm;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15pt; font-weight: 900;
+  }
+  .pd-header__name { font-size: 12pt; font-weight: 900; color: #0d4a5c; line-height: 1.1; }
+  .pd-header__tag { font-size: 6.5pt; color: #8298a3; letter-spacing: 0.8pt; font-weight: 600; }
+  .pd-header__meta { text-align: left; font-size: 8pt; color: #4a6270; line-height: 1.6; }
+  .pd-header__meta div { margin-bottom: 0.3mm; }
+  .pd-header__meta strong { color: #0d4a5c; font-weight: 800; }
+
+  /* ---- TITLE ---- */
+  .pd-title { text-align: center; margin: 3mm 0 5mm; }
+  .pd-title h1 {
+    font-size: 21pt; font-weight: 900; color: #0d4a5c;
+    letter-spacing: -0.4pt; line-height: 1.2; margin-bottom: 1.5mm;
+  }
+  .pd-title h2 {
+    font-size: 12pt; font-weight: 700; color: #c9962e;
+    margin-bottom: 2.5mm;
+  }
+  .pd-title__rule {
+    width: 22mm; height: 1.2pt; background: #c9962e; margin: 0 auto;
+  }
+
+  /* ---- PARTIES ---- */
+  .pd-parties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5mm;
+    margin-bottom: 4.5mm;
+    break-inside: avoid;
+  }
+  .pd-party {
+    padding: 3.5mm 4mm;
+    border: 0.5pt solid #d8e1e6;
+    border-radius: 1.8mm;
+    background: #f7f9fa;
+    border-right: 2.2pt solid #0d4a5c;
+  }
+  .pd-party__label {
+    font-size: 6.8pt; font-weight: 800; color: #8298a3;
+    letter-spacing: 0.9pt; text-transform: uppercase; margin-bottom: 1.2mm;
+  }
+  .pd-party__name {
+    font-size: 10.2pt; font-weight: 900; color: #0d4a5c; margin-bottom: 1.2mm;
+  }
+  .pd-party__detail { font-size: 7.8pt; color: #4a6270; line-height: 1.75; }
+
+  /* ---- SUMMARY ---- */
+  .pd-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.2mm;
+    margin-bottom: 5mm;
+    break-inside: avoid;
+  }
+  .pd-summary__cell {
+    padding: 2.6mm 2mm;
+    background: #0d4a5c;
+    border-radius: 1.8mm;
+    text-align: center;
+    color: #fff;
+  }
+  .pd-summary__cell span {
+    display: block; font-size: 6.8pt; color: rgba(255,255,255,0.72);
+    margin-bottom: 0.8mm; font-weight: 600; letter-spacing: 0.3pt;
+  }
+  .pd-summary__cell strong {
+    display: block; font-size: 9.5pt; color: #e2b95a; font-weight: 900; line-height: 1.3;
+  }
+
+  /* ---- HEADINGS ---- */
+  .print-doc h3 {
+    font-size: 11.5pt; font-weight: 900; color: #0d4a5c;
+    margin: 4mm 0 2.2mm;
+    padding-bottom: 1.2mm;
+    border-bottom: 0.9pt solid #c9962e;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .print-doc h4 {
+    font-size: 9.8pt; font-weight: 800; color: #0d4a5c;
+    margin: 0 0 1.2mm;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .print-doc p {
+    margin: 0 0 2.2mm;
+    color: #3a4a54;
+    text-align: justify;
+    font-size: 9pt;
+  }
+  .pd-note {
+    font-size: 7.8pt; color: #6a7d88;
+    margin: -0.8mm 0 2.5mm;
+  }
+  .pd-note strong { color: #0d4a5c; font-weight: 800; }
+
+  /* ---- TABLES ---- */
+  .pd-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.3pt;
+    margin-bottom: 3.5mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .pd-table thead th {
+    background: #0d4a5c;
+    color: #fff;
+    padding: 2mm 2.3mm;
+    text-align: right;
+    font-weight: 800;
+    font-size: 7.8pt;
+    letter-spacing: 0.2pt;
+    border: none;
+  }
+  .pd-table thead th:first-child { border-radius: 0 1.5mm 0 0; }
+  .pd-table thead th:last-child { border-radius: 1.5mm 0 0 0; }
+  .pd-table tbody td {
+    padding: 1.8mm 2.3mm;
+    border-bottom: 0.4pt solid #e3ebef;
+    color: #3a4a54;
+    font-weight: 500;
+    line-height: 1.55;
+    vertical-align: middle;
+    font-size: 8.3pt;
+  }
+  .pd-table tbody tr:nth-child(even) td { background: #f7f9fa; }
+  .pd-table tbody td:first-child {
+    font-weight: 900; color: #0d4a5c; text-align: center;
+    width: 9mm;
+  }
+  .pd-table .pd-amount {
+    text-align: left;
+    font-weight: 700;
+    color: #16232b;
+    direction: ltr;
+  }
+  .pd-table .pd-total td {
+    background: #e6f2f6 !important;
+    color: #0d4a5c !important;
+    font-weight: 900 !important;
+    border-top: 0.9pt solid #0d4a5c;
+    border-bottom: 0.9pt solid #0d4a5c;
+  }
+  .pd-table .pd-gift td {
+    background: #fdf6e6 !important;
+    color: #8a6a1e !important;
+    font-weight: 700;
+  }
+
+  /* ---- CLAUSES ---- */
+  .pd-clause {
+    padding: 2.8mm 4mm;
+    background: #f7f9fa;
+    border-radius: 1.8mm;
+    border-right: 2.2pt solid #c9962e;
+    margin-bottom: 2.2mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .pd-clause p { margin: 0; font-size: 8.7pt; line-height: 1.75; }
+
+  /* ---- SIGNATURES ---- */
+  .pd-sig-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3.5mm;
+    margin-top: 2.5mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .pd-sig {
+    padding: 3.5mm 3mm;
+    border: 0.5pt solid #d8e1e6;
+    border-radius: 1.8mm;
+    background: #fafcfd;
+    text-align: center;
+    min-height: 38mm;
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid;
+  }
+  .pd-sig__role {
+    font-size: 6.8pt; font-weight: 800; color: #8298a3;
+    letter-spacing: 0.9pt; text-transform: uppercase; margin-bottom: 1.5mm;
+  }
+  .pd-sig__name {
+    font-size: 9.5pt; font-weight: 900; color: #0d4a5c; margin-bottom: 0.8mm;
+  }
+  .pd-sig__person { font-size: 7.8pt; color: #4a6270; margin-bottom: auto; }
+  .pd-sig__line {
+    font-size: 6.8pt; color: #8298a3; font-weight: 600;
+    letter-spacing: 0.9pt; padding-top: 11mm;
+    border-top: 0.4pt dashed #c0cdd4;
+    margin-top: 2.5mm;
+  }
+  .pd-sig__date {
+    font-size: 7.2pt; color: #6a7d88; margin-top: 1.5mm;
+  }
+
+  /* ---- FOOTER ---- */
+  .pd-footer {
+    margin-top: 5mm;
+    padding-top: 2.5mm;
+    border-top: 0.5pt solid #d8e1e6;
+    text-align: center;
+  }
+  .pd-footer p {
+    font-size: 7.2pt;
+    color: #8298a3;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Page break control */
+  .pd-section-break {
+    break-before: page;
+    page-break-before: always;
+  }
 }
 </style>
 </head>
@@ -587,7 +836,190 @@ ul{list-style:none}
 
 <main class="container">
 
-  <!-- HERO -->
+  <!-- ============================================================
+       PRINT-ONLY DOCUMENT — clean, compact, beautiful PDF
+       ============================================================ -->
+  <section class="print-doc" aria-hidden="true">
+
+    <!-- HEADER -->
+    <header class="pd-header">
+      <div class="pd-header__brand">
+        <div class="pd-header__logo">ک</div>
+        <div>
+          <div class="pd-header__name">Code Packs</div>
+          <div class="pd-header__tag">Intelligent Business Systems</div>
+        </div>
+      </div>
+      <div class="pd-header__meta">
+        <div>شماره قرارداد: <strong>CP-PUZZLE-001</strong></div>
+        <div>تاریخ انعقاد: [تاریخ شمسی]</div>
+        <div>نسخه: نهایی</div>
+      </div>
+    </header>
+
+    <!-- TITLE -->
+    <div class="pd-title">
+      <h1>قرارداد همکاری</h1>
+      <h2>اکوسیستم دیجیتال پازل فرشته</h2>
+      <div class="pd-title__rule"></div>
+    </div>
+
+    <!-- PARTIES -->
+    <div class="pd-parties">
+      <div class="pd-party">
+        <div class="pd-party__label">کارفرما</div>
+        <div class="pd-party__name">گروه مشاوره املاک پازل فرشته</div>
+        <div class="pd-party__detail">نماینده: جناب مهندس سالمی — مدیرعامل</div>
+        <div class="pd-party__detail">تهران، خیابان فرشته، اخگری، بن‌بست بهار، پلاک ۳</div>
+        <div class="pd-party__detail">تلفن: ۰۹۱۲۱۰۹۹۱۶۱</div>
+      </div>
+      <div class="pd-party">
+        <div class="pd-party__label">پیمانکار</div>
+        <div class="pd-party__name">شرکت Code Packs</div>
+        <div class="pd-party__detail">امیرمحمد بهرامی (CTO) — مبین شیخی (CEO)</div>
+        <div class="pd-party__detail">البرز، کرج، مهرشهر، بلوار ارم، ساختمان خلیج فارس، واحد ۲۰۲</div>
+        <div class="pd-party__detail">۰۹۰۰۹۹۹۹۲۳۷ — codepacksteam@gmail.com</div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="pd-summary">
+      <div class="pd-summary__cell">
+        <span>مدت اجرا</span>
+        <strong>۱۳۵ روز</strong>
+      </div>
+      <div class="pd-summary__cell">
+        <span>سرمایه‌گذاری</span>
+        <strong>۴۹۰ میلیون تومان</strong>
+      </div>
+      <div class="pd-summary__cell">
+        <span>هدیه همکاری</span>
+        <strong>بات بله — ۶۰ میلیون</strong>
+      </div>
+      <div class="pd-summary__cell">
+        <span>مالکیت</span>
+        <strong>۱۰۰٪ کارفرما</strong>
+      </div>
+    </div>
+
+    <!-- 1. SUBJECT -->
+    <h3>۱. موضوع قرارداد</h3>
+    <p>طراحی، توسعه، استقرار و پشتیبانی اکوسیستم دیجیتال یکپارچه پازل فرشته در قالب ۵ فاز شامل: نرم‌افزار جامع مدیریت املاک و CRM، دو وب‌سایت اختصاصی، هسته هوش مصنوعی پیشرفته، بات اختصاصی بله، و خدمات دوره‌ای محتوا و تبلیغات. فازهای ۱ تا ۳ به‌صورت موازی در ۱۳۵ روز اجرا می‌شوند.</p>
+
+    <!-- 2. PHASES -->
+    <h3>۲. فازها و سرمایه‌گذاری</h3>
+    <table class="pd-table">
+      <thead>
+        <tr>
+          <th style="width:10mm;">فاز</th>
+          <th>عنوان</th>
+          <th style="width:28mm;">زمان</th>
+          <th style="width:38mm;">هزینه (تومان)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>۱</td><td>زیرساخت داخلی و نرم‌افزار جامع</td><td>۷۵ روز</td><td class="pd-amount">۲۱۰,۰۰۰,۰۰۰</td></tr>
+        <tr><td>۲</td><td>وب‌سایت اختصاصی و لایه مشتری</td><td>۶۰ روز</td><td class="pd-amount">۹۰,۰۰۰,۰۰۰</td></tr>
+        <tr><td>۳</td><td>هسته هوش مصنوعی پیشرفته</td><td>۵۰ روز</td><td class="pd-amount">۱۹۰,۰۰۰,۰۰۰</td></tr>
+        <tr class="pd-total"><td colspan="2">جمع فازهای ۱ تا ۳ (اجرای موازی)</td><td>۱۳۵ روز</td><td class="pd-amount">۴۹۰,۰۰۰,۰۰۰</td></tr>
+        <tr class="pd-gift"><td>🎁</td><td>بات اختصاصی بله — هدیه</td><td>همراه پروژه</td><td class="pd-amount">رایگان (ارزش ۶۰,۰۰۰,۰۰۰)</td></tr>
+        <tr><td>۴</td><td>تولید محتوا، تور ۳۶۰ و مارکتینگ دوره‌ای</td><td>ماهانه</td><td>پس از توافق</td></tr>
+        <tr><td>۵</td><td>کمپین‌های تبلیغاتی</td><td>دوره‌ای</td><td>بر اساس بودجه</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 3. PAYMENTS -->
+    <h3>۳. جدول پرداخت مرحله‌ای</h3>
+    <p class="pd-note">هر پرداخت با یک خروجی ملموس و قابل استفاده گره خورده است.</p>
+    <table class="pd-table">
+      <thead>
+        <tr>
+          <th style="width:10mm;">مرحله</th>
+          <th style="width:22mm;">زمان</th>
+          <th>خروجی قابل تحویل</th>
+          <th style="width:14mm;">درصد</th>
+          <th style="width:34mm;">مبلغ (تومان)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>۱</td><td>روز ۰</td><td>پیش‌پرداخت و شروع رسمی پروژه</td><td>۳۰٪</td><td class="pd-amount">۱۴۷,۰۰۰,۰۰۰</td></tr>
+        <tr><td>۲</td><td>روز ۲۵</td><td>ماژول اول هسته داخلی (فایل، مشتری، CRM پایه)</td><td>۱۰٪</td><td class="pd-amount">۴۹,۰۰۰,۰۰۰</td></tr>
+        <tr><td>۳</td><td>روز ۵۰</td><td>هسته داخلی کامل + نسخه آلفای وب‌سایت</td><td>۱۰٪</td><td class="pd-amount">۴۹,۰۰۰,۰۰۰</td></tr>
+        <tr><td>۴</td><td>روز ۷۵</td><td>وب‌سایت کامل + لیدگیری متصل به CRM</td><td>۱۰٪</td><td class="pd-amount">۴۹,۰۰۰,۰۰۰</td></tr>
+        <tr><td>۵</td><td>روز ۱۰۰</td><td>هسته هوش مصنوعی کامل</td><td>۱۵٪</td><td class="pd-amount">۷۳,۵۰۰,۰۰۰</td></tr>
+        <tr><td>۶</td><td>روز ۱۰۰–۱۳۵</td><td>استقرار، آموزش تیم و پشتیبانی یک ماهه (پس از رضایت کامل)</td><td>۱۰٪</td><td class="pd-amount">۴۹,۰۰۰,۰۰۰</td></tr>
+        <tr><td>۷</td><td>پایان ۱۳۵</td><td>تحویل نهایی سورس، مستندات و دسترسی‌های مدیریتی</td><td>۱۵٪</td><td class="pd-amount">۷۳,۵۰۰,۰۰۰</td></tr>
+        <tr class="pd-total"><td colspan="3">جمع کل</td><td>۱۰۰٪</td><td class="pd-amount">۴۹۰,۰۰۰,۰۰۰</td></tr>
+      </tbody>
+    </table>
+    <p class="pd-note">شماره حساب رسمی: <span dir="ltr" style="direction:ltr;display:inline-block;">IR500560611828005756984701</span> — به نام آقای مبین شیخی</p>
+
+    <!-- 4. KEY CLAUSES -->
+    <h3>۴. مفاد کلیدی</h3>
+
+    <div class="pd-clause">
+      <h4>مالکیت محصول</h4>
+      <p>تمام سورس‌کدها، مستندات، الگوریتم‌ها، پرامپت‌های هوش مصنوعی، وب‌سایت‌ها و دیتابیس، به‌صورت کامل به کارفرما تعلق دارد. محصول اجاره‌ای نبوده و برای استفاده از آن هیچ هزینه دوره‌ای تحت عنوان لایسنس دریافت نمی‌شود.</p>
+    </div>
+
+    <div class="pd-clause">
+      <h4>پشتیبانی رایگان</h4>
+      <p>۶ ماه پشتیبانی رایگان پس از تحویل نهایی، شامل: پایش امنیت، رفع باگ، بروزرسانی کتابخانه‌ها، پشتیبانی کاربران، مشاوره فنی، محتوای آموزشی و سئو اولیه.</p>
+    </div>
+
+    <div class="pd-clause">
+      <h4>محرمانگی</h4>
+      <p>هر دو طرف متعهد به حفظ اطلاعات محرمانه طرف دیگر هستند. این تعهد تا ۵ سال پس از خاتمه قرارداد معتبر است.</p>
+    </div>
+
+    <div class="pd-clause">
+      <h4>تحویل و تأیید (Acceptance)</h4>
+      <p>در هر نقطه تحویل، پیمانکار آمادگی را کتباً اعلام می‌کند. کارفرما حداکثر ۵ روز کاری فرصت بررسی دارد؛ عدم اعلام نظر به‌معنای تأیید خودکار است. پرداخت هر مرحله حداکثر ۷ روز کاری پس از تأیید انجام می‌شود.</p>
+    </div>
+
+    <div class="pd-clause">
+      <h4>تعهدات کارفرما</h4>
+      <p>ارائه داده‌ها و دسترسی‌های لازم، پرداخت به‌موقع در نقاط تحویل، همکاری در تست پذیرش، تأمین اطلاعات برندینگ و معرفی نماینده فنی و کسب‌وکار.</p>
+    </div>
+
+    <div class="pd-clause">
+      <h4>هزینه‌های جاری</h4>
+      <p>پس از تحویل، هزینه‌های سرور، دامنه، APIهای ثالث و سرویس‌های پیام‌رسان به عهده کارفرما و تابع تعرفه ارائه‌دهنده مربوطه است.</p>
+    </div>
+
+    <!-- 5. SIGNATURES -->
+    <h3>۵. امضای طرفین</h3>
+    <div class="pd-sig-grid">
+      <div class="pd-sig">
+        <div class="pd-sig__role">کارفرما</div>
+        <div class="pd-sig__name">گروه مشاوره املاک پازل فرشته</div>
+        <div class="pd-sig__person">جناب مهندس سالمی — مدیرعامل</div>
+        <div class="pd-sig__line">امضا و مهر</div>
+        <div class="pd-sig__date">تاریخ: ....................</div>
+      </div>
+      <div class="pd-sig">
+        <div class="pd-sig__role">پیمانکار</div>
+        <div class="pd-sig__name">Code Packs</div>
+        <div class="pd-sig__person">امیرمحمد بهرامی — مدیرعامل (CTO)</div>
+        <div class="pd-sig__line">امضا و مهر</div>
+        <div class="pd-sig__date">تاریخ: ....................</div>
+      </div>
+      <div class="pd-sig">
+        <div class="pd-sig__role">پیمانکار</div>
+        <div class="pd-sig__name">Code Packs</div>
+        <div class="pd-sig__person">مبین شیخی — رئیس هیئت مدیره (CEO)</div>
+        <div class="pd-sig__line">امضا و مهر</div>
+        <div class="pd-sig__date">تاریخ: ....................</div>
+      </div>
+    </div>
+
+    <div class="pd-footer">
+      <p>این سند خلاصه‌ای از قرارداد کامل است. متن کامل قرارداد و پیوست‌های آن (پروپوزال تفصیلی، جدول فازبندی، مشخصات فنی، لیست پشتیبانی و معیارهای پذیرش) جزء لاینفک این توافق محسوب می‌شود.</p>
+    </div>
+
+  </section>
+
+  <!-- HERO (screen only) -->
   <section class="hero">
     <div class="hero__bg"></div>
     <div class="hero__grid"></div>
