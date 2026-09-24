@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl" data-theme="light">
 <head>
@@ -314,13 +315,13 @@ ul{list-style:none}
 .table-wrap .row-total td{background:var(--accent-soft)!important;color:var(--accent);font-weight:900;border-top:2px solid var(--accent-ring)}
 .table-wrap .row-final td{background:var(--gold-soft)!important;border-top:1px solid var(--gold-ring)}
 .table-wrap .row-deploy td{background:rgba(26,154,106,.08)!important;border-top:1px solid rgba(26,154,106,.25)}
+.table-wrap .row-conditional td{background:rgba(201,150,46,.10)!important;border-top:1px solid var(--gold-ring)}
 
 .pay-bar{display:flex;align-items:center;gap:10px;min-width:130px}
 .pay-bar__track{flex:1;height:5px;border-radius:3px;background:var(--bg-subtle);overflow:hidden;border:1px solid var(--border-soft)}
 .pay-bar__fill{height:100%;border-radius:3px;background:var(--grad-gold);transition:width 1s var(--ease-out)}
 .pay-bar__label{font-size:.76rem;font-weight:900;color:var(--text-primary);min-width:36px;text-align:left;direction:ltr}
 
-/* TIMELINE */
 .timeline{margin:24px 0;padding:32px 8px 20px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-md);overflow-x:auto;overflow-y:hidden;position:relative}
 .timeline__scroll{display:flex;min-width:1000px;position:relative;padding:0 16px}
 .timeline__track{position:absolute;top:34px;right:60px;left:60px;height:2px;background:var(--accent-ring);z-index:0}
@@ -366,7 +367,6 @@ ul{list-style:none}
 .appendix .txt strong{display:block;font-size:.86rem;font-weight:800;color:var(--text-primary);margin-bottom:3px}
 .appendix .txt span{font-size:.75rem;color:var(--text-muted);line-height:1.65}
 
-/* SIGNATURES */
 .signatures{margin-top:32px;padding-top:32px;border-top:1px solid var(--border)}
 .sig-head{text-align:center;margin-bottom:28px}
 .sig-head .title{font-size:.7rem;font-weight:800;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
@@ -412,9 +412,9 @@ ul{list-style:none}
 .back svg{width:20px;height:20px}
 
 /* ============================================================
-   PRINT DOCUMENT — hidden on screen, beautifully typeset for PDF
+   PRINT-ONLY PDF DOCUMENT — hidden on screen, shown in print
    ============================================================ */
-.print-doc{display:none}
+.pdf-doc{display:none}
 
 @media (max-width:1024px){
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -487,286 +487,694 @@ ul{list-style:none}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
 
-/* ============ PRINT ============ */
+/* ============================================================
+   PRINT — Show the PDF document, hide everything else
+   ============================================================ */
 @media print {
   @page {
     size: A4;
-    margin: 13mm 13mm 14mm 13mm;
+    margin: 0;
   }
 
   html, body {
     background: #fff !important;
-    color: #16232b !important;
+    margin: 0 !important;
+    padding: 0 !important;
     font-size: 9.5pt !important;
     line-height: 1.7 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   body::before { display: none !important; }
 
-  /* Hide every screen element */
+  /* Hide ALL screen UI */
   .scroll-progress,
   .loader,
   .header,
   .mnav,
   .back,
-  .hero,
-  .meta-wrap,
-  .toc,
-  .final,
-  .footer { display: none !important; }
+  .container > .hero,
+  .container > .meta-wrap,
+  .container > .toc,
+  .container > .section,
+  .container > .final,
+  .container > .footer { display: none !important; }
 
-  .container {
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  .container > .section { display: none !important; }
-
-  .print-doc {
+  /* Show the PDF document */
+  .pdf-doc {
     display: block !important;
-    font-family: 'Vazirmatn', system-ui, sans-serif;
+    font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
     color: #16232b;
     direction: rtl;
     font-size: 9.5pt;
     line-height: 1.7;
+    background: #fff;
   }
 
-  /* ---- HEADER ---- */
-  .pd-header {
+  /* ============ PAGE STRUCTURE ============ */
+  .pdf-doc .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: #ffffff;
+    padding: 14mm 15mm 22mm 15mm;
+    position: relative;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+    margin: 0;
+    box-shadow: none;
+  }
+  .pdf-doc .page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* Page header */
+  .pdf-doc .page-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2.2pt solid #0d4a5c;
+    border-bottom: 0.8pt solid #d8e1e6;
+    padding-bottom: 2.5mm;
+    margin-bottom: 5mm;
+    font-size: 7.5pt;
+    color: #8298a3;
+  }
+  .pdf-doc .page-head__title {
+    font-weight: 700;
+    color: #0d4a5c;
+    font-size: 8pt;
+  }
+  .pdf-doc .page-head__meta {
+    font-weight: 500;
+  }
+  .pdf-doc .page-head__meta strong {
+    color: #4a6270;
+    font-weight: 700;
+  }
+
+  /* Page footer with tiny signatures */
+  .pdf-doc .page-foot {
+    position: absolute;
+    bottom: 7mm;
+    right: 15mm;
+    left: 15mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 2mm;
+    border-top: 0.5pt dashed #c8d4da;
+    font-size: 6.8pt;
+    color: #8298a3;
+    line-height: 1.4;
+  }
+  .pdf-doc .page-foot__sig {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+  .pdf-doc .page-foot__sig b {
+    font-weight: 700;
+    color: #4a6270;
+  }
+  .pdf-doc .page-foot__line {
+    display: inline-block;
+    width: 22mm;
+    border-bottom: 0.5pt dotted #a8b8c0;
+    height: 2.6mm;
+  }
+  .pdf-doc .page-foot__center {
+    font-weight: 600;
+    color: #8298a3;
+    font-size: 6.5pt;
+    letter-spacing: 0.3pt;
+  }
+
+  /* ============ DOCUMENT HEADER ============ */
+  .pdf-doc .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.8pt solid #0d4a5c;
     padding-bottom: 3.5mm;
     margin-bottom: 5mm;
   }
-  .pd-header__brand { display: flex; align-items: center; gap: 2.5mm; }
-  .pd-header__logo {
-    width: 11mm; height: 11mm;
+  .pdf-doc .doc-header__brand { display: flex; align-items: center; gap: 2.8mm; }
+  .pdf-doc .doc-header__logo {
+    width: 11mm;
+    height: 11mm;
     background: #0d4a5c;
     color: #fff;
     border-radius: 2.2mm;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 15pt; font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15pt;
+    font-weight: 900;
   }
-  .pd-header__name { font-size: 12pt; font-weight: 900; color: #0d4a5c; line-height: 1.1; }
-  .pd-header__tag { font-size: 6.5pt; color: #8298a3; letter-spacing: 0.8pt; font-weight: 600; }
-  .pd-header__meta { text-align: left; font-size: 8pt; color: #4a6270; line-height: 1.6; }
-  .pd-header__meta div { margin-bottom: 0.3mm; }
-  .pd-header__meta strong { color: #0d4a5c; font-weight: 800; }
+  .pdf-doc .doc-header__name {
+    font-size: 12pt;
+    font-weight: 900;
+    color: #0d4a5c;
+    line-height: 1.1;
+  }
+  .pdf-doc .doc-header__tag {
+    font-size: 6.5pt;
+    color: #8298a3;
+    letter-spacing: 0.8pt;
+    font-weight: 600;
+    margin-top: 0.5mm;
+  }
+  .pdf-doc .doc-header__meta {
+    text-align: left;
+    font-size: 7.8pt;
+    color: #4a6270;
+    line-height: 1.7;
+  }
+  .pdf-doc .doc-header__meta strong {
+    color: #0d4a5c;
+    font-weight: 800;
+  }
 
-  /* ---- TITLE ---- */
-  .pd-title { text-align: center; margin: 3mm 0 5mm; }
-  .pd-title h1 {
-    font-size: 21pt; font-weight: 900; color: #0d4a5c;
-    letter-spacing: -0.4pt; line-height: 1.2; margin-bottom: 1.5mm;
+  /* Title */
+  .pdf-doc .doc-title {
+    text-align: center;
+    margin: 4mm 0 6mm;
   }
-  .pd-title h2 {
-    font-size: 12pt; font-weight: 700; color: #c9962e;
-    margin-bottom: 2.5mm;
+  .pdf-doc .doc-title h1 {
+    font-size: 19pt;
+    font-weight: 900;
+    color: #0d4a5c;
+    letter-spacing: -0.3pt;
+    line-height: 1.25;
+    margin-bottom: 1.5mm;
   }
-  .pd-title__rule {
-    width: 22mm; height: 1.2pt; background: #c9962e; margin: 0 auto;
+  .pdf-doc .doc-title h2 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #c9962e;
+    margin-bottom: 3mm;
+  }
+  .pdf-doc .doc-title__rule {
+    width: 20mm;
+    height: 1pt;
+    background: #c9962e;
+    margin: 0 auto;
+    border-radius: 99px;
   }
 
-  /* ---- PARTIES ---- */
-  .pd-parties {
+  /* Parties */
+  .pdf-doc .parties {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3.5mm;
-    margin-bottom: 4.5mm;
-    break-inside: avoid;
+    margin-bottom: 5mm;
   }
-  .pd-party {
+  .pdf-doc .party {
     padding: 3.5mm 4mm;
     border: 0.5pt solid #d8e1e6;
-    border-radius: 1.8mm;
-    background: #f7f9fa;
+    border-radius: 2mm;
+    background: #f8fafb;
     border-right: 2.2pt solid #0d4a5c;
   }
-  .pd-party__label {
-    font-size: 6.8pt; font-weight: 800; color: #8298a3;
-    letter-spacing: 0.9pt; text-transform: uppercase; margin-bottom: 1.2mm;
+  .pdf-doc .party--contractor {
+    border-right-color: #c9962e;
   }
-  .pd-party__name {
-    font-size: 10.2pt; font-weight: 900; color: #0d4a5c; margin-bottom: 1.2mm;
+  .pdf-doc .party__label {
+    font-size: 6.5pt;
+    font-weight: 800;
+    color: #8298a3;
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 1.5mm;
   }
-  .pd-party__detail { font-size: 7.8pt; color: #4a6270; line-height: 1.75; }
+  .pdf-doc .party__name {
+    font-size: 10pt;
+    font-weight: 900;
+    color: #0d4a5c;
+    margin-bottom: 1.5mm;
+    line-height: 1.3;
+  }
+  .pdf-doc .party__detail {
+    font-size: 7.6pt;
+    color: #4a6270;
+    line-height: 1.85;
+  }
 
-  /* ---- SUMMARY ---- */
-  .pd-summary {
+  /* Summary */
+  .pdf-doc .summary {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2.2mm;
-    margin-bottom: 5mm;
-    break-inside: avoid;
+    margin-bottom: 6mm;
   }
-  .pd-summary__cell {
-    padding: 2.6mm 2mm;
+  .pdf-doc .summary__cell {
+    padding: 2.8mm 2mm;
     background: #0d4a5c;
     border-radius: 1.8mm;
     text-align: center;
     color: #fff;
   }
-  .pd-summary__cell span {
-    display: block; font-size: 6.8pt; color: rgba(255,255,255,0.72);
-    margin-bottom: 0.8mm; font-weight: 600; letter-spacing: 0.3pt;
+  .pdf-doc .summary__cell--gold {
+    background: linear-gradient(135deg, #c9962e, #e2b95a);
   }
-  .pd-summary__cell strong {
-    display: block; font-size: 9.5pt; color: #e2b95a; font-weight: 900; line-height: 1.3;
+  .pdf-doc .summary__cell span {
+    display: block;
+    font-size: 6.5pt;
+    color: rgba(255, 255, 255, 0.72);
+    margin-bottom: 0.8mm;
+    font-weight: 600;
+    letter-spacing: 0.2pt;
+  }
+  .pdf-doc .summary__cell strong {
+    display: block;
+    font-size: 9pt;
+    color: #e2b95a;
+    font-weight: 900;
+    line-height: 1.3;
+  }
+  .pdf-doc .summary__cell--gold strong {
+    color: #231a08;
   }
 
-  /* ---- HEADINGS ---- */
-  .print-doc h3 {
-    font-size: 11.5pt; font-weight: 900; color: #0d4a5c;
-    margin: 4mm 0 2.2mm;
+  /* Headings */
+  .pdf-doc h3.section-title {
+    font-size: 11pt;
+    font-weight: 900;
+    color: #0d4a5c;
+    margin: 5mm 0 2.5mm;
     padding-bottom: 1.2mm;
-    border-bottom: 0.9pt solid #c9962e;
-    break-after: avoid;
+    border-bottom: 0.8pt solid #c9962e;
+    display: flex;
+    align-items: center;
+    gap: 2mm;
     page-break-after: avoid;
+    break-after: avoid;
   }
-  .print-doc h4 {
-    font-size: 9.8pt; font-weight: 800; color: #0d4a5c;
-    margin: 0 0 1.2mm;
-    break-after: avoid;
-    page-break-after: avoid;
+  .pdf-doc h3.section-title:first-of-type {
+    margin-top: 0;
+  }
+  .pdf-doc h3.section-title .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 6mm;
+    height: 6mm;
+    background: #0d4a5c;
+    color: #fff;
+    border-radius: 1.5mm;
+    font-size: 8pt;
+    font-weight: 900;
+    flex-shrink: 0;
   }
 
-  .print-doc p {
-    margin: 0 0 2.2mm;
+  .pdf-doc h4.clause-title {
+    font-size: 9pt;
+    font-weight: 800;
+    color: #0d4a5c;
+    margin: 0 0 1.5mm;
+    display: flex;
+    align-items: center;
+    gap: 1.5mm;
+  }
+  .pdf-doc h4.clause-title::before {
+    content: '';
+    width: 2.2mm;
+    height: 2.2mm;
+    background: #c9962e;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .pdf-doc p {
+    font-size: 8.6pt;
+    line-height: 1.85;
     color: #3a4a54;
     text-align: justify;
-    font-size: 9pt;
+    margin-bottom: 2.2mm;
   }
-  .pd-note {
-    font-size: 7.8pt; color: #6a7d88;
-    margin: -0.8mm 0 2.5mm;
+  .pdf-doc p strong {
+    color: #0d4a5c;
+    font-weight: 800;
   }
-  .pd-note strong { color: #0d4a5c; font-weight: 800; }
+  .pdf-doc p:last-child {
+    margin-bottom: 0;
+  }
 
-  /* ---- TABLES ---- */
-  .pd-table {
+  /* Tables */
+  .pdf-doc table.doc-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 8.3pt;
-    margin-bottom: 3.5mm;
-    break-inside: avoid;
+    font-size: 8pt;
+    margin-bottom: 4mm;
     page-break-inside: avoid;
+    break-inside: avoid;
   }
-  .pd-table thead th {
+  .pdf-doc table.doc-table thead th {
     background: #0d4a5c;
     color: #fff;
     padding: 2mm 2.3mm;
     text-align: right;
     font-weight: 800;
-    font-size: 7.8pt;
+    font-size: 7.5pt;
     letter-spacing: 0.2pt;
     border: none;
   }
-  .pd-table thead th:first-child { border-radius: 0 1.5mm 0 0; }
-  .pd-table thead th:last-child { border-radius: 1.5mm 0 0 0; }
-  .pd-table tbody td {
-    padding: 1.8mm 2.3mm;
+  .pdf-doc table.doc-table tbody td {
+    padding: 1.9mm 2.3mm;
     border-bottom: 0.4pt solid #e3ebef;
     color: #3a4a54;
     font-weight: 500;
-    line-height: 1.55;
+    line-height: 1.6;
     vertical-align: middle;
-    font-size: 8.3pt;
+    font-size: 8pt;
   }
-  .pd-table tbody tr:nth-child(even) td { background: #f7f9fa; }
-  .pd-table tbody td:first-child {
-    font-weight: 900; color: #0d4a5c; text-align: center;
+  .pdf-doc table.doc-table tbody tr:nth-child(even) td {
+    background: #f8fafb;
+  }
+  .pdf-doc table.doc-table tbody td:first-child {
+    font-weight: 900;
+    color: #0d4a5c;
+    text-align: center;
     width: 9mm;
   }
-  .pd-table .pd-amount {
+  .pdf-doc table.doc-table .amount {
     text-align: left;
     font-weight: 700;
     color: #16232b;
     direction: ltr;
+    font-variant-numeric: tabular-nums;
   }
-  .pd-table .pd-total td {
+  .pdf-doc table.doc-table .row-total td {
     background: #e6f2f6 !important;
     color: #0d4a5c !important;
     font-weight: 900 !important;
-    border-top: 0.9pt solid #0d4a5c;
-    border-bottom: 0.9pt solid #0d4a5c;
+    border-top: 0.8pt solid #0d4a5c;
+    border-bottom: 0.8pt solid #0d4a5c;
   }
-  .pd-table .pd-gift td {
+  .pdf-doc table.doc-table .row-conditional td {
+    background: #fdf6e6 !important;
+    color: #8a6a1e !important;
+    font-weight: 700;
+    border-top: 0.8pt dashed #c9962e;
+  }
+  .pdf-doc table.doc-table .row-gift td {
     background: #fdf6e6 !important;
     color: #8a6a1e !important;
     font-weight: 700;
   }
 
-  /* ---- CLAUSES ---- */
-  .pd-clause {
-    padding: 2.8mm 4mm;
-    background: #f7f9fa;
+  /* Clause boxes */
+  .pdf-doc .clause-box {
+    padding: 3mm 3.5mm;
+    background: #f8fafb;
     border-radius: 1.8mm;
     border-right: 2.2pt solid #c9962e;
-    margin-bottom: 2.2mm;
-    break-inside: avoid;
+    margin-bottom: 2.5mm;
     page-break-inside: avoid;
+    break-inside: avoid;
   }
-  .pd-clause p { margin: 0; font-size: 8.7pt; line-height: 1.75; }
+  .pdf-doc .clause-box p {
+    margin: 0;
+    font-size: 8.4pt;
+    line-height: 1.8;
+  }
+  .pdf-doc .clause-box--accent {
+    border-right-color: #0d4a5c;
+    background: #f4f9fb;
+  }
 
-  /* ---- SIGNATURES ---- */
-  .pd-sig-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3.5mm;
-    margin-top: 2.5mm;
+  /* Phase cards */
+  .pdf-doc .phase-card {
+    padding: 3mm 3.5mm;
+    background: linear-gradient(180deg, #fafcfd 0%, #f2f7f9 100%);
+    border: 0.5pt solid #d8e1e6;
+    border-right: 2.5pt solid #0d4a5c;
+    border-radius: 2mm;
+    margin-bottom: 2.5mm;
+    page-break-inside: avoid;
     break-inside: avoid;
+  }
+  .pdf-doc .phase-card--gold {
+    border-right-color: #c9962e;
+    background: linear-gradient(180deg, #fffdf7 0%, #fdf6e6 100%);
+  }
+  .pdf-doc .phase-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.8mm;
+    gap: 3mm;
+    flex-wrap: wrap;
+  }
+  .pdf-doc .phase-card__title {
+    font-size: 9.2pt;
+    font-weight: 900;
+    color: #0d4a5c;
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+  }
+  .pdf-doc .phase-card__title .phase-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.5mm;
+    height: 5.5mm;
+    background: #0d4a5c;
+    color: #fff;
+    border-radius: 1.4mm;
+    font-size: 7.5pt;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .pdf-doc .phase-card--gold .phase-card__title .phase-num {
+    background: #c9962e;
+  }
+  .pdf-doc .phase-card__meta {
+    font-size: 6.8pt;
+    color: #8298a3;
+    font-weight: 700;
+    letter-spacing: 0.3pt;
+    white-space: nowrap;
+  }
+  .pdf-doc .phase-card__desc {
+    font-size: 7.8pt;
+    color: #4a6270;
+    line-height: 1.7;
+    margin-bottom: 2mm;
+  }
+  .pdf-doc .phase-card__deliverables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1mm 3mm;
+    margin-top: 1mm;
+  }
+  .pdf-doc .phase-card__deliverables li {
+    font-size: 7.4pt;
+    color: #4a6270;
+    line-height: 1.65;
+    padding-right: 3.5mm;
+    position: relative;
+    list-style: none;
+  }
+  .pdf-doc .phase-card__deliverables li::before {
+    content: '✓';
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #c9962e;
+    font-weight: 900;
+    font-size: 7pt;
+  }
+
+  /* Highlight */
+  .pdf-doc .highlight {
+    padding: 3mm 3.5mm;
+    background: linear-gradient(135deg, #fdf6e6, #fefbf3);
+    border: 0.5pt solid #e8d5a8;
+    border-right: 2.2pt solid #c9962e;
+    border-radius: 1.8mm;
+    margin: 3mm 0;
+    font-size: 8.2pt;
+    line-height: 1.8;
+    color: #4a6270;
     page-break-inside: avoid;
   }
-  .pd-sig {
-    padding: 3.5mm 3mm;
-    border: 0.5pt solid #d8e1e6;
-    border-radius: 1.8mm;
-    background: #fafcfd;
+  .pdf-doc .highlight strong {
+    color: #8a6a1e;
+    font-weight: 800;
+  }
+
+  /* Money hero */
+  .pdf-doc .money-hero {
+    background: linear-gradient(135deg, #0d4a5c 0%, #1a7086 100%);
+    color: #fff;
+    border-radius: 2.5mm;
+    padding: 5mm 5mm;
+    margin: 4mm 0;
     text-align: center;
-    min-height: 38mm;
+    page-break-inside: avoid;
+    position: relative;
+    overflow: hidden;
+  }
+  .pdf-doc .money-hero__label {
+    font-size: 7pt;
+    color: rgba(255, 255, 255, 0.65);
+    letter-spacing: 1.5pt;
+    font-weight: 800;
+    margin-bottom: 1.5mm;
+  }
+  .pdf-doc .money-hero__value {
+    font-size: 22pt;
+    font-weight: 900;
+    color: #e2b95a;
+    line-height: 1.1;
+    letter-spacing: -0.3pt;
+  }
+  .pdf-doc .money-hero__value small {
+    font-size: 8pt;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    margin-right: 1.5mm;
+  }
+  .pdf-doc .money-hero__sub {
+    font-size: 7.5pt;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 2mm;
+    line-height: 1.7;
+  }
+  .pdf-doc .money-hero__sub b {
+    color: #e2b95a;
+    font-weight: 800;
+  }
+
+  /* Signatures */
+  .pdf-doc .sig-intro {
+    text-align: center;
+    font-size: 8.5pt;
+    color: #4a6270;
+    line-height: 1.9;
+    margin: 2mm 0 6mm;
+    padding: 3mm 5mm;
+    background: #f8fafb;
+    border-radius: 2mm;
+    border: 0.5pt solid #e3ebef;
+  }
+  .pdf-doc .sig-intro strong {
+    color: #0d4a5c;
+  }
+  .pdf-doc .sig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+    margin-top: 4mm;
+  }
+  .pdf-doc .sig-card {
+    padding: 5mm 4.5mm;
+    border: 0.7pt solid #d8e1e6;
+    border-radius: 2.5mm;
+    background: linear-gradient(180deg, #fafcfd 0%, #f4f8fa 100%);
+    page-break-inside: avoid;
+    break-inside: avoid;
+    min-height: 45mm;
     display: flex;
     flex-direction: column;
-    break-inside: avoid;
   }
-  .pd-sig__role {
-    font-size: 6.8pt; font-weight: 800; color: #8298a3;
-    letter-spacing: 0.9pt; text-transform: uppercase; margin-bottom: 1.5mm;
+  .pdf-doc .sig-card--employer {
+    border-top: 2.2pt solid #0d4a5c;
   }
-  .pd-sig__name {
-    font-size: 9.5pt; font-weight: 900; color: #0d4a5c; margin-bottom: 0.8mm;
+  .pdf-doc .sig-card--contractor {
+    border-top: 2.2pt solid #c9962e;
   }
-  .pd-sig__person { font-size: 7.8pt; color: #4a6270; margin-bottom: auto; }
-  .pd-sig__line {
-    font-size: 6.8pt; color: #8298a3; font-weight: 600;
-    letter-spacing: 0.9pt; padding-top: 11mm;
-    border-top: 0.4pt dashed #c0cdd4;
-    margin-top: 2.5mm;
+  .pdf-doc .sig-card__role {
+    font-size: 6.8pt;
+    font-weight: 800;
+    color: #8298a3;
+    letter-spacing: 1.2pt;
+    text-transform: uppercase;
+    margin-bottom: 2.5mm;
   }
-  .pd-sig__date {
-    font-size: 7.2pt; color: #6a7d88; margin-top: 1.5mm;
+  .pdf-doc .sig-card__name {
+    font-size: 10.5pt;
+    font-weight: 900;
+    color: #0d4a5c;
+    margin-bottom: 1mm;
+    line-height: 1.3;
   }
-
-  /* ---- FOOTER ---- */
-  .pd-footer {
-    margin-top: 5mm;
-    padding-top: 2.5mm;
-    border-top: 0.5pt solid #d8e1e6;
-    text-align: center;
+  .pdf-doc .sig-card__person {
+    font-size: 8pt;
+    color: #4a6270;
+    margin-bottom: 1mm;
+    font-weight: 600;
   }
-  .pd-footer p {
-    font-size: 7.2pt;
+  .pdf-doc .sig-card__hint {
+    font-size: 7pt;
     color: #8298a3;
     line-height: 1.7;
-    margin: 0;
+    margin-bottom: auto;
+  }
+  .pdf-doc .sig-card__blank {
+    margin-top: 5mm;
+    padding-top: 3mm;
+    border-top: 0.5pt dashed #c8d4da;
+  }
+  .pdf-doc .sig-card__label {
+    font-size: 6.5pt;
+    color: #8298a3;
+    font-weight: 700;
+    letter-spacing: 0.8pt;
+    margin-bottom: 1.5mm;
+  }
+  .pdf-doc .sig-card__line {
+    height: 12mm;
+    border-bottom: 0.6pt solid #a8b8c0;
+    margin-bottom: 1.5mm;
+  }
+  .pdf-doc .sig-card__date {
+    font-size: 7pt;
+    color: #8298a3;
+    font-weight: 500;
   }
 
-  /* Page break control */
-  .pd-section-break {
-    break-before: page;
-    page-break-before: always;
+  /* Final note */
+  .pdf-doc .final-note {
+    margin-top: 6mm;
+    padding: 3mm 4mm;
+    background: #f8fafb;
+    border-radius: 2mm;
+    border: 0.5pt solid #e3ebef;
+    font-size: 7.5pt;
+    color: #6a7d88;
+    line-height: 1.8;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* Two-col list */
+  .pdf-doc .two-col-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5mm 5mm;
+    margin: 2mm 0;
+  }
+  .pdf-doc .two-col-list li {
+    font-size: 8pt;
+    color: #4a6270;
+    line-height: 1.7;
+    padding-right: 4mm;
+    position: relative;
+    list-style: none;
+  }
+  .pdf-doc .two-col-list li::before {
+    content: '◆';
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #c9962e;
+    font-size: 6pt;
+    line-height: 2.2;
   }
 }
 </style>
@@ -837,184 +1245,382 @@ ul{list-style:none}
 <main class="container">
 
   <!-- ============================================================
-       PRINT-ONLY DOCUMENT — clean, compact, beautiful PDF
+       PDF-ONLY DOCUMENT — 5-page beautifully typeset
        ============================================================ -->
-  <section class="print-doc" aria-hidden="true">
+  <section class="pdf-doc" aria-hidden="true">
 
-    <!-- HEADER -->
-    <header class="pd-header">
-      <div class="pd-header__brand">
-        <div class="pd-header__logo">ک</div>
-        <div>
-          <div class="pd-header__name">Code Packs</div>
-          <div class="pd-header__tag">Intelligent Business Systems</div>
+    <!-- PAGE 1 -->
+    <div class="page">
+      <header class="doc-header">
+        <div class="doc-header__brand">
+          <div class="doc-header__logo">ک</div>
+          <div>
+            <div class="doc-header__name">Code Packs</div>
+            <div class="doc-header__tag">Intelligent Business Systems</div>
+          </div>
+        </div>
+        <div class="doc-header__meta">
+          <div>شماره قرارداد: <strong>CP-PUZZLE-001</strong></div>
+          <div>تاریخ انعقاد: <strong>۱ مهر ۱۴۰۵</strong></div>
+          <div>نسخه: نهایی</div>
+        </div>
+      </header>
+
+      <div class="doc-title">
+        <h1>خلاصه قرارداد همکاری</h1>
+        <h2>اکوسیستم دیجیتال پازل فرشته</h2>
+        <div class="doc-title__rule"></div>
+      </div>
+
+      <div class="parties">
+        <div class="party">
+          <div class="party__label">کارفرما</div>
+          <div class="party__name">گروه مشاوره املاک پازل فرشته</div>
+          <div class="party__detail">
+            نماینده: جناب مهندس سالمی — مدیرعامل<br>
+            تهران، خیابان فرشته، اخگری، بن‌بست بهار، پلاک ۳<br>
+            تلفن: ۰۹۱۲۱۰۹۹۱۶۱
+          </div>
+        </div>
+        <div class="party party--contractor">
+          <div class="party__label">پیمانکار</div>
+          <div class="party__name">شرکت Code Packs</div>
+          <div class="party__detail">
+            امیرمحمد بهرامی (CTO) — مبین شیخی (CEO)<br>
+            البرز، کرج، مهرشهر، بلوار ارم، ساختمان خلیج فارس، واحد ۲۰۲<br>
+            codepacksteam@gmail.com
+          </div>
         </div>
       </div>
-      <div class="pd-header__meta">
-        <div>شماره قرارداد: <strong>CP-PUZZLE-001</strong></div>
-        <div>تاریخ انعقاد: [تاریخ شمسی]</div>
-        <div>نسخه: نهایی</div>
-      </div>
-    </header>
 
-    <!-- TITLE -->
-    <div class="pd-title">
-      <h1>قرارداد همکاری</h1>
-      <h2>اکوسیستم دیجیتال پازل فرشته</h2>
-      <div class="pd-title__rule"></div>
-    </div>
+      <div class="summary">
+        <div class="summary__cell">
+          <span>مدت اجرا</span>
+          <strong>۱۳۵ روز + ۱ ماه</strong>
+        </div>
+        <div class="summary__cell">
+          <span>ارزش پروژه</span>
+          <strong>۴۴۰ میلیون تومان</strong>
+        </div>
+        <div class="summary__cell">
+          <span>مبلغ مشروط نهایی</span>
+          <strong>۵۰ میلیون تومان</strong>
+        </div>
+        <div class="summary__cell summary__cell--gold">
+          <span>جمع کل قرارداد</span>
+          <strong>۴۹۰ میلیون تومان</strong>
+        </div>
+      </div>
 
-    <!-- PARTIES -->
-    <div class="pd-parties">
-      <div class="pd-party">
-        <div class="pd-party__label">کارفرما</div>
-        <div class="pd-party__name">گروه مشاوره املاک پازل فرشته</div>
-        <div class="pd-party__detail">نماینده: جناب مهندس سالمی — مدیرعامل</div>
-        <div class="pd-party__detail">تهران، خیابان فرشته، اخگری، بن‌بست بهار، پلاک ۳</div>
-        <div class="pd-party__detail">تلفن: ۰۹۱۲۱۰۹۹۱۶۱</div>
-      </div>
-      <div class="pd-party">
-        <div class="pd-party__label">پیمانکار</div>
-        <div class="pd-party__name">شرکت Code Packs</div>
-        <div class="pd-party__detail">امیرمحمد بهرامی (CTO) — مبین شیخی (CEO)</div>
-        <div class="pd-party__detail">البرز، کرج، مهرشهر، بلوار ارم، ساختمان خلیج فارس، واحد ۲۰۲</div>
-        <div class="pd-party__detail">۰۹۰۰۹۹۹۹۲۳۷ — codepacksteam@gmail.com</div>
-      </div>
-    </div>
+      <h3 class="section-title"><span class="num">۱</span>موضوع قرارداد</h3>
+      <p>
+        طراحی، توسعه، استقرار و پشتیبانی اکوسیستم دیجیتال یکپارچه پازل فرشته در قالب ۵ فاز شامل: نرم‌افزار جامع مدیریت املاک و CRM، دو وب‌سایت اختصاصی، هسته هوش مصنوعی پیشرفته، بات اختصاصی بله، و خدمات دوره‌ای محتوا و تبلیغات. فازهای ۱ تا ۳ به‌صورت موازی در ۱۳۵ روز اجرا می‌شوند و پس از آن یک ماه استقرار، آموزش و پشتیبانی در کنار تیم کارفرما انجام می‌گیرد.
+      </p>
 
-    <!-- SUMMARY -->
-    <div class="pd-summary">
-      <div class="pd-summary__cell">
-        <span>مدت اجرا</span>
-        <strong>۱۳۵ روز</strong>
+      <div class="highlight">
+        <strong>🎯 هدف کلان:</strong> تبدیل پازل فرشته به مجموعه‌ای داده‌محور که اطلاعات، پیگیری مشتری، وب‌سایت، هوش مصنوعی و بازاریابی آن در یک مسیر واحد کار کنند؛ نه مجموعه‌ای از ابزارهای جدا از هم.
       </div>
-      <div class="pd-summary__cell">
-        <span>سرمایه‌گذاری</span>
-        <strong>۴۹۰ میلیون تومان</strong>
+
+      <div class="highlight">
+        <strong>🎁 هدیه همکاری:</strong> بات اختصاصی بله به ارزش تقریبی ۶۰,۰۰۰,۰۰۰ تومان، به‌صورت رایگان در این قرارداد گنجانده شده است. این بات به سیستم داخلی، CRM، وب‌سایت و در مراحل بعد به هسته هوش مصنوعی متصل می‌شود و هدف آن کوتاه کردن فاصله بین «ثبت یک اتفاق در سیستم» تا «اقدام انسان درست» است.
       </div>
-      <div class="pd-summary__cell">
-        <span>هدیه همکاری</span>
-        <strong>بات بله — ۶۰ میلیون</strong>
-      </div>
-      <div class="pd-summary__cell">
-        <span>مالکیت</span>
-        <strong>۱۰۰٪ کارفرما</strong>
+
+      <div class="page-foot">
+        <div class="page-foot__sig"><b>امضای کارفرما:</b> <span class="page-foot__line"></span></div>
+        <div class="page-foot__center">صفحه ۱ از ۵ — CP-PUZZLE-001</div>
+        <div class="page-foot__sig"><b>امضای پیمانکار:</b> <span class="page-foot__line"></span></div>
       </div>
     </div>
 
-    <!-- 1. SUBJECT -->
-    <h3>۱. موضوع قرارداد</h3>
-    <p>طراحی، توسعه، استقرار و پشتیبانی اکوسیستم دیجیتال یکپارچه پازل فرشته در قالب ۵ فاز شامل: نرم‌افزار جامع مدیریت املاک و CRM، دو وب‌سایت اختصاصی، هسته هوش مصنوعی پیشرفته، بات اختصاصی بله، و خدمات دوره‌ای محتوا و تبلیغات. فازهای ۱ تا ۳ به‌صورت موازی در ۱۳۵ روز اجرا می‌شوند.</p>
-
-    <!-- 2. PHASES -->
-    <h3>۲. فازها و سرمایه‌گذاری</h3>
-    <table class="pd-table">
-      <thead>
-        <tr>
-          <th style="width:10mm;">فاز</th>
-          <th>عنوان</th>
-          <th style="width:28mm;">زمان</th>
-          <th style="width:38mm;">هزینه (تومان)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>۱</td><td>زیرساخت داخلی و نرم‌افزار جامع</td><td>۷۵ روز</td><td class="pd-amount">۲۱۰,۰۰۰,۰۰۰</td></tr>
-        <tr><td>۲</td><td>وب‌سایت اختصاصی و لایه مشتری</td><td>۶۰ روز</td><td class="pd-amount">۹۰,۰۰۰,۰۰۰</td></tr>
-        <tr><td>۳</td><td>هسته هوش مصنوعی پیشرفته</td><td>۵۰ روز</td><td class="pd-amount">۱۹۰,۰۰۰,۰۰۰</td></tr>
-        <tr class="pd-total"><td colspan="2">جمع فازهای ۱ تا ۳ (اجرای موازی)</td><td>۱۳۵ روز</td><td class="pd-amount">۴۹۰,۰۰۰,۰۰۰</td></tr>
-        <tr class="pd-gift"><td>🎁</td><td>بات اختصاصی بله — هدیه</td><td>همراه پروژه</td><td class="pd-amount">رایگان (ارزش ۶۰,۰۰۰,۰۰۰)</td></tr>
-        <tr><td>۴</td><td>تولید محتوا، تور ۳۶۰ و مارکتینگ دوره‌ای</td><td>ماهانه</td><td>پس از توافق</td></tr>
-        <tr><td>۵</td><td>کمپین‌های تبلیغاتی</td><td>دوره‌ای</td><td>بر اساس بودجه</td></tr>
-      </tbody>
-    </table>
-
-    <!-- 3. PAYMENTS -->
-    <h3>۳. جدول پرداخت مرحله‌ای</h3>
-    <p class="pd-note">هر پرداخت با یک خروجی ملموس و قابل استفاده گره خورده است.</p>
-    <table class="pd-table">
-      <thead>
-        <tr>
-          <th style="width:10mm;">مرحله</th>
-          <th style="width:22mm;">زمان</th>
-          <th>خروجی قابل تحویل</th>
-          <th style="width:14mm;">درصد</th>
-          <th style="width:34mm;">مبلغ (تومان)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>۱</td><td>روز ۰</td><td>پیش‌پرداخت و شروع رسمی پروژه</td><td>۳۰٪</td><td class="pd-amount">۱۴۷,۰۰۰,۰۰۰</td></tr>
-        <tr><td>۲</td><td>روز ۲۵</td><td>ماژول اول هسته داخلی (فایل، مشتری، CRM پایه)</td><td>۱۰٪</td><td class="pd-amount">۴۹,۰۰۰,۰۰۰</td></tr>
-        <tr><td>۳</td><td>روز ۵۰</td><td>هسته داخلی کامل + نسخه آلفای وب‌سایت</td><td>۱۰٪</td><td class="pd-amount">۴۹,۰۰۰,۰۰۰</td></tr>
-        <tr><td>۴</td><td>روز ۷۵</td><td>وب‌سایت کامل + لیدگیری متصل به CRM</td><td>۱۰٪</td><td class="pd-amount">۴۹,۰۰۰,۰۰۰</td></tr>
-        <tr><td>۵</td><td>روز ۱۰۰</td><td>هسته هوش مصنوعی کامل</td><td>۱۵٪</td><td class="pd-amount">۷۳,۵۰۰,۰۰۰</td></tr>
-        <tr><td>۶</td><td>روز ۱۰۰–۱۳۵</td><td>استقرار، آموزش تیم و پشتیبانی یک ماهه (پس از رضایت کامل)</td><td>۱۰٪</td><td class="pd-amount">۴۹,۰۰۰,۰۰۰</td></tr>
-        <tr><td>۷</td><td>پایان ۱۳۵</td><td>تحویل نهایی سورس، مستندات و دسترسی‌های مدیریتی</td><td>۱۵٪</td><td class="pd-amount">۷۳,۵۰۰,۰۰۰</td></tr>
-        <tr class="pd-total"><td colspan="3">جمع کل</td><td>۱۰۰٪</td><td class="pd-amount">۴۹۰,۰۰۰,۰۰۰</td></tr>
-      </tbody>
-    </table>
-    <p class="pd-note">شماره حساب رسمی: <span dir="ltr" style="direction:ltr;display:inline-block;">IR500560611828005756984701</span> — به نام آقای مبین شیخی</p>
-
-    <!-- 4. KEY CLAUSES -->
-    <h3>۴. مفاد کلیدی</h3>
-
-    <div class="pd-clause">
-      <h4>مالکیت محصول</h4>
-      <p>تمام سورس‌کدها، مستندات، الگوریتم‌ها، پرامپت‌های هوش مصنوعی، وب‌سایت‌ها و دیتابیس، به‌صورت کامل به کارفرما تعلق دارد. محصول اجاره‌ای نبوده و برای استفاده از آن هیچ هزینه دوره‌ای تحت عنوان لایسنس دریافت نمی‌شود.</p>
-    </div>
-
-    <div class="pd-clause">
-      <h4>پشتیبانی رایگان</h4>
-      <p>۶ ماه پشتیبانی رایگان پس از تحویل نهایی، شامل: پایش امنیت، رفع باگ، بروزرسانی کتابخانه‌ها، پشتیبانی کاربران، مشاوره فنی، محتوای آموزشی و سئو اولیه.</p>
-    </div>
-
-    <div class="pd-clause">
-      <h4>محرمانگی</h4>
-      <p>هر دو طرف متعهد به حفظ اطلاعات محرمانه طرف دیگر هستند. این تعهد تا ۵ سال پس از خاتمه قرارداد معتبر است.</p>
-    </div>
-
-    <div class="pd-clause">
-      <h4>تحویل و تأیید (Acceptance)</h4>
-      <p>در هر نقطه تحویل، پیمانکار آمادگی را کتباً اعلام می‌کند. کارفرما حداکثر ۵ روز کاری فرصت بررسی دارد؛ عدم اعلام نظر به‌معنای تأیید خودکار است. پرداخت هر مرحله حداکثر ۷ روز کاری پس از تأیید انجام می‌شود.</p>
-    </div>
-
-    <div class="pd-clause">
-      <h4>تعهدات کارفرما</h4>
-      <p>ارائه داده‌ها و دسترسی‌های لازم، پرداخت به‌موقع در نقاط تحویل، همکاری در تست پذیرش، تأمین اطلاعات برندینگ و معرفی نماینده فنی و کسب‌وکار.</p>
-    </div>
-
-    <div class="pd-clause">
-      <h4>هزینه‌های جاری</h4>
-      <p>پس از تحویل، هزینه‌های سرور، دامنه، APIهای ثالث و سرویس‌های پیام‌رسان به عهده کارفرما و تابع تعرفه ارائه‌دهنده مربوطه است.</p>
-    </div>
-
-    <!-- 5. SIGNATURES -->
-    <h3>۵. امضای طرفین</h3>
-    <div class="pd-sig-grid">
-      <div class="pd-sig">
-        <div class="pd-sig__role">کارفرما</div>
-        <div class="pd-sig__name">گروه مشاوره املاک پازل فرشته</div>
-        <div class="pd-sig__person">جناب مهندس سالمی — مدیرعامل</div>
-        <div class="pd-sig__line">امضا و مهر</div>
-        <div class="pd-sig__date">تاریخ: ....................</div>
+    <!-- PAGE 2 -->
+    <div class="page">
+      <div class="page-head">
+        <div class="page-head__title">قرارداد همکاری — پازل فرشته × کدپکس</div>
+        <div class="page-head__meta">شماره: <strong>CP-PUZZLE-001</strong></div>
       </div>
-      <div class="pd-sig">
-        <div class="pd-sig__role">پیمانکار</div>
-        <div class="pd-sig__name">Code Packs</div>
-        <div class="pd-sig__person">امیرمحمد بهرامی — مدیرعامل (CTO)</div>
-        <div class="pd-sig__line">امضا و مهر</div>
-        <div class="pd-sig__date">تاریخ: ....................</div>
+
+      <h3 class="section-title"><span class="num">۲</span>جدول پرداخت مرحله‌ای</h3>
+      <p>
+        مبنای محاسبات پرداخت، <strong>ارزش پروژه (فازهای ۱ تا ۳) معادل ۴۴۰,۰۰۰,۰۰۰ تومان</strong> است. مبلغ <strong>۵۰,۰۰۰,۰۰۰ تومان</strong> به‌صورت جداگانه و مشروط به رضایت کامل کارفرما پس از یک ماه استقرار و آموزش پرداخت می‌شود.
+      </p>
+
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width:10mm;">مرحله</th>
+            <th style="width:22mm;">زمان</th>
+            <th>خروجی قابل تحویل</th>
+            <th style="width:22mm;">درصد</th>
+            <th style="width:32mm;">مبلغ (تومان)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>۱</td><td>روز ۰</td><td>پیش‌پرداخت و شروع رسمی پروژه</td><td>۳۰٪</td><td class="amount">۱۳۲,۰۰۰,۰۰۰</td></tr>
+          <tr><td>۲</td><td>روز ۲۵</td><td>ماژول اول هسته داخلی (فایل، مشتری، CRM پایه)</td><td>۱۰٪</td><td class="amount">۴۴,۰۰۰,۰۰۰</td></tr>
+          <tr><td>۳</td><td>روز ۵۰</td><td>هسته داخلی کامل + نسخه آلفای وب‌سایت</td><td>۱۰٪</td><td class="amount">۴۴,۰۰۰,۰۰۰</td></tr>
+          <tr><td>۴</td><td>روز ۷۵</td><td>وب‌سایت کامل + لیدگیری متصل به CRM</td><td>۱۰٪</td><td class="amount">۴۴,۰۰۰,۰۰۰</td></tr>
+          <tr><td>۵</td><td>روز ۱۰۰</td><td>هسته هوش مصنوعی کامل</td><td>۱۵٪</td><td class="amount">۶۶,۰۰۰,۰۰۰</td></tr>
+          <tr><td>۶</td><td>پایان روز ۱۳۵</td><td>تحویل نهایی سورس، مستندات، دسترسی‌های مدیریتی و تأییدیه کتبی (Acceptance)</td><td>۲۵٪</td><td class="amount">۲۵٪</td></tr>
+          <tr class="row-total"><td colspan="3">جمع ارزش پروژه (فازهای ۱ تا ۳)</td><td>۱۰۰٪</td><td class="amount">۴۴۰,۰۰۰,۰۰۰</td></tr>
+          <tr class="row-conditional"><td>۷</td><td>یک ماه پس از تحویل</td><td>استقرار، آموزش و پشتیبانی در کنار تیم پازل فرشته — پرداخت پس از رضایت کامل کارفرما</td><td>مشروط</td><td class="amount">۵۰,۰۰۰,۰۰۰</td></tr>
+          <tr class="row-total"><td colspan="3">جمع کل قرارداد</td><td>—</td><td class="amount">۴۹۰,۰۰۰,۰۰۰</td></tr>
+        </tbody>
+      </table>
+
+      <div class="money-hero">
+        <div class="money-hero__label">مبلغ کل قرارداد — توسعه دارایی دیجیتال اصلی</div>
+        <div class="money-hero__value">۴۹۰ <small>میلیون تومان</small></div>
+        <div class="money-hero__sub">
+          <b>۴۴۰ میلیون</b> ارزش پروژه در طول اجرا — <b>۵۰ میلیون</b> مشروط پس از استقرار و رضایت کامل
+        </div>
       </div>
-      <div class="pd-sig">
-        <div class="pd-sig__role">پیمانکار</div>
-        <div class="pd-sig__name">Code Packs</div>
-        <div class="pd-sig__person">مبین شیخی — رئیس هیئت مدیره (CEO)</div>
-        <div class="pd-sig__line">امضا و مهر</div>
-        <div class="pd-sig__date">تاریخ: ....................</div>
+
+      <p style="font-size:7pt;color:#8298a3;line-height:1.75;margin-top:1.5mm;">
+        <strong>شماره حساب رسمی:</strong>
+        <span dir="ltr" style="direction:ltr;display:inline-block;font-weight:700;">IR500560611828005756984701</span>
+        — به نام آقای مبین شیخی
+      </p>
+
+      <div class="page-foot">
+        <div class="page-foot__sig"><b>امضای کارفرما:</b> <span class="page-foot__line"></span></div>
+        <div class="page-foot__center">صفحه ۲ از ۵ — CP-PUZZLE-001</div>
+        <div class="page-foot__sig"><b>امضای پیمانکار:</b> <span class="page-foot__line"></span></div>
       </div>
     </div>
 
-    <div class="pd-footer">
-      <p>این سند خلاصه‌ای از قرارداد کامل است. متن کامل قرارداد و پیوست‌های آن (پروپوزال تفصیلی، جدول فازبندی، مشخصات فنی، لیست پشتیبانی و معیارهای پذیرش) جزء لاینفک این توافق محسوب می‌شود.</p>
+    <!-- PAGE 3 -->
+    <div class="page">
+      <div class="page-head">
+        <div class="page-head__title">قرارداد همکاری — پازل فرشته × کدپکس</div>
+        <div class="page-head__meta">شماره: <strong>CP-PUZZLE-001</strong></div>
+      </div>
+
+      <h3 class="section-title"><span class="num">۳</span>تحویل فنی هر فاز — چه چیزی تحویل داده می‌شود؟</h3>
+      <p style="margin-bottom:3mm;">
+        در پایان هر فاز، بسته‌ی کاملی از خروجی‌های فنی و کاربردی تحویل کارفرما می‌شود. تمامی موارد زیر در Repository اختصاصی کارفرما قرار می‌گیرد و مالکیت آن ۱۰۰٪ متعلق به کارفرماست.
+      </p>
+
+      <div class="phase-card">
+        <div class="phase-card__head">
+          <div class="phase-card__title"><span class="phase-num">۱</span>زیرساخت داخلی و نرم‌افزار جامع</div>
+          <div class="phase-card__meta">۷۵ روز (موازی) • تحویل: روز ۵۰</div>
+        </div>
+        <div class="phase-card__desc">
+          سامانه جامع مدیریت املاک، فایل‌ها، مشتریان، معاملات و کمیسیون‌ها به‌همراه CRM یکپارچه، دیتابیس مرکزی و APIهای پایه.
+        </div>
+        <ul class="phase-card__deliverables">
+          <li>سورس‌کد کامل Front-end و Back-end سامانه</li>
+          <li>اسکیمای کامل دیتابیس (PostgreSQL / MySQL)</li>
+          <li>APIهای RESTful با مستندات OpenAPI / Swagger</li>
+          <li>سیستم مدیریت نقش‌ها و سطوح دسترسی (RBAC)</li>
+          <li>گزارش‌گیری پیشرفته و داشبورد مدیریتی</li>
+          <li>ماژول مدیریت فایل، املاک و مشتریان</li>
+          <li>ماژول مدیریت معاملات و محاسبه کمیسیون</li>
+          <li>باشگاه مشتریان و تاریخچه تعاملات</li>
+          <li>سیستم یادآوری و پیگیری خودکار</li>
+          <li>رنکینگ مشاوران و تحلیل عملکرد</li>
+          <li>مستندات فنی معماری و راهنمای نصب</li>
+          <li>راهنمای کاربری برای دپارتمان‌ها</li>
+        </ul>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-card__head">
+          <div class="phase-card__title"><span class="phase-num">۲</span>وب‌سایت اختصاصی و لایه مشتری</div>
+          <div class="phase-card__meta">۶۰ روز (موازی) • تحویل: روز ۷۵</div>
+        </div>
+        <div class="phase-card__desc">
+          دو وب‌سایت برنامه‌نویسی‌شده اختصاصی (شرکتی و پلتفرم املاک) با طراحی UI/UX منحصربه‌فرد، سئوی تکنیکال پیشرفته و اتصال امن به دیتابیس مرکزی.
+        </div>
+        <ul class="phase-card__deliverables">
+          <li>سورس‌کد کامل Front-end (React / Next.js)</li>
+          <li>سورس‌کد کامل Back-end اختصاصی</li>
+          <li>طراحی UI/UX واکنش‌گرا (Responsive)</li>
+          <li>اتصال کنترل‌شده به دیتابیس فاز ۱</li>
+          <li>لندینگ‌پیج‌های اختصاصی کمپین‌ها</li>
+          <li>فرم‌های جذب لید متصل به CRM</li>
+          <li>سیستم مدیریت محتوا (CMS اختصاصی)</li>
+          <li>بهینه‌سازی سئو تکنیکال (On-Page / Technical)</li>
+          <li>ساختار Schema.org برای املاک</li>
+          <li>سرعت بارگذاری بهینه (Core Web Vitals)</li>
+          <li>مستندات محتواگذاری و مدیریت</li>
+          <li>راهنمای اتصال به Google Search Console</li>
+        </ul>
+      </div>
+
+      <div class="phase-card phase-card--gold">
+        <div class="phase-card__head">
+          <div class="phase-card__title"><span class="phase-num">۳</span>هسته هوش مصنوعی پیشرفته</div>
+          <div class="phase-card__meta">۵۰ روز (موازی) • تحویل: روز ۱۰۰</div>
+        </div>
+        <div class="phase-card__desc">
+          دستیار هوشمند هر مشاور شامل چت اختصاصی هر فایل، تحلیل مکالمه و ویس، پیشنهاد استراتژی مذاکره، مربی هوشمند و گزارش‌های پیش‌بینی فروش.
+        </div>
+        <ul class="phase-card__deliverables">
+          <li>سورس‌کد کامل هسته AI</li>
+          <li>پرامپت‌های اختصاصی و بهینه‌شده</li>
+          <li>کانفیگ و اتصال به مدل‌های زبانی</li>
+          <li>سرویس تبدیل گفتار به متن (STT)</li>
+          <li>سیستم تحلیل نیت و احساسات مشتری</li>
+          <li>موتور پیشنهاد پاسخ و استراتژی مذاکره</li>
+          <li>داشبورد تحلیل مکالمات و ویس‌ها</li>
+          <li>سیستم امتیازدهی و اولویت‌بندی لیدها</li>
+          <li>مربی هوشمند و بازخورد به مشاوران</li>
+          <li>گزارش‌های پیش‌بینی روند فروش</li>
+          <li>APIهای اختصاصی هوش مصنوعی</li>
+          <li>مستندات فنی و راهنمای استفاده</li>
+        </ul>
+      </div>
+
+      <div class="highlight">
+        <strong>📌 نکته مهم:</strong> تمام خروجی‌های فوق، شامل سورس‌کد، دیتابیس، مستندات، الگوریتم‌ها و پرامپت‌ها، در پایان هر فاز در Repository اختصاصی کارفرما قرار می‌گیرد و دسترسی مدیریتی کامل به کارفرما تحویل داده می‌شود.
+      </div>
+
+      <div class="page-foot">
+        <div class="page-foot__sig"><b>امضای کارفرما:</b> <span class="page-foot__line"></span></div>
+        <div class="page-foot__center">صفحه ۳ از ۵ — CP-PUZZLE-001</div>
+        <div class="page-foot__sig"><b>امضای پیمانکار:</b> <span class="page-foot__line"></span></div>
+      </div>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="page">
+      <div class="page-head">
+        <div class="page-head__title">قرارداد همکاری — پازل فرشته × کدپکس</div>
+        <div class="page-head__meta">شماره: <strong>CP-PUZZLE-001</strong></div>
+      </div>
+
+      <h3 class="section-title"><span class="num">۴</span>مفاد کلیدی قرارداد</h3>
+
+      <div class="clause-box clause-box--accent">
+        <h4 class="clause-title">مالکیت محصول و سورس‌کد</h4>
+        <p>
+          تمام سورس‌کدها، مستندات، الگوریتم‌ها، پرامپت‌های هوش مصنوعی، وب‌سایت‌ها، دیتابیس و هر دستاورد فکری حاصل از این قرارداد، <strong>به‌صورت کامل به کارفرما تعلق دارد</strong>. محصول اجاره‌ای نبوده و برای استفاده از آن هیچ هزینه دوره‌ای تحت عنوان لایسنس دریافت نمی‌شود. کارفرما مالک ۱۰۰٪ دارایی دیجیتال تولیدشده است و می‌تواند پروژه را با تیم فنی دیگری ادامه دهد.
+        </p>
+      </div>
+
+      <div class="clause-box">
+        <h4 class="clause-title">پشتیبانی رایگان ۶ ماهه</h4>
+        <p>
+          پس از تحویل نهایی و اتمام دوره یک‌ماهه استقرار، پیمانکار متعهد به ارائه <strong>۶ ماه پشتیبانی رایگان</strong> است. این دوره شامل موارد زیر می‌باشد:
+        </p>
+        <ul class="two-col-list" style="margin-top:2mm;">
+          <li>پایش مستمر امنیت و رفع آسیب‌پذیری‌ها</li>
+          <li>رفع باگ‌های نرم‌افزاری و منطقی</li>
+          <li>بروزرسانی کتابخانه‌ها و فریم‌ورک‌ها</li>
+          <li>پشتیبانی فنی کاربران نهایی</li>
+          <li>مشاوره فنی به تیم کارفرما</li>
+          <li>تهیه ویدیوهای آموزشی کوتاه</li>
+          <li>سئو اولیه وب‌سایت‌ها</li>
+          <li>پایش عملکرد سرور و سرویس‌ها</li>
+        </ul>
+      </div>
+
+      <div class="clause-box clause-box--accent">
+        <h4 class="clause-title">استقرار، آموزش و پشتیبانی در کنار تیم</h4>
+        <p>
+          پس از پایان روز ۱۳۵ و تحویل نهایی سورس‌کد، پیمانکار به مدت <strong>یک ماه</strong> در کنار تیم پازل فرشته حضور دارد و موارد زیر را انجام می‌دهد: استقرار کامل روی زیرساخت کارفرما، آموزش دپارتمان‌های فروش، مشاوران، مالی و پشتیبانی، همراهی در اولین چرخه کاری واقعی روی سیستم و رفع اشکالات استقرار. پرداخت مبلغ مشروط نهایی (۵۰ میلیون تومان) تنها پس از اعلام رضایت کامل کارفرما از این دوره انجام می‌شود.
+        </p>
+      </div>
+
+      <div class="clause-box">
+        <h4 class="clause-title">تحویل و تأیید (Acceptance)</h4>
+        <p>
+          در هر نقطه تحویل (روزهای ۲۵، ۵۰، ۷۵، ۱۰۰ و پایان روز ۱۳۵)، پیمانکار آمادگی خود را کتباً اعلام می‌کند. کارفرما حداکثر <strong>۵ روز کاری</strong> فرصت بررسی دارد؛ عدم اعلام نظر به‌معنای <strong>تأیید خودکار</strong> است. در صورت اعلام نقص، پیمانکار حداکثر <strong>۱۰ روز کاری</strong> فرصت رفع دارد. پرداخت هر مرحله حداکثر <strong>۷ روز کاری</strong> پس از تأیید انجام می‌شود.
+        </p>
+      </div>
+
+      <div class="clause-box clause-box--accent">
+        <h4 class="clause-title">محرمانگی اطلاعات</h4>
+        <p>
+          هر دو طرف متعهد به حفظ اطلاعات محرمانه طرف دیگر هستند. این تعهد شامل اطلاعات تجاری، فنی، مالی، داده‌های مشتریان، رمزهای عبور، الگوریتم‌ها و پرامپت‌های اختصاصی می‌شود و تا <strong>۵ سال</strong> پس از خاتمه قرارداد معتبر است. در صورت نقض، طرف متخلف مسئول جبران کلیه خسارات وارده خواهد بود.
+        </p>
+      </div>
+
+      <div class="clause-box">
+        <h4 class="clause-title">تضمین‌های پیمانکار</h4>
+        <p>
+          تمامی خدمات مطابق با استانداردهای حرفه‌ای صنعت نرم‌افزار ارائه می‌شود. محصول تحویلی عاری از هرگونه نقص عمده و باگ‌های بحرانی خواهد بود. کلیه حقوق مربوط به استفاده از نرم‌افزارهای شخص ثالث دارای مجوز قانونی هستند. تست‌های واحد، یکپارچه، نفوذ و بار مطابق با استانداردهای صنعت اجرا می‌شود.
+        </p>
+      </div>
+
+      <div class="page-foot">
+        <div class="page-foot__sig"><b>امضای کارفرما:</b> <span class="page-foot__line"></span></div>
+        <div class="page-foot__center">صفحه ۴ از ۵ — CP-PUZZLE-001</div>
+        <div class="page-foot__sig"><b>امضای پیمانکار:</b> <span class="page-foot__line"></span></div>
+      </div>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div class="page">
+      <div class="page-head">
+        <div class="page-head__title">قرارداد همکاری — پازل فرشته × کدپکس</div>
+        <div class="page-head__meta">شماره: <strong>CP-PUZZLE-001</strong></div>
+      </div>
+
+      <h3 class="section-title"><span class="num">۵</span>امضای طرفین</h3>
+
+      <div class="sig-intro">
+        این قرارداد در ۲ نسخه تنظیم و با امضای نمایندگان مجاز طرفین، لازم‌الاجرا می‌گردد.<br>
+        <strong>تاریخ انعقاد و شروع رسمی پروژه: ۱ مهر ۱۴۰۵</strong>
+      </div>
+
+      <div class="sig-grid">
+        <div class="sig-card sig-card--employer">
+          <div class="sig-card__role">کارفرما</div>
+          <div class="sig-card__name">گروه مشاوره املاک پازل فرشته</div>
+          <div class="sig-card__person">جناب مهندس سالمی — مدیرعامل</div>
+          <div class="sig-card__hint">
+            تهران، خیابان فرشته، اخگری، بن‌بست بهار، پلاک ۳<br>
+            تلفن: ۰۹۱۲۱۰۹۹۱۶۱
+          </div>
+          <div class="sig-card__blank">
+            <div class="sig-card__label">امضا و مهر</div>
+            <div class="sig-card__line"></div>
+            <div class="sig-card__date">تاریخ: ۱ مهر ۱۴۰۵</div>
+          </div>
+        </div>
+
+        <div class="sig-card sig-card--contractor">
+          <div class="sig-card__role">پیمانکار</div>
+          <div class="sig-card__name">شرکت Code Packs</div>
+          <div class="sig-card__person">امیرمحمد بهرامی — مدیرعامل (CTO)</div>
+          <div class="sig-card__hint">
+            البرز، کرج، مهرشهر، بلوار ارم، ساختمان خلیج فارس، واحد ۲۰۲<br>
+            codepacksteam@gmail.com
+          </div>
+          <div class="sig-card__blank">
+            <div class="sig-card__label">امضا و مهر</div>
+            <div class="sig-card__line"></div>
+            <div class="sig-card__date">تاریخ: ۱ مهر ۱۴۰۵</div>
+          </div>
+        </div>
+
+        <div class="sig-card sig-card--contractor" style="grid-column: 1 / -1; max-width: 50%; margin: 0 auto;">
+          <div class="sig-card__role">پیمانکار — عضو هیئت مدیره</div>
+          <div class="sig-card__name">شرکت Code Packs</div>
+          <div class="sig-card__person">مبین شیخی — رئیس هیئت مدیره (CEO)</div>
+          <div class="sig-card__hint">
+            شماره حساب رسمی جهت واریز:
+            <span dir="ltr" style="direction:ltr;display:inline-block;font-weight:700;font-size:7pt;">IR500560611828005756984701</span>
+          </div>
+          <div class="sig-card__blank">
+            <div class="sig-card__label">امضا و مهر</div>
+            <div class="sig-card__line"></div>
+            <div class="sig-card__date">تاریخ: ۱ مهر ۱۴۰۵</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="final-note">
+        این سند خلاصه‌ای از قرارداد کامل است. متن کامل قرارداد و پیوست‌های آن (پروپوزال تفصیلی، جدول فازبندی، مشخصات فنی، لیست پشتیبانی و معیارهای پذیرش) جزء لاینفک این توافق محسوب می‌شود.
+      </div>
+
+      <div class="page-foot">
+        <div class="page-foot__sig"><b>امضای کارفرما:</b> <span class="page-foot__line"></span></div>
+        <div class="page-foot__center">صفحه ۵ از ۵ — CP-PUZZLE-001</div>
+        <div class="page-foot__sig"><b>امضای پیمانکار:</b> <span class="page-foot__line"></span></div>
+      </div>
     </div>
 
   </section>
@@ -1044,7 +1650,7 @@ ul{list-style:none}
         </span>
         <span class="hero__chip">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          مدت اجرا: ۱۳۵ روز
+          شروع: ۱ مهر ۱۴۰۵
         </span>
         <span class="hero__chip">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.66 0 3.22.45 4.56 1.24"/></svg>
@@ -1067,7 +1673,11 @@ ul{list-style:none}
     <div class="meta-grid">
       <div class="meta-card">
         <div class="label">تاریخ انعقاد</div>
-        <div class="value">[تاریخ شمسی]<span class="sub">([تاریخ میلادی])</span></div>
+        <div class="value">۱ مهر ۱۴۰۵<span class="sub">(۲۳ سپتامبر ۲۰۲۶)</span></div>
+      </div>
+      <div class="meta-card">
+        <div class="label">تاریخ شروع پروژه</div>
+        <div class="value">۱ مهر ۱۴۰۵<span class="sub">هم‌زمان با امضای قرارداد</span></div>
       </div>
       <div class="meta-card">
         <div class="label">کارفرما</div>
@@ -1079,15 +1689,15 @@ ul{list-style:none}
       </div>
       <div class="meta-card">
         <div class="label">مدت اجرای پروژه</div>
-        <div class="value">۱۳۵ روز<span class="sub">(اجرای موازی فازهای ۱ تا ۳ + استقرار)</span></div>
+        <div class="value">۱۳۵ روز<span class="sub">(اجرای موازی فازهای ۱ تا ۳ + یک ماه استقرار و آموزش)</span></div>
       </div>
       <div class="meta-card">
-        <div class="label">سرمایه‌گذاری فاز ۱ تا ۳</div>
-        <div class="value"><span class="em">۴۹۰,۰۰۰,۰۰۰</span> تومان</div>
+        <div class="label">ارزش پروژه (فازهای ۱ تا ۳)</div>
+        <div class="value"><span class="em">۴۴۰,۰۰۰,۰۰۰</span> تومان<span class="sub">مبنای محاسبات پرداخت مرحله‌ای</span></div>
       </div>
       <div class="meta-card">
-        <div class="label">هدیه همکاری</div>
-        <div class="value"><span class="em">۶۰ میلیون</span><span class="sub">بات اختصاصی بله — رایگان</span></div>
+        <div class="label">مبلغ مشروط نهایی</div>
+        <div class="value"><span class="em">۵۰,۰۰۰,۰۰۰</span> تومان<span class="sub">پس از یک ماه استقرار و رضایت کامل کارفرما</span></div>
       </div>
     </div>
   </div>
@@ -1169,7 +1779,7 @@ ul{list-style:none}
       </table>
     </div>
 
-    <p style="margin-top:14px;">۱-۳. در سراسر این سند، دو طرف با عنوان‌های «کارفرما» و «پیمانکار» شناخته می‌شوند.</p>
+    <p style="margin-top:14px;">۱-۳. در سراسر این سند، دو طرف با عنوان‌های «کارفرما» و «پیمانکار» شناخته می‌شوند. تاریخ انعقاد و شروع رسمی پروژه، <strong>۱ مهر ۱۴۰۵</strong> می‌باشد.</p>
   </section>
 
   <!-- C2: موضوع -->
@@ -1283,8 +1893,8 @@ ul{list-style:none}
       <li>تضمین کیفیت کد و اجرای تست‌های واحد، یکپارچه، نفوذ و بار مطابق با استانداردهای صنعت نرم‌افزار.</li>
       <li>تحویل سورس‌کد کامل، دسترسی Repository، مالکیت دیتابیس و تمام دسترسی‌های مدیریتی به کارفرما در پایان هر مرحله.</li>
       <li>رعایت کامل محرمانگی اطلاعات کارفرما مطابق با ماده ۱۳ این قرارداد.</li>
-      <li>استقرار سیستم در زیرساخت کارفرما، آموزش دپارتمان‌های مختلف و ارائه یک ماه پشتیبانی استقرار پس از تکمیل توسعه.</li>
-      <li>ارائه پشتیبانی رایگان ۶ ماهه مطابق با ماده ۱۲ این قرارداد پس از تحویل نهایی.</li>
+      <li>استقرار سیستم در زیرساخت کارفرما، آموزش دپارتمان‌های مختلف و ارائه <strong>یک ماه استقرار، آموزش و پشتیبانی در کنار تیم کارفرما</strong> پس از تکمیل توسعه و تحویل نهایی.</li>
+      <li>ارائه پشتیبانی رایگان ۶ ماهه مطابق با ماده ۱۲ این قرارداد پس از تحویل نهایی و اتمام دوره استقرار.</li>
     </ul>
   </section>
 
@@ -1300,7 +1910,7 @@ ul{list-style:none}
 
     <p>کارفرما متعهد به موارد زیر است:</p>
     <ul class="deliver" style="background:transparent;border:0;padding:0;">
-      <li>ارائه مستندات، داده‌های فروش، اطلاعات فایل‌ها و املاک، لیست مشتریان و هر داده موردنیاز، حداکثر تا ۷ روز کاری از تاریخ امضا قرارداد.</li>
+      <li>ارائه مستندات، داده‌های فروش، اطلاعات فایل‌ها و املاک، لیست مشتریان و هر داده موردنیاز، حداکثر تا ۷ روز کاری از تاریخ امضا قرارداد (۱ مهر ۱۴۰۵).</li>
       <li>فراهم‌سازی دسترسی‌های لازم به محیط‌های سرویس‌دهنده (سرور، دیتابیس، سرویس‌های ابری، دامنه و سایر موارد مورد نیاز).</li>
       <li>پرداخت تعهدات مالی خود مطابق با ماده ۱۱ به‌موقع و در نقاط تحویل مشخص‌شده.</li>
       <li>همکاری در تست‌های پذیرش کاربری (UAT) و ارائه تأییدیه هر مرحله حداکثر تا ۵ روز کاری پس از اعلام آمادگی پیمانکار.</li>
@@ -1320,7 +1930,7 @@ ul{list-style:none}
       </div>
     </div>
 
-    <p>کل پروژه در <strong>۵ فاز</strong> اجرا می‌شود. فازهای ۱ تا ۳ (ساخت دارایی دیجیتال اصلی) به‌صورت <strong>موازی و هم‌پوشان</strong> در مجموع <strong>۱۳۵ روز</strong> زمان‌بندی شده‌اند که شامل <strong>۱۰۵ روز توسعه موازی</strong> و <strong>۳۰ روز استقرار، آموزش و پشتیبانی استقرار</strong> است. فازهای ۴ و ۵ به‌صورت دوره‌ای / ماهانه و پس از تثبیت دامنه خدمات، اجرا خواهند شد.</p>
+    <p>کل پروژه در <strong>۵ فاز</strong> اجرا می‌شود. فازهای ۱ تا ۳ (ساخت دارایی دیجیتال اصلی) به‌صورت <strong>موازی و هم‌پوشان</strong> در مجموع <strong>۱۳۵ روز</strong> زمان‌بندی شده‌اند که شامل <strong>۱۰۵ روز توسعه موازی</strong> و <strong>۳۰ روز آماده‌سازی و تحویل نهایی</strong> است. پس از پایان روز ۱۳۵، پیمانکار به مدت <strong>یک ماه در کنار تیم پازل فرشته</strong> جهت استقرار، آموزش و پشتیبانی حضور دارد و پرداخت نهایی (۵۰ میلیون تومان) پس از اعلام رضایت کامل کارفرما در پایان این دوره انجام می‌شود. فازهای ۴ و ۵ به‌صورت دوره‌ای / ماهانه و پس از تثبیت دامنه خدمات، اجرا خواهند شد.</p>
 
     <div class="callout">
       <strong>منطق اجرای موازی</strong>
@@ -1330,10 +1940,9 @@ ul{list-style:none}
     <div class="timeline">
       <div class="timeline__scroll">
         <div class="timeline__track"></div>
-
         <div class="tl is-primary">
           <div class="tl__dot">۰</div>
-          <div class="tl__week">روز ۰</div>
+          <div class="tl__week">۱ مهر ۱۴۰۵</div>
           <div class="tl__label">امضا و پیش‌پرداخت</div>
           <div class="tl__pay">۳۰٪</div>
         </div>
@@ -1363,15 +1972,15 @@ ul{list-style:none}
         </div>
         <div class="tl is-deploy">
           <div class="tl__dot">۵</div>
-          <div class="tl__week">۱ ماه</div>
-          <div class="tl__label">استقرار، آموزش و پشتیبانی</div>
-          <div class="tl__pay">۱۰٪</div>
+          <div class="tl__week">روز ۱۳۵</div>
+          <div class="tl__label">تحویل نهایی سورس و مستندات</div>
+          <div class="tl__pay">۱۱۰ م</div>
         </div>
         <div class="tl is-final">
           <div class="tl__dot">★</div>
-          <div class="tl__week">روز ۱۳۵</div>
-          <div class="tl__label">تحویل نهایی و تسویه</div>
-          <div class="tl__pay">۱۵٪</div>
+          <div class="tl__week">+ یک ماه</div>
+          <div class="tl__label">استقرار، آموزش و رضایت نهایی</div>
+          <div class="tl__pay">۵۰ م</div>
         </div>
       </div>
       <div class="timeline__hint">برای دیدن همه مراحل، جدول را به چپ و راست بکشید</div>
@@ -1390,7 +1999,7 @@ ul{list-style:none}
         </thead>
         <tbody>
           <tr class="row-total">
-            <td>روز ۰</td>
+            <td>۱ مهر ۱۴۰۵</td>
             <td>امضای قرارداد، تشکیل تیم، تثبیت نیازمندی‌ها، طراحی معماری کلان و راه‌اندازی محیط توسعه.</td>
             <td><strong>شروع رسمی پروژه</strong><br><small>سند تثبیت Scope و معماری</small></td>
             <td><strong>۳۰٪</strong></td>
@@ -1421,80 +2030,23 @@ ul{list-style:none}
           </tr>
           <tr class="row-deploy">
             <td>روز ۱۰۰ – ۱۳۵</td>
-            <td>استقرار روی زیرساخت کارفرما &nbsp;|&nbsp; آموزش دپارتمان‌های فروش، مشاوران، مالی و پشتیبانی &nbsp;|&nbsp; پشتیبانی کامل ماه اول</td>
-            <td><strong>رضایت کامل کارفرما و تیم</strong><br><small>سیستم روی زیرساخت خود کارفرما، تیم آموزش‌دیده</small></td>
-            <td><strong>۱۰٪</strong></td>
-          </tr>
-          <tr class="row-final">
-            <td>پایان روز ۱۳۵</td>
-            <td>تحویل سورس‌کد کامل، مستندات، دسترسی‌های مدیریتی و تأییدیه کتبی نهایی</td>
-            <td><strong>تحویل نهایی و تسویه</strong><br><small>سند Acceptance و بستن پروژه</small></td>
-            <td><strong>۱۵٪</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3>۶-۲. جدول تفصیلی فازبندی و سرمایه‌گذاری</h3>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:70px;">فاز</th>
-            <th>عنوان</th>
-            <th style="width:130px;">زمان تقریبی</th>
-            <th style="width:180px;">هزینه</th>
-            <th style="width:120px;">نوع</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>۱</td>
-            <td><strong>زیرساخت داخلی و نرم‌افزار جامع</strong><br><small>پایه عملیاتی و دیتابیس مرکزی مجموعه</small></td>
-            <td>۷۵ روز (موازی)</td>
-            <td><strong>۲۱۰ میلیون تومان</strong></td>
-            <td>یک‌باره</td>
-          </tr>
-          <tr>
-            <td>۲</td>
-            <td><strong>وب‌سایت برنامه‌نویسی‌شده اختصاصی</strong><br><small>کانال رسمی دریافت لید و تجربه دیجیتال مشتری</small></td>
-            <td>۶۰ روز (موازی)</td>
-            <td><strong>۹۰ میلیون تومان</strong></td>
-            <td>یک‌باره</td>
-          </tr>
-          <tr>
-            <td>۳</td>
-            <td><strong>هوش مصنوعی پیشرفته</strong><br><small>دستیار هوشمند مشاور، تحلیل مکالمه و پیشنهاد مذاکره</small></td>
-            <td>۵۰ روز (موازی)</td>
-            <td><strong>۱۹۰ میلیون تومان</strong></td>
-            <td>یک‌باره</td>
+            <td>تکمیل نهایی، تست پذیرش، رفع اشکالات، آماده‌سازی سورس و مستندات برای تحویل</td>
+            <td><strong>تحویل نهایی: سورس‌کد، مستندات، دسترسی‌های مدیریتی و تأییدیه کتبی (Acceptance)</strong><br><small>بستن رسمی فاز توسعه</small></td>
+            <td><strong>۲۵٪</strong></td>
           </tr>
           <tr class="row-total">
-            <td colspan="2"><strong>جمع فازهای ۱ تا ۳ — توسعه دارایی دیجیتال اصلی (اجرای موازی)</strong></td>
-            <td><strong>۱۳۵ روز</strong></td>
-            <td><strong>۴۹۰,۰۰۰,۰۰۰ تومان</strong></td>
-            <td>—</td>
+            <td colspan="3"><strong>جمع ارزش پروژه (فازهای ۱ تا ۳) — پرداخت‌شده تا پایان روز ۱۳۵</strong></td>
+            <td><strong>۴۴۰,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr class="row-final">
-            <td>🎁</td>
-            <td><strong>بات اختصاصی بله برای پازل فرشته</strong><br><small>هدیه ویژه شروع همکاری</small></td>
-            <td>همراه پروژه</td>
-            <td><strong>رایگان — ارزش تقریبی ۶۰ میلیون</strong></td>
-            <td>هدیه</td>
+            <td>روز ۱۳۵ تا ۱۶۵<br>(یک ماه)</td>
+            <td>استقرار روی زیرساخت کارفرما &nbsp;|&nbsp; آموزش دپارتمان‌های فروش، مشاوران، مالی و پشتیبانی &nbsp;|&nbsp; حضور در کنار تیم پازل فرشته &nbsp;|&nbsp; رفع اشکالات استقرار</td>
+            <td><strong>رضایت کامل کارفرما و تیم</strong><br><small>سیستم روی زیرساخت خود کارفرما، تیم آموزش‌دیده — شرط پرداخت نهایی</small></td>
+            <td><strong>۵۰,۰۰۰,۰۰۰</strong></td>
           </tr>
-          <tr>
-            <td>۴</td>
-            <td><strong>تولید محتوا، تور ۳۶۰ و مارکتینگ دوره‌ای</strong></td>
-            <td>دوره‌ای / ماهانه</td>
-            <td>پس از تعیین حجم خدمات</td>
-            <td>تکرارشونده</td>
-          </tr>
-          <tr>
-            <td>۵</td>
-            <td><strong>کمپین‌های تبلیغاتی</strong></td>
-            <td>دوره‌ای</td>
-            <td>بر اساس بودجه و کانال کمپین</td>
-            <td>کمپینی</td>
+          <tr class="row-total">
+            <td colspan="3"><strong>جمع کل قرارداد</strong></td>
+            <td><strong>۴۹۰,۰۰۰,۰۰۰</strong></td>
           </tr>
         </tbody>
       </table>
@@ -1521,8 +2073,6 @@ ul{list-style:none}
     </div>
 
     <div class="phases">
-
-      <!-- Phase 1 -->
       <div class="phase is-core">
         <div class="phase__head">
           <div class="phase__title-wrap">
@@ -1534,7 +2084,6 @@ ul{list-style:none}
           </div>
           <div class="phase__meta">
             <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۷۵ روز (موازی)</span>
-            <span class="chip chip--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>۲۱۰ میلیون تومان</span>
           </div>
         </div>
         <div class="phase__body">
@@ -1566,7 +2115,6 @@ ul{list-style:none}
         </div>
       </div>
 
-      <!-- Phase 2 -->
       <div class="phase is-core">
         <div class="phase__head">
           <div class="phase__title-wrap">
@@ -1578,7 +2126,6 @@ ul{list-style:none}
           </div>
           <div class="phase__meta">
             <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۶۰ روز (موازی)</span>
-            <span class="chip chip--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>۹۰ میلیون تومان</span>
           </div>
         </div>
         <div class="phase__body">
@@ -1610,7 +2157,6 @@ ul{list-style:none}
         </div>
       </div>
 
-      <!-- Phase 3 -->
       <div class="phase is-core">
         <div class="phase__head">
           <div class="phase__title-wrap">
@@ -1622,7 +2168,6 @@ ul{list-style:none}
           </div>
           <div class="phase__meta">
             <span class="chip chip--accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>۵۰ روز (موازی)</span>
-            <span class="chip chip--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>۱۹۰ میلیون تومان</span>
           </div>
         </div>
         <div class="phase__body">
@@ -1660,7 +2205,6 @@ ul{list-style:none}
           <strong>📌 یک مثال واقعی:</strong> مشتری برای فایل X یک ویس می‌فرستد: «قیمت کمی بالاست، ولی منظره عالیه». سیستم ویس را به متن تبدیل می‌کند، نیت مشتری (احتمالاً چانه‌زنی) را تشخیص می‌دهد، سابقه مکالمات قبلی او را می‌خواند و به مشاور پیشنهاد می‌دهد: «گزینه B را با ۵٪ تخفیف مشروط به پرداخت نقدی معرفی کن و روی نقطه قوت منظره تأکید کن.» مشاور فقط تأیید می‌کند و پیام آماده ارسال است.
         </div>
       </div>
-
     </div>
   </section>
 
@@ -1851,45 +2395,12 @@ ul{list-style:none}
       </div>
     </div>
 
-    <h3>۱۱-۱. مبلغ کل قرارداد برای فازهای ۱ تا ۳</h3>
-    <p>مبلغ کل قرارداد برای فازهای ۱ تا ۳ (ساخت دارایی دیجیتال اصلی) معادل <strong>۴۹۰,۰۰۰,۰۰۰ تومان</strong> (چهارصد و نود میلیون تومان) است. تفکیک ارزش خدمات به شرح زیر است:</p>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:60px;">ردیف</th>
-            <th>خدمت</th>
-            <th style="width:130px;">زمان</th>
-            <th style="width:200px;">ارزش (تومان)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>۱</td>
-            <td>زیرساخت داخلی و نرم‌افزار جامع (فاز ۱)</td>
-            <td>۷۵ روز (موازی)</td>
-            <td><strong>۲۱۰,۰۰۰,۰۰۰</strong></td>
-          </tr>
-          <tr>
-            <td>۲</td>
-            <td>وب‌سایت اختصاصی و لایه مشتری (فاز ۲)</td>
-            <td>۶۰ روز (موازی)</td>
-            <td><strong>۹۰,۰۰۰,۰۰۰</strong></td>
-          </tr>
-          <tr>
-            <td>۳</td>
-            <td>هوش مصنوعی پیشرفته (فاز ۳)</td>
-            <td>۵۰ روز (موازی)</td>
-            <td><strong>۱۹۰,۰۰۰,۰۰۰</strong></td>
-          </tr>
-          <tr class="row-total">
-            <td colspan="3"><strong>جمع کل</strong></td>
-            <td><strong>۴۹۰,۰۰۰,۰۰۰</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <h3>۱۱-۱. ساختار مالی قرارداد</h3>
+    <p>مبلغ کل قرارداد معادل <strong>۴۹۰,۰۰۰,۰۰۰ تومان</strong> (چهارصد و نود میلیون تومان) است که به دو بخش تقسیم می‌شود:</p>
+    <ul class="deliver" style="background:transparent;border:0;padding:0;margin-bottom:18px;">
+      <li><strong>ارزش پروژه (فازهای ۱ تا ۳):</strong> <strong>۴۴۰,۰۰۰,۰۰۰ تومان</strong> — از پیش‌پرداخت تا تحویل نهایی سورس‌کد در پایان روز ۱۳۵. این مبلغ، <strong>مبنای محاسبات پرداخت مرحله‌ای</strong> است.</li>
+      <li><strong>مبلغ مشروط نهایی:</strong> <strong>۵۰,۰۰۰,۰۰۰ تومان</strong> — به‌صورت جداگانه و پس از یک ماه استقرار، آموزش و پشتیبانی در کنار تیم پازل فرشته و اعلام رضایت کامل کارفرما از پروژه پرداخت می‌شود.</li>
+    </ul>
 
     <p style="font-size:.85rem;color:var(--text-muted);">
       <strong>تبصره:</strong> بات اختصاصی بله (فاز هدیه) به ارزش تقریبی ۶۰,۰۰۰,۰۰۰ تومان، به‌صورت رایگان و بدون هزینه در این قرارداد گنجانده شده است. فازهای ۴ و ۵ (تولید محتوا و تبلیغات) بر اساس تعرفه دوره‌ای، پس از توافق حجم خدمات، در قالب توافق‌نامه مستقل محاسبه می‌شوند.
@@ -1897,8 +2408,8 @@ ul{list-style:none}
 
     <h3>۱۱-۲. جدول پرداخت مرحله‌ای بر اساس نقاط تحویل</h3>
     <div class="callout">
-      <strong>ساختار پرداخت: ۳۰٪ پیش‌پرداخت + ۴۵٪ در چهار مرحله تحویل + ۱۰٪ پس از استقرار و رضایت + ۱۵٪ تحویل نهایی</strong>
-      <p>هر پرداخت با یک خروجی قابل استفاده و ملموس گره خورده است. در هر مرحله، کارفرما بخشی از محصول را دریافت می‌کند و سپس پرداخت مربوطه انجام می‌شود.</p>
+      <strong>ساختار پرداخت: ۴۴۰ میلیون تومان در طول پروژه (از پیش‌پرداخت تا تحویل نهایی سورس) + ۵۰ میلیون تومان پس از یک ماه استقرار و آموزش و اعلام رضایت کامل کارفرما</strong>
+      <p>هر پرداخت با یک خروجی قابل استفاده و ملموس گره خورده است. در هر مرحله، کارفرما بخشی از محصول را دریافت می‌کند و سپس پرداخت مربوطه انجام می‌شود. مبلغ ۵۰,۰۰۰,۰۰۰ تومان به‌عنوان مبلغ مشروط نهایی، تنها پس از اتمام یک ماه حضور پیمانکار در کنار تیم پازل فرشته و رضایت کامل کارفرما پرداخت می‌گردد.</p>
     </div>
 
     <div class="table-wrap">
@@ -1906,100 +2417,70 @@ ul{list-style:none}
         <thead>
           <tr>
             <th style="width:70px;">مرحله</th>
-            <th style="width:110px;">زمان</th>
+            <th style="width:120px;">زمان</th>
             <th>شرح تحویل (خروجی ملموس)</th>
-            <th style="width:150px;">درصد</th>
+            <th style="width:120px;">درصد</th>
             <th style="width:150px;">مبلغ (تومان)</th>
           </tr>
         </thead>
         <tbody>
           <tr class="row-total">
             <td>۱</td>
-            <td>روز ۰</td>
+            <td>۱ مهر ۱۴۰۵ (روز ۰)</td>
             <td><strong>پیش‌پرداخت و شروع رسمی</strong><br><small>امضای قرارداد، تثبیت Scope، معماری کلان، تشکیل تیم</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:90%;"></div></div>
-                <span class="pay-bar__label">۳۰٪</span>
-              </div>
-            </td>
-            <td><strong>۱۴۷,۰۰۰,۰۰۰</strong></td>
+            <td><div class="pay-bar"><div class="pay-bar__track"><div class="pay-bar__fill" style="width:90%;"></div></div><span class="pay-bar__label">۳۰٪</span></div></td>
+            <td><strong>۱۳۲,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr>
             <td>۲</td>
             <td>روز ۲۵</td>
             <td><strong>تحویل ماژول اول هسته داخلی</strong><br><small>ثبت فایل، املاک، مشتریان و CRM پایه — قابل استفاده واقعی</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div>
-                <span class="pay-bar__label">۱۰٪</span>
-              </div>
-            </td>
-            <td><strong>۴۹,۰۰۰,۰۰۰</strong></td>
+            <td><div class="pay-bar"><div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div><span class="pay-bar__label">۱۰٪</span></div></td>
+            <td><strong>۴۴,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr>
             <td>۳</td>
             <td>روز ۵۰</td>
             <td><strong>تحویل هسته داخلی کامل + نسخه آلفای وب‌سایت</strong><br><small>گزارش‌گیری، رنکینگ، دسترسی‌ها + پیش‌نمایش سایت روی داده واقعی</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div>
-                <span class="pay-bar__label">۱۰٪</span>
-              </div>
-            </td>
-            <td><strong>۴۹,۰۰۰,۰۰۰</strong></td>
+            <td><div class="pay-bar"><div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div><span class="pay-bar__label">۱۰٪</span></div></td>
+            <td><strong>۴۴,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr>
             <td>۴</td>
             <td>روز ۷۵</td>
             <td><strong>تحویل وب‌سایت کامل + لیدگیری متصل به CRM</strong><br><small>سایت اختصاصی، لندینگ‌ها و فرم‌های جذب لید</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div>
-                <span class="pay-bar__label">۱۰٪</span>
-              </div>
-            </td>
-            <td><strong>۴۹,۰۰۰,۰۰۰</strong></td>
+            <td><div class="pay-bar"><div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div><span class="pay-bar__label">۱۰٪</span></div></td>
+            <td><strong>۴۴,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr>
             <td>۵</td>
             <td>روز ۱۰۰</td>
             <td><strong>تحویل هسته هوش مصنوعی کامل</strong><br><small>دستیار مشاور، تحلیل مکالمه و ویس، مربی هوشمند — یکپارچگی سه محصول</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:45%;"></div></div>
-                <span class="pay-bar__label">۱۵٪</span>
-              </div>
-            </td>
-            <td><strong>۷۳,۵۰۰,۰۰۰</strong></td>
+            <td><div class="pay-bar"><div class="pay-bar__track"><div class="pay-bar__fill" style="width:45%;"></div></div><span class="pay-bar__label">۱۵٪</span></div></td>
+            <td><strong>۶۶,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr class="row-deploy">
             <td>۶</td>
-            <td>روز ۱۰۰ – ۱۳۵</td>
-            <td><strong>استقرار، آموزش و پشتیبانی یک ماهه</strong><br><small>استقرار روی زیرساخت کارفرما + آموزش تیم پازل فرشته + پشتیبانی ماه اول — پرداخت پس از رضایت کامل کارفرما و تیم</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div>
-                <span class="pay-bar__label">۱۰٪</span>
-              </div>
-            </td>
-            <td><strong>۴۹,۰۰۰,۰۰۰</strong></td>
+            <td>پایان روز ۱۳۵</td>
+            <td><strong>تحویل نهایی سورس، مستندات، دسترسی‌ها و Acceptance</strong><br><small>تحویل سورس‌کد کامل، مستندات فنی و کاربری، دسترسی‌های مدیریتی و امضای صورت‌جلسه تحویل نهایی — این مرحله، جمع ارزش پروژه را به ۴۴۰ میلیون تومان می‌رساند</small></td>
+            <td><div class="pay-bar"><div class="pay-bar__track"><div class="pay-bar__fill" style="width:75%;"></div></div><span class="pay-bar__label">۲۵٪</span></div></td>
+            <td><strong>۲۵٪</strong></td>
+          </tr>
+          <tr class="row-total">
+            <td colspan="3"><strong>جمع ارزش پروژه (فازهای ۱ تا ۳) — پرداخت‌شده تا پایان روز ۱۳۵</strong></td>
+            <td><strong>۱۰۰٪</strong></td>
+            <td><strong>۴۴۰,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr class="row-final">
             <td>۷</td>
-            <td>پایان روز ۱۳۵</td>
-            <td><strong>تحویل نهایی و تسویه</strong><br><small>سورس‌کد کامل، مستندات، دسترسی‌های مدیریتی و تأییدیه کتبی نهایی</small></td>
-            <td>
-              <div class="pay-bar">
-                <div class="pay-bar__track"><div class="pay-bar__fill" style="width:45%;"></div></div>
-                <span class="pay-bar__label">۱۵٪</span>
-              </div>
-            </td>
-            <td><strong>۷۳,۵۰۰,۰۰۰</strong></td>
+            <td>روز ۱۳۵ تا ۱۶۵<br>(یک ماه پس از تحویل)</td>
+            <td><strong>استقرار، آموزش و پشتیبانی در کنار تیم پازل فرشته</strong><br><small>حضور پیمانکار در کنار تیم کارفرما به مدت یک ماه جهت استقرار کامل روی زیرساخت، آموزش دپارتمان‌ها، رفع اشکالات و تثبیت سیستم — پرداخت این مرحله، مشروط به اعلام رضایت کامل کارفرما و تیم از پروژه است</small></td>
+            <td><div class="pay-bar"><div class="pay-bar__track"><div class="pay-bar__fill" style="width:30%;"></div></div><span class="pay-bar__label">مشروط</span></div></td>
+            <td><strong>۵۰,۰۰۰,۰۰۰</strong></td>
           </tr>
           <tr class="row-total">
-            <td colspan="3"><strong>جمع کل</strong></td>
-            <td><strong>۱۰۰٪</strong></td>
+            <td colspan="3"><strong>جمع کل قرارداد</strong></td>
+            <td><strong>—</strong></td>
             <td><strong>۴۹۰,۰۰۰,۰۰۰</strong></td>
           </tr>
         </tbody>
@@ -2007,13 +2488,8 @@ ul{list-style:none}
     </div>
 
     <div class="callout">
-      <strong>شرط پرداخت مرحله ۶ (استقرار و آموزش)</strong>
-      <p>پرداخت ۱۰٪ مرحله ششم (معادل ۴۹,۰۰۰,۰۰۰ تومان) فقط پس از گذشت یک ماه از استقرار، انجام آموزش کامل تیم پازل فرشته و اعلام رضایت کامل کارفرما و تیم انجام می‌شود. در صورت اعلام نقص، پیمانکار مطابق ماده ۱۴-۳ نسبت به رفع آن اقدام می‌کند و پرداخت پس از تأیید مجدد انجام می‌گردد.</p>
-    </div>
-
-    <div class="callout">
-      <strong>شرط پرداخت مرحله ۷ (تحویل نهایی)</strong>
-      <p>پرداخت ۱۵٪ نهایی (معادل ۷۳,۵۰۰,۰۰۰ تومان) پس از تحویل کامل سورس‌کد، مستندات، دسترسی‌های مدیریتی و امضای صورت‌جلسه تحویل نهایی (Acceptance) انجام می‌شود.</p>
+      <strong>شرط پرداخت مرحله ۷ (مبلغ مشروط نهایی — ۵۰,۰۰۰,۰۰۰ تومان)</strong>
+      <p>این مبلغ تنها پس از گذشت <strong>یک ماه کامل از تحویل نهایی روز ۱۳۵</strong>، انجام استقرار روی زیرساخت کارفرما، آموزش کامل تیم پازل فرشته، حضور پیمانکار در کنار تیم و <strong>اعلام رضایت کامل کارفرما از پروژه</strong> پرداخت می‌شود. در صورت اعلام هرگونه نقص، پیمانکار مطابق ماده ۱۴-۳ نسبت به رفع آن اقدام می‌کند و پرداخت پس از تأیید مجدد انجام می‌گردد. در واقع، <strong>مبنای محاسبه پروژه ۴۴۰ میلیون تومان</strong> بوده و این ۵۰ میلیون، پاداش کیفیت، استقرار موفق و رضایت نهایی است.</p>
     </div>
 
     <h3>۱۱-۳. نحوه پرداخت</h3>
@@ -2028,16 +2504,16 @@ ul{list-style:none}
     </ul>
 
     <div class="money">
-      <div class="money__label">مبلغ کل قرارداد فازهای ۱ تا ۳ — توسعه دارایی دیجیتال اصلی</div>
+      <div class="money__label">مبلغ کل قرارداد — توسعه دارایی دیجیتال اصلی + استقرار و رضایت</div>
       <div class="money__big">۴۹۰ <small>میلیون تومان</small></div>
       <div class="money__grid">
         <div class="money__cell">
-          <strong>۱۳۵ روز</strong>
-          <span>توسعه موازی + استقرار و آموزش</span>
+          <strong>۴۴۰ میلیون</strong>
+          <span>ارزش پروژه (فازهای ۱ تا ۳) — از پیش‌پرداخت تا تحویل نهایی سورس در روز ۱۳۵</span>
         </div>
         <div class="money__cell">
-          <strong>۷ پرداخت مرحله‌ای</strong>
-          <span>هر پرداخت با یک خروجی ملموس</span>
+          <strong>۵۰ میلیون</strong>
+          <span>مبلغ مشروط نهایی — پس از یک ماه استقرار و رضایت کامل کارفرما</span>
         </div>
         <div class="money__cell">
           <strong>۳ محصول متصل</strong>
@@ -2071,17 +2547,22 @@ ul{list-style:none}
       <li>راهنمای کاربری برای دپارتمان‌های مختلف</li>
     </ul>
 
-    <h3>۱۲-۲. برنامه استقرار و آموزش (یک ماه — روز ۱۰۰ تا ۱۳۵)</h3>
+    <h3>۱۲-۲. برنامه استقرار، آموزش و پشتیبانی در کنار تیم (یک ماه — روز ۱۳۵ تا ۱۶۵)</h3>
+    <p>پس از تحویل نهایی سورس‌کد در پایان روز ۱۳۵، پیمانکار به مدت <strong>یک ماه</strong> در کنار تیم پازل فرشته حضور دارد و موارد زیر را انجام می‌دهد:</p>
     <ul class="deliver" style="background:transparent;border:0;padding:0;">
       <li>استقرار کامل سیستم روی زیرساخت کارفرما</li>
       <li>آموزش دپارتمان‌های مختلف (فروش، مشاوران، مالی، پشتیبانی)</li>
       <li>پشتیبانی کامل در راه‌اندازی اولیه و رفع اشکالات استقرار</li>
       <li>همراهی تیم پازل فرشته در اولین چرخه کاری واقعی روی سیستم</li>
-      <li>اعلام رضایت کتبی کارفرما به‌عنوان شرط پرداخت مرحله ششم</li>
+      <li>اعلام رضایت کتبی کارفرما به‌عنوان شرط پرداخت مبلغ مشروط نهایی (۵۰,۰۰۰,۰۰۰ تومان)</li>
     </ul>
 
+    <div class="highlight">
+      <strong>📌 نکته مهم:</strong> پرداخت ۵۰ میلیون تومان (مرحله ۷) تنها پس از اتمام این یک ماه، اعلام رضایت کامل کارفرما و تیم از پروژه و تأیید کتبی انجام می‌شود. در صورت اعلام هرگونه نقص، پیمانکار نسبت به رفع آن اقدام کرده و پرداخت پس از تأیید مجدد انجام می‌گردد.
+    </div>
+
     <h3>۱۲-۳. پشتیبانی رایگان</h3>
-    <p>پس از تحویل نهایی و استقرار کامل سیستم، پیمانکار متعهد می‌شود <strong>۶ ماه پشتیبانی رایگان</strong> برای کارفرما ارائه دهد. این دوره شامل موارد زیر است:</p>
+    <p>پس از تحویل نهایی، استقرار کامل سیستم و اتمام دوره یک ماهه استقرار و آموزش، پیمانکار متعهد می‌شود <strong>۶ ماه پشتیبانی رایگان</strong> برای کارفرما ارائه دهد. این دوره شامل موارد زیر است:</p>
     <ul class="deliver" style="background:transparent;border:0;padding:0;">
       <li><strong>امنیت:</strong> پایش مستمر امنیت، بروزرسانی گواهی‌های SSL، تشخیص و رفع آسیب‌پذیری‌ها.</li>
       <li><strong>رفع باگ‌ها:</strong> شناسایی و رفع هرگونه خطا، باگ یا نقص فنی در سامانه، CRM، وب‌سایت‌ها و دستیار هوشمند.</li>
@@ -2139,7 +2620,7 @@ ul{list-style:none}
       <li>در صورت عدم اعلام نظر در بازه مذکور، آن مرحله به‌صورت <strong>خودکار تأیید شده</strong> تلقی می‌گردد.</li>
       <li>در صورت اعلام نقص، پیمانکار حداکثر تا <strong>۱۰ روز کاری</strong> نسبت به رفع نقص اقدام می‌کند.</li>
       <li><strong>پرداخت مرتبط با هر مرحله، پس از تأیید کتبی کارفرما (یا تأیید خودکار) حداکثر تا ۷ روز کاری انجام می‌شود.</strong></li>
-      <li>پرداخت مرحله استقرار و آموزش، مشروط به گذشت یک ماه از استقرار و اعلام رضایت کامل کارفرما و تیم است.</li>
+      <li><strong>پرداخت مرحله ۷ (مبلغ مشروط نهایی ۵۰,۰۰۰,۰۰۰ تومان):</strong> پس از گذشت یک ماه از تحویل نهایی روز ۱۳۵، اتمام استقرار، آموزش کامل تیم کارفرما و اعلام رضایت کامل کارفرما و تیم از پروژه انجام می‌شود.</li>
     </ul>
 
     <h3>۱۴-۴. چارچوب اجرایی — چهار نقطه کنترل هر مرحله</h3>
@@ -2195,7 +2676,7 @@ ul{list-style:none}
         <span class="badge-num">B</span>
         <div class="txt">
           <strong>جدول فازبندی و اجرای موازی</strong>
-          <span>زمان‌بندی ۱۳۵ روزه با نقاط تحویل مرحله‌ای</span>
+          <span>زمان‌بندی ۱۳۵ روزه با نقاط تحویل مرحله‌ای + یک ماه استقرار</span>
         </div>
       </div>
       <div class="appendix">
@@ -2222,7 +2703,7 @@ ul{list-style:none}
     </div>
   </section>
 
-  <!-- SIGNATURES -->
+  <!-- SIGNATURES (screen view) -->
   <section class="section" id="signatures">
     <div class="section__head">
       <div class="section__icon">✎</div>
@@ -2235,7 +2716,7 @@ ul{list-style:none}
     <div class="signatures">
       <div class="sig-head">
         <div class="title">امضای طرفین</div>
-        <p class="desc">این قرارداد در ۲ نسخه تنظیم و با امضای نمایندگان مجاز طرفین، لازم‌الاجرا می‌گردد.</p>
+        <p class="desc">این قرارداد در ۲ نسخه تنظیم و با امضای نمایندگان مجاز طرفین، لازم‌الاجرا می‌گردد. تاریخ انعقاد و شروع رسمی پروژه: <strong>۱ مهر ۱۴۰۵</strong>.</p>
       </div>
 
       <div class="sig-primary">
@@ -2250,7 +2731,7 @@ ul{list-style:none}
           <div class="sig-blank">
             <div class="line">امضا و مهر</div>
             <div class="dotted"></div>
-            <div class="date">تاریخ: [تاریخ شمسی] ([تاریخ میلادی])</div>
+            <div class="date">تاریخ: ۱ مهر ۱۴۰۵</div>
           </div>
         </div>
       </div>
@@ -2269,7 +2750,7 @@ ul{list-style:none}
           <div class="sig-blank">
             <div class="line">امضا و مهر</div>
             <div class="dotted"></div>
-            <div class="date">تاریخ: [تاریخ شمسی]</div>
+            <div class="date">تاریخ: ۱ مهر ۱۴۰۵</div>
           </div>
         </div>
         <div class="sig-card">
@@ -2283,7 +2764,7 @@ ul{list-style:none}
           <div class="sig-blank">
             <div class="line">امضا و مهر</div>
             <div class="dotted"></div>
-            <div class="date">تاریخ: [تاریخ شمسی]</div>
+            <div class="date">تاریخ: ۱ مهر ۱۴۰۵</div>
           </div>
         </div>
         <div class="sig-card">
@@ -2297,7 +2778,7 @@ ul{list-style:none}
           <div class="sig-blank">
             <div class="line">امضا و مهر</div>
             <div class="dotted"></div>
-            <div class="date">تاریخ: [تاریخ شمسی]</div>
+            <div class="date">تاریخ: ۱ مهر ۱۴۰۵</div>
           </div>
         </div>
       </div>
@@ -2308,7 +2789,7 @@ ul{list-style:none}
   <section class="final">
     <div class="final__icon">🤝</div>
     <h2>آماده‌ایم وارد <span>فاز اجرایی</span> شویم</h2>
-    <p>این قرارداد بر اساس پروپوزال نهایی اکوسیستم دیجیتال پازل فرشته تدوین شده و مبنای شروع رسمی پروژه قرار می‌گیرد.</p>
+    <p>این قرارداد بر اساس پروپوزال نهایی اکوسیستم دیجیتال پازل فرشته تدوین شده و مبنای شروع رسمی پروژه از تاریخ ۱ مهر ۱۴۰۵ قرار می‌گیرد.</p>
     <div class="final__btns">
       <a class="cta cta--gold" href="mailto:codepacksteam@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -2326,7 +2807,7 @@ ul{list-style:none}
     <div><strong>تیم کدپکس</strong> — طراحی و توسعه سیستم‌های هوشمند و زیرساخت‌های دیجیتال</div>
     <div class="footer__meta">
       <span>قرارداد CP-PUZZLE-001</span>
-      <span>[تاریخ شمسی]</span>
+      <span>تاریخ انعقاد: ۱ مهر ۱۴۰۵</span>
       <span>از زیرساخت تا رشد؛ در یک معماری واحد</span>
     </div>
   </footer>
